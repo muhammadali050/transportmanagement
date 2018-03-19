@@ -12,8 +12,8 @@
         android:id="@+id/login_title"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="22dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:gravity="center_horizontal"
         android:text="Create Account"
         android:textColor="#fff"
@@ -26,7 +26,7 @@
         android:layout_below="@+id/login_title"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="45dp"
         android:background="#fff"
         android:elevation="4dp"
         android:orientation="vertical"
@@ -36,7 +36,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingTop="30dp">
+            android:paddingTop="50dp">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -74,9 +74,17 @@
                     android:layout_marginTop="16dp"
                     android:singleLine="true"
                     android:drawableTint="#FF4081"
-                    android:hint="Password"
-                    android:inputType="textPassword" />
+                    android:hint="Password" />
             </android.support.design.widget.TextInputLayout>
+
+            <ImageView
+                android:id="@+id/add_mechanic_photo"
+                android:layout_width="75dp"
+                android:layout_height="75"
+                android:layout_gravity="center"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                app:srcCompat="@drawable/add_image_icon" />
 
             <!--<TextView
                 android:layout_width="wrap_content"
@@ -89,7 +97,7 @@
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="22dp"
+                android:layout_margin="16dp"
                 android:background="@color/colorBtnBack"
                 android:text="Register"
                 android:textAllCaps="false"
@@ -104,7 +112,6 @@
         android:layout_height="100dp"
         android:layout_below="@+id/login_title"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
         android:background="@drawable/user_profile_image_background"
         android:elevation="4dp"
         android:src="@drawable/profile_icon" />

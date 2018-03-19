@@ -15,7 +15,8 @@
             android:layout_below="@+id/header_cover_image"
             android:background="#32a0ef"
             android:elevation="4dp"
-            android:paddingBottom="8dp">
+            android:paddingBottom="8dp"
+            android:paddingTop="16dp">
 
 
 
@@ -33,7 +34,8 @@
                     android:layout_marginTop="16dp"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
-                    android:text="User Name"
+                    android:text="From"
+                    android:layout_weight="1"
                     android:textColor="#fff"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -48,8 +50,7 @@
                     android:paddingEnd="16dp"
                     android:text="to"
                     android:textColor="#fff"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tv_destination"
@@ -58,8 +59,10 @@
                     android:layout_centerHorizontal="false"
                     android:layout_marginTop="16dp"
                     android:paddingStart="16dp"
+                    android:layout_weight="1"
                     android:paddingEnd="16dp"
                     android:text="Destination"
+                    android:gravity="end"
                     android:textColor="#fff"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -68,8 +71,8 @@
 
             <ImageView
                 android:id="@+id/add_friend"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_below="@+id/ll_route_head"
@@ -78,8 +81,8 @@
 
             <ImageView
                 android:id="@+id/drop_down_option_menu"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_below="@+id/ll_route_head"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="16dp"
