@@ -6,7 +6,7 @@
     <color name="colorBtnBack">@color/colorPrimaryDark</color>
 
     <color name="textcolor">#c2c1c1</color>
-    <color name="colorActivtyBackground">#5fb0c9</color>
+    <color name="colorActivityBackground">#5fb0c9</color>
 
 
     <color name="icon_color_grey">#8c8b8b</color>
