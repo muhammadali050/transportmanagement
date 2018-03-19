@@ -43,12 +43,13 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/etUserName"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:drawableTint="#FF4081"
-                    android:singleLine="true"
                     android:hint="User Name"
-                    android:inputType="textEmailAddress" />
+                    android:inputType="textEmailAddress"
+                    android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -56,12 +57,13 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/etEmail"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:drawableTint="#FF4081"
-                    android:singleLine="true"
                     android:hint="Email"
-                    android:inputType="textEmailAddress" />
+                    android:inputType="textEmailAddress"
+                    android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -69,13 +71,14 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/etPassword"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:singleLine="true"
                     android:drawableTint="#FF4081"
                     android:hint="Password"
-                    android:inputType="textPassword" />
+                    android:inputType="textPassword"
+                    android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
 
             <!--<TextView
@@ -87,10 +90,12 @@
 
 
             <Button
+                android:id="@+id/btRegister"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="22dp"
                 android:background="@color/colorBtnBack"
+                android:onClick="userRegister"
                 android:text="Register"
                 android:textAllCaps="false"
                 android:textColor="#fff"

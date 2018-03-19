@@ -41,13 +41,15 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <EditText
+                    android:id="@+id/etUserEmail"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:drawableTint="#FF4081"
-                    android:singleLine="true"
-                    android:hint="User Name"
-                    android:inputType="textEmailAddress" />
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -55,13 +57,14 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/etUserPassword"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:singleLine="true"
                     android:drawableTint="#FF4081"
                     android:hint="Password"
-                    android:inputType="numberPassword" />
+                    android:inputType="numberPassword"
+                    android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
 
             <TextView
