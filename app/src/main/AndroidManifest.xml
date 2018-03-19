@@ -20,7 +20,7 @@
         <activity android:name=".AllMechanicsActivity"
             android:label="@string/title_activity_all_mechanics"/>
 
-        <activity android:name=".AllUsersActivity"
+        <activity android:name=".AllDriversActivity"
             android:label="@string/title_activity_all_users" />
 
         <activity android:name=".LoginActivity"
@@ -45,6 +45,9 @@
 
         <activity android:name=".AddMechanic"
             android:label="@string/title_activity_add_Mechanic" />
+        <activity android:name=".AddDriver"
+            android:label="@string/title_activity_add_driver" />
+
     </application>
 
 </manifest>

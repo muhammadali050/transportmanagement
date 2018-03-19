@@ -10,7 +10,7 @@
     <string name="title_activity_add_route">Add Routes</string>
     <string name="title_activity_route">Route</string>
     <string name="title_activity_add_Mechanic">Add Mechanic</string>
-    <string name="title_activity_add_user">Add User</string>
+    <string name="title_activity_add_driver">Add Driver</string>
 
     <string-array name="cities">
         <item>Sialkot</item>

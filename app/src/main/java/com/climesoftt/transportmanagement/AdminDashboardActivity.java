@@ -23,7 +23,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
     }
 
     public void onClickUsers(View view) {
-        Intent intent = new Intent(this, AllUsersActivity.class);
+        Intent intent = new Intent(this, AllDriversActivity.class);
         startActivity(intent);
     }
 

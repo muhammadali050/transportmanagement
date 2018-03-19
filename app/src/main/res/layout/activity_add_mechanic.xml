@@ -85,7 +85,6 @@
                 android:textColor="@color/textcolor"
                 android:textColorHint="@color/textcolor"
                 android:textSize="18sp"
-                android:textStyle="bold"
                 android:inputType="number"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textViewTool"
@@ -121,7 +120,6 @@
 
                 android:textColorHint="@color/textcolor"
                 android:textSize="18sp"
-                android:textStyle="bold"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textViewPetrol"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline" />
@@ -155,7 +153,6 @@
                 android:textColor="@color/textcolor"
                 android:textColorHint="@color/textcolor"
                 android:textSize="18sp"
-                android:textStyle="bold"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textViewExtras"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline" />
