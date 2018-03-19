@@ -100,6 +100,7 @@
                 android:layout_margin="16dp"
                 android:background="@color/colorBtnBack"
                 android:text="Register"
+                android:onClick="onClickRegister"
                 android:textAllCaps="false"
                 android:textColor="#fff"
                 android:textSize="18sp" />
