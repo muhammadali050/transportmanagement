@@ -40,6 +40,7 @@ public class AllMechanicsActivity extends AppCompatActivity {
     }
 
     public void addUser(MenuItem item){
-        Toast.makeText(this, "add..." , Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, AddMechanic.class);
+        startActivity(intent);
     }
 }
