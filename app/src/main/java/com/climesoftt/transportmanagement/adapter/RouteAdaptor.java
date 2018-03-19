@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.climesoftt.transportmanagement.R;
+import com.climesoftt.transportmanagement.Route;
 import com.climesoftt.transportmanagement.UserProfile;
 
 /**
@@ -54,7 +55,7 @@ public class RouteAdaptor extends RecyclerView.Adapter<RouteAdaptor.VHolder> {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context , UserProfile.class);
+                    Intent intent = new Intent(context , Route.class);
                     context.startActivity(intent);
                 }
             });
