@@ -1,14 +1,17 @@
 package com.climesoftt.transportmanagement;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.climesoftt.transportmanagement.utils.Message;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -24,10 +27,12 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText etl_email,etl_password;
     private String email,password;
+    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        progressDialog = new ProgressDialog(this);
 
         mAuth = FirebaseAuth.getInstance();
         etl_email = findViewById(R.id.etUserEmail);
@@ -37,7 +42,14 @@ public class LoginActivity extends AppCompatActivity {
     public void onClickLogin(View view){
         email = etl_email.getText().toString();
         password = etl_password.getText().toString();
-
+        //All Fields must be fill
+        if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password))
+        {
+            Message.show(LoginActivity.this , "Please fill all fields. . .");
+            return;
+        }
+        progressDialog.setMessage("Trying to login. . .");
+        progressDialog.show();
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
