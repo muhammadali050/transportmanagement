@@ -14,7 +14,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:gravity="center_horizontal"
-        android:text="Add Route"
+        android:text="Update Mechanic"
         android:textColor="#fff"
         android:textSize="26sp"
         android:textStyle="bold"
@@ -53,66 +53,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.4" />
+                app:layout_constraintGuide_percent="0.35" />
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:paddingBottom="15dp"
-                android:text="To"
-                android:textColor="#000"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/guideline"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/spinner"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:paddingBottom="10dp"
-                android:paddingTop="5dp"
-                android:hint="city"
-                app:layout_constraintBaseline_toBaselineOf="@+id/textView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/guideline" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:paddingBottom="15dp"
-                android:singleLine="true"
-                android:textColor="#000"
-                android:text="From"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/guideline"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-            <EditText
-                android:id="@+id/spinner2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:hint="city"
-                android:paddingBottom="10dp"
-                android:paddingTop="5dp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView2" />
 
             <TextView
                 android:id="@+id/textViewTool"
@@ -123,8 +66,8 @@
                 android:layout_marginTop="8dp"
                 android:paddingBottom="15dp"
                 android:singleLine="true"
-                android:text="Tool Plaza"
-                android:textColor="#000"
+                android:text="Name"
+                android:textColor="#000000"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/guideline"
@@ -137,15 +80,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:hint="Tool plaza cost"
+                android:hint="Add Name"
                 android:paddingBottom="5dp"
                 android:textColor="@color/textcolor"
+                android:textColorHint="@color/textcolor"
                 android:textSize="18sp"
                 android:inputType="number"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textViewTool"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
-                tools:layout_editor_absoluteY="124dp" />
+                />
 
             <TextView
                 android:id="@+id/textViewPetrol"
@@ -156,8 +100,8 @@
                 android:layout_marginTop="8dp"
                 android:paddingBottom="15dp"
                 android:singleLine="true"
-                android:text="Petrol"
-                android:textColor="#000"
+                android:text="Phone"
+                android:textColor="#000000"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/guideline"
@@ -170,10 +114,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:hint="Petrol Cost"
+                android:hint="Phone"
                 android:inputType="number"
                 android:paddingBottom="5dp"
-                android:textColor="@color/textcolor"
+
+                android:textColorHint="@color/textcolor"
                 android:textSize="18sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textViewPetrol"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -188,8 +133,8 @@
                 android:layout_marginTop="8dp"
                 android:paddingBottom="15dp"
                 android:singleLine="true"
-                android:text="Extras"
-                android:textColor="#000"
+                android:text="Address"
+                android:textColor="#000000"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/guideline"
@@ -202,28 +147,43 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:hint="Extra Cost"
+                android:hint="Adress"
                 android:inputType="number"
                 android:paddingBottom="5dp"
                 android:textColor="@color/textcolor"
+                android:textColorHint="@color/textcolor"
                 android:textSize="18sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textViewExtras"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline" />
+
+            <ImageView
+                android:id="@+id/add_mechanic_photo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="@+id/guideline"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintTop_toBottomOf="@+id/textViewExtras"
+                app:srcCompat="@drawable/add_image_icon" />
 
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="22dp"
                 android:background="@color/colorBtnBack"
-                android:text="Sign in"
+                android:text="Update"
                 android:textAllCaps="false"
                 android:textColor="#fff"
                 android:textSize="18sp"
-                app:layout_constraintTop_toBottomOf="@+id/textViewExtras"
-                app:layout_constraintLeft_toLeftOf="@+id/textViewExtras"
-                app:layout_constraintRight_toRightOf="@+id/editTextExtras"
+                app:layout_constraintTop_toBottomOf="@+id/add_mechanic_photo"
+                app:layout_constraintLeft_toLeftOf="@+id/add_mechanic_photo"
+                app:layout_constraintRight_toRightOf="@+id/add_mechanic_photo"
                 />
+
+
 
 
         </android.support.constraint.ConstraintLayout>

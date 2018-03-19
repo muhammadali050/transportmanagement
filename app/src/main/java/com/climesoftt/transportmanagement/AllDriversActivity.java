@@ -9,9 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.climesoftt.transportmanagement.adapter.UsersAdapter;
+import com.climesoftt.transportmanagement.adapter.DriverAdapter;
 
 /**
  * Created by Ali on 3/14/2018.
@@ -24,9 +23,15 @@ public class AllDriversActivity extends AppCompatActivity {
         setContentView(R.layout.activity_all_drivers);
 
         RecyclerView  rv = (RecyclerView)findViewById(R.id.rcvUsers);
-        UsersAdapter adapter = new UsersAdapter(this);
+        DriverAdapter adapter = new DriverAdapter(this);
         rv.setAdapter(adapter) ;
         rv.setLayoutManager(new LinearLayoutManager(this));
+        try{
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+        catch (Exception e){
+
+        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

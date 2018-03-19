@@ -23,6 +23,13 @@ public class AllRoutes extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_routes);
 
+        try{
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+        catch (Exception e){
+
+        }
+
         RecyclerView rv = (RecyclerView)findViewById(R.id.rcvRoutes);
         RouteAdaptor adapter = new RouteAdaptor(this);
         rv.setAdapter(adapter) ;

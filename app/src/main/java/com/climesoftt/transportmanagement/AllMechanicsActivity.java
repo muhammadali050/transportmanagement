@@ -24,6 +24,13 @@ public class AllMechanicsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_mechanics);
 
+        try{
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+        catch (Exception e){
+
+        }
+
         RecyclerView  rv = (RecyclerView)findViewById(R.id.rcvMechanics);
         MechanicsAdaptor adapter = new MechanicsAdaptor(this);
         rv.setAdapter(adapter) ;

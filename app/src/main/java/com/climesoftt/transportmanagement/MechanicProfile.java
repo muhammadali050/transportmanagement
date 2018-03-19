@@ -5,11 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity{
+public class MechanicProfile extends AppCompatActivity {
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        //getActionBar().setDisplayHomeAsUpEnabled(true);
+        setContentView(R.layout.activity_mechanic_profile);
+
         try{
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
@@ -17,9 +19,10 @@ public class MainActivity extends AppCompatActivity{
 
         }
 
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
     }
 
-
+    public void onClickEditMechanic(View view) {
+        Intent intent = new Intent(this, EditMechanic.class);
+        startActivity(intent);
+    }
 }

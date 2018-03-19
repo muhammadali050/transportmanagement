@@ -11,27 +11,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.climesoftt.transportmanagement.R;
-import com.climesoftt.transportmanagement.UserProfile;
-
-import java.util.List;
+import com.climesoftt.transportmanagement.DriverProfile;
 
 /**
  * Created by Ali on 3/14/2018.
  */
 
-public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.VHolder> {
+public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.VHolder> {
     private Context context;
     private Cursor cursor;
     private String[] names = {"Noor","Ali" , "Asif","Noor","Ali" , "Asif","Noor","Ali" , "Asif","Noor","Ali" , "Asif"};
 
-    public UsersAdapter(Context context ){
+    public DriverAdapter(Context context ){
         this.context = context;
         //this.cursor = cursor;
     }
 
-    public UsersAdapter.VHolder onCreateViewHolder(ViewGroup viewGroup , int resType){
+    public DriverAdapter.VHolder onCreateViewHolder(ViewGroup viewGroup , int resType){
         View view = LayoutInflater.from(context).inflate(R.layout.user_item, viewGroup , false);
-        return new UsersAdapter.VHolder(view);
+        return new DriverAdapter.VHolder(view);
     }
 
 
@@ -41,7 +39,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.VHolder> {
     }
 
 
-    public void onBindViewHolder(UsersAdapter.VHolder vh , int position){
+    public void onBindViewHolder(DriverAdapter.VHolder vh , int position){
         //cursor.moveToPosition(position);
 
         vh.txtName.setText(names[position]);
@@ -61,7 +59,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.VHolder> {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context , UserProfile.class);
+                    Intent intent = new Intent(context , DriverProfile.class);
                     context.startActivity(intent);
                 }
             });
