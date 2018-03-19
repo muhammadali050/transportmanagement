@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 
 /**
@@ -36,5 +37,15 @@ public class AdminDashboardActivity extends AppCompatActivity {
     public void onClickRoutes(View view) {
         Intent intent = new Intent(this, AllRoutes.class);
         startActivity(intent);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                this.finish();;
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

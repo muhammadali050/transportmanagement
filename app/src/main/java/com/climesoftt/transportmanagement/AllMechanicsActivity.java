@@ -50,4 +50,15 @@ public class AllMechanicsActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AddMechanic.class);
         startActivity(intent);
     }
+
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                this.finish();;
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
