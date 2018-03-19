@@ -104,6 +104,7 @@
                 android:background="@color/colorBtnBack"
                 android:onClick="userRegister"
                 android:text="Register"
+                android:onClick="onClickRegister"
                 android:textAllCaps="false"
                 android:textColor="#fff"
                 android:textSize="18sp" />

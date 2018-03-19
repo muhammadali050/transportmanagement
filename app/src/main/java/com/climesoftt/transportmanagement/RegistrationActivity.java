@@ -1,6 +1,8 @@
 package com.climesoftt.transportmanagement;
 
 import android.app.ProgressDialog;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -23,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Date;
 import android.view.MenuItem;
+import android.view.View;
 
 /**
  * Created by Ali on 3/14/2018.
@@ -68,6 +71,11 @@ public class RegistrationActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onClickRegister(View view) {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 
     @Override

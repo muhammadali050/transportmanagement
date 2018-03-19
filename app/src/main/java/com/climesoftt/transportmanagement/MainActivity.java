@@ -13,13 +13,13 @@ public class MainActivity extends AppCompatActivity{
         //getActionBar().setDisplayHomeAsUpEnabled(true);
         try{
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().hide();
         }
         catch (Exception e){
 
         }
 
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
+
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -33,4 +33,13 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
+    public void onClickLogin(View view) {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
+    public void onClickRegister(View view) {
+        Intent intent = new Intent(this, RegistrationActivity.class);
+        startActivity(intent);
+    }
 }
