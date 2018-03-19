@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -21,6 +22,12 @@ public class AdminDashboardActivity extends AppCompatActivity {
         String uname = getIntent().getStringExtra("userName");
         tvName.setText(uname);
 
+        try{
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+        catch (Exception e){
+
+        }
     }
 
     public void onClickMechanic(View view) {
@@ -29,12 +36,22 @@ public class AdminDashboardActivity extends AppCompatActivity {
     }
 
     public void onClickUsers(View view) {
-        Intent intent = new Intent(this, AllUsersActivity.class);
+        Intent intent = new Intent(this, AllDriversActivity.class);
         startActivity(intent);
     }
 
     public void onClickRoutes(View view) {
         Intent intent = new Intent(this, AllRoutes.class);
         startActivity(intent);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                this.finish();;
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

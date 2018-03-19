@@ -9,20 +9,21 @@ import android.view.MenuItem;
  * Created by Ali on 3/19/2018.
  */
 
-public class AddMechanic extends AppCompatActivity {
+public class EditDriver extends AppCompatActivity {
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_mechanic);
+        setContentView(R.layout.activity_edit_driver);
+
         try{
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         catch (Exception e){
 
         }
+
     }
-
-
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

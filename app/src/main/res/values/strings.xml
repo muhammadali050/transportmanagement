@@ -1,16 +1,19 @@
 <resources>
     <string name="app_name">Transport Management</string>
-    <string name="title_activity_all_users">All Users</string>
+    <string name="title_activity_all_drivers">All Driver</string>
     <string name="title_activity_all_mechanics">All Mechanics</string>
     <string name="title_activity_login">Login</string>
     <string name="title_activity_admin_dashboard">Dashboard</string>
     <string name="title_activity_resgistration">Create Account</string>
-    <string name="title_activity_user_profile">Profile</string>
+    <string name="title_activity_driver_profile">Driver Profile</string>
+    <string name="title_activity_mechanic_profile">Driver Profile</string>
     <string name="title_activity_all_routes">All Routes</string>
     <string name="title_activity_add_route">Add Routes</string>
     <string name="title_activity_route">Route</string>
     <string name="title_activity_add_Mechanic">Add Mechanic</string>
-    <string name="title_activity_add_user">Add User</string>
+    <string name="title_activity_add_driver">Add Driver</string>
+    <string name="title_activity_edit_driver">Edit Driver</string>
+    <string name="title_activity_edit_mechanic">Edit Mechanic</string>
 
     <string-array name="cities">
         <item>Sialkot</item>

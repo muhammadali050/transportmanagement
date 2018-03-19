@@ -66,16 +66,6 @@
                     android:inputType="numberPassword"
                     android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:paddingTop="5dp"
-                android:onClick="onClickRegister"
-                android:text="Register" />
-
-
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -86,6 +76,14 @@
                 android:textAllCaps="false"
                 android:textColor="#fff"
                 android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:paddingTop="5dp"
+                android:onClick="onClickRegister"
+                android:text="Register" />
         </LinearLayout>
     </RelativeLayout>
 

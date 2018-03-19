@@ -71,15 +71,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Spinner
+            <EditText
                 android:id="@+id/spinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:entries="@array/cities"
                 android:paddingBottom="10dp"
                 android:paddingTop="5dp"
+                android:hint="city"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline" />
@@ -101,13 +101,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-            <Spinner
+            <EditText
                 android:id="@+id/spinner2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:entries="@array/cities"
+                android:hint="city"
                 android:paddingBottom="10dp"
                 android:paddingTop="5dp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textView2"

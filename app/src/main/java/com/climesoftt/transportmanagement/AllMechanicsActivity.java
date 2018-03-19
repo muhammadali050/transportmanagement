@@ -24,6 +24,13 @@ public class AllMechanicsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_mechanics);
 
+        try{
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+        catch (Exception e){
+
+        }
+
         RecyclerView  rv = (RecyclerView)findViewById(R.id.rcvMechanics);
         MechanicsAdaptor adapter = new MechanicsAdaptor(this);
         rv.setAdapter(adapter) ;
@@ -42,5 +49,16 @@ public class AllMechanicsActivity extends AppCompatActivity {
     public void addUser(MenuItem item){
         Intent intent = new Intent(this, AddMechanic.class);
         startActivity(intent);
+    }
+
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                this.finish();;
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

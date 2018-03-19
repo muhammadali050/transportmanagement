@@ -23,6 +23,13 @@ public class AllRoutes extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_routes);
 
+        try{
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+        catch (Exception e){
+
+        }
+
         RecyclerView rv = (RecyclerView)findViewById(R.id.rcvRoutes);
         RouteAdaptor adapter = new RouteAdaptor(this);
         rv.setAdapter(adapter) ;
@@ -41,5 +48,17 @@ public class AllRoutes extends AppCompatActivity {
     public void addRoute(MenuItem item){
         Intent intent = new Intent(this, AddRoute.class);
         startActivity(intent);
+    }
+
+
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                this.finish();;
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

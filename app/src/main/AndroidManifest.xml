@@ -9,42 +9,55 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AllMechanicsActivity"
-            android:label="@string/title_activity_all_mechanics"/>
-
-        <activity android:name=".AllUsersActivity"
-            android:label="@string/title_activity_all_users" />
-
-        <activity android:name=".LoginActivity"
+        <activity
+            android:name=".AllMechanicsActivity"
+            android:label="@string/title_activity_all_mechanics" />
+        <activity
+            android:name=".AllDriversActivity"
+            android:label="@string/title_activity_all_drivers" />
+        <activity
+            android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
-
-        <activity android:name=".AdminDashboardActivity"
-         android:label="@string/title_activity_admin_dashboard" />
-
-        <activity android:name=".RegistrationActivity"
-            android:label="@string/title_activity_resgistration"/>
-
-        <activity android:name=".UserProfile"
-            android:label="@string/title_activity_user_profile" />
-
-        <activity android:name=".AllRoutes"
+        <activity
+            android:name=".AdminDashboardActivity"
+            android:label="@string/title_activity_admin_dashboard" />
+        <activity
+            android:name=".RegistrationActivity"
+            android:label="@string/title_activity_resgistration" />
+        <activity
+            android:name=".DriverProfile"
+            android:label="@string/title_activity_driver_profile" />
+        <activity
+            android:name=".AllRoutes"
             android:label="@string/title_activity_all_routes" />
-        <activity android:name=".AddRoute"
+        <activity
+            android:name=".AddRoute"
             android:label="@string/title_activity_add_route" />
-
-        <activity android:name=".Route"
+        <activity
+            android:name=".Route"
             android:label="@string/title_activity_route" />
-
-        <activity android:name=".AddMechanic"
+        <activity
+            android:name=".AddMechanic"
             android:label="@string/title_activity_add_Mechanic" />
+        <activity
+            android:name=".AddDriver"
+            android:label="@string/title_activity_add_driver" />
+        <activity
+            android:name=".EditDriver"
+            android:label="@string/title_activity_edit_driver" />
+        <activity
+            android:name=".EditMechanic"
+            android:label="@string/title_activity_edit_mechanic" />
+        <activity android:name=".MechanicProfile"
+            android:label="@string/title_activity_edit_mechanic"
+            ></activity>
     </application>
 
 </manifest>

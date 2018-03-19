@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Date;
+import android.view.MenuItem;
 
 /**
  * Created by Ali on 3/14/2018.
@@ -49,6 +50,24 @@ public class RegistrationActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         dbRef = database.getReference();
 
+
+        try{
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+        catch (Exception e){
+
+        }
+
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                this.finish();;
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

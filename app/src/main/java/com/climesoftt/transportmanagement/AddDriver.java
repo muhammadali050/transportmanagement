@@ -9,11 +9,11 @@ import android.view.MenuItem;
  * Created by Ali on 3/19/2018.
  */
 
-public class AddMechanic extends AppCompatActivity {
+public class AddDriver extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_mechanic);
+        setContentView(R.layout.activity_add_driver);
         try{
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
@@ -21,8 +21,6 @@ public class AddMechanic extends AppCompatActivity {
 
         }
     }
-
-
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -33,4 +31,5 @@ public class AddMechanic extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }
