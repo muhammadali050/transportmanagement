@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Transport Management</string>
+    <string name="title_activity_all_users">All Users</string>
+    <string name="title_activity_all_mechanics">All Mechanics</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_admin_dashboard">Dashboard</string>
+    <string name="title_activity_resgistration">Create Account</string>
+    <string name="title_activity_user_profile">Profile</string>
+    <string name="title_activity_all_routes">All Routes</string>
+    <string name="title_activity_add_route">Add Routes</string>
+
+    <string-array name="cities">
+        <item>Sialkot</item>
+        <item>Gujranwala</item>
+        <item>Mandi</item>
+        <item>Lahore</item>
+    </string-array>
+</resources>

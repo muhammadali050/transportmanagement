@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#e1e1e1"
+    android:paddingBottom="2dp"
+    android:paddingTop="4dp"
+    android:paddingEnd="8dp"
+    android:paddingStart="8dp"
+    android:elevation="4dp">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cv"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            >
+
+            <android.support.v7.widget.CardView
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:elevation="12dp"
+                android:id="@+id/user_card_view"
+                app:cardCornerRadius="42.5dp"
+                android:layout_centerHorizontal="true"
+                android:innerRadius="0dp"
+                android:shape="ring"
+                android:thicknessRatio="1.9"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="4dp">
+                <ImageView
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:id="@+id/user_photo"
+                    android:src="@drawable/users_admin"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true">
+                </ImageView>
+            </android.support.v7.widget.CardView>
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_user_name"
+                android:layout_toEndOf="@+id/user_card_view"
+                android:layout_alignParentTop="true"
+                android:singleLine="true"
+                android:textSize="20sp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="2dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_user_address"
+                android:layout_toEndOf="@+id/user_card_view"
+                android:layout_below="@+id/txt_user_name"
+                android:drawableStart="@drawable/ic_address_18_black"
+                android:drawablePadding="4dp"
+                android:singleLine="true"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="2dp"
+                />
+
+            <TextView
+                android:id="@+id/txt_mechanic_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_user_address"
+                android:layout_toEndOf="@+id/user_card_view"
+                android:drawableStart="@drawable/ic_call_18_black"
+                android:drawablePadding="4dp"
+                android:singleLine="true"
+                android:text="0123-12345679"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="2dp"
+                />
+
+
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
