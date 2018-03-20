@@ -26,7 +26,7 @@
         android:layout_below="@+id/login_title"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="40dp"
         android:background="#fff"
         android:elevation="4dp"
         android:orientation="vertical"
@@ -36,7 +36,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingTop="50dp">
+            android:paddingTop="20dp">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -107,8 +107,21 @@
                 android:textAllCaps="false"
                 android:textColor="#fff"
                 android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:onClick="onClickLogin"
+                android:paddingTop="5dp"
+                android:textSize="16sp"
+                android:text="@string/login"
+                android:padding="6dp"
+                android:textColor="@color/colorBtnBack" />
         </LinearLayout>
+
     </RelativeLayout>
+
 
     <ImageButton
         android:id="@+id/user_profile_photo"

@@ -78,6 +78,11 @@ public class RegistrationActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void onClickLogin(View view) {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     public void onStart() {
         super.onStart();

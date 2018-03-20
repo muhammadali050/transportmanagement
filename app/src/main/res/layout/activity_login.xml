@@ -82,8 +82,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:paddingTop="5dp"
+                android:textColor="@color/colorBtnBack"
+                android:textSize="16sp"
                 android:onClick="onClickRegister"
-                android:text="Register" />
+                android:text="@string/btnRegister" />
         </LinearLayout>
     </RelativeLayout>
 

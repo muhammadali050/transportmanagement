@@ -15,6 +15,10 @@
     <string name="title_activity_edit_driver">Edit Driver</string>
     <string name="title_activity_edit_mechanic">Edit Mechanic</string>
 
+
+    <string name="login"><u>Login</u></string>
+    <string name="btnRegister"><u>Register</u></string>
+
     <string-array name="cities">
         <item>Sialkot</item>
         <item>Gujranwala</item>
