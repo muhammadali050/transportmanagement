@@ -76,6 +76,7 @@
                 android:layout_height="24dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
+                android:onClick="onClickEditRoute"
                 android:layout_below="@+id/ll_route_head"
                 android:layout_toLeftOf="@+id/drop_down_option_menu"
                 app:srcCompat="@drawable/icon_edit_user"/>

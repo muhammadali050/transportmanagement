@@ -32,7 +32,7 @@
         android:scrollbarAlwaysDrawVerticalTrack="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/admin_title"
         app:layout_constraintVertical_bias="0.0">
@@ -112,8 +112,8 @@
                 android:hint="City"
                 android:inputType="text"
                 android:paddingBottom="10dp"
-                android:singleLine="true"
                 android:paddingTop="5dp"
+                android:singleLine="true"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView2" />
@@ -142,8 +142,8 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:hint="Tool plaza cost"
-                android:paddingBottom="5dp"
                 android:inputType="number"
+                android:paddingBottom="5dp"
                 android:singleLine="true"
                 android:textColor="@color/textcolor"
                 android:textSize="18sp"
@@ -208,12 +208,43 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:hint="Extra Cost"
+                android:inputType="number"
                 android:paddingBottom="5dp"
                 android:singleLine="true"
-                android:inputType="number"
                 android:textColor="@color/textcolor"
                 android:textSize="18sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textViewExtras"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline" />
+
+
+            <TextView
+                android:id="@+id/textViewDriver"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:paddingBottom="15dp"
+                android:singleLine="true"
+                android:text="Driver"
+                android:textColor="#000"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewExtras" />
+
+            <Spinner
+                android:id="@+id/rDriver"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:paddingBottom="5dp"
+                android:entries="@array/cities"
+                android:textSize="18sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textViewDriver"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline" />
 
@@ -230,7 +261,7 @@
                 android:textSize="18sp"
                 app:layout_constraintLeft_toLeftOf="@+id/textViewExtras"
                 app:layout_constraintRight_toRightOf="@+id/rExtras"
-                app:layout_constraintTop_toBottomOf="@+id/textViewExtras" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewDriver" />
 
 
         </android.support.constraint.ConstraintLayout>

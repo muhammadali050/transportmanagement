@@ -59,8 +59,8 @@
         <activity
             android:name=".MechanicProfile"
             android:label="@string/title_activity_edit_mechanic" />
-        
-        <activity android:name=".EditRoute"></activity>
+        <activity android:name=".EditRoute" />
+        <activity android:name=".DriverFaq"></activity>
     </application>
 
 </manifest>
