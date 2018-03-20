@@ -32,7 +32,6 @@
         android:scrollbarAlwaysDrawVerticalTrack="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/admin_title"
         app:layout_constraintVertical_bias="0.0">
@@ -56,7 +55,6 @@
                 app:layout_constraintGuide_percent="0.35" />
 
 
-
             <TextView
                 android:id="@+id/textViewTool"
                 android:layout_width="0dp"
@@ -75,21 +73,20 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
             <EditText
-                android:id="@+id/editTextTool"
+                android:id="@+id/etDName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:hint="Add Name"
+                android:hint="Name"
+                android:inputType="textCapWords"
                 android:paddingBottom="5dp"
                 android:textColor="@color/textcolor"
                 android:textColorHint="@color/textcolor"
                 android:textSize="18sp"
-                android:inputType="number"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textViewTool"
-                app:layout_constraintStart_toStartOf="@+id/guideline"
-                />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline" />
 
             <TextView
                 android:id="@+id/textViewPetrol"
@@ -109,15 +106,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/textViewTool" />
 
             <EditText
-                android:id="@+id/editTextPetrol"
+                android:id="@+id/etDPhone"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:hint="Phone"
                 android:inputType="number"
+                android:maxLength="14"
                 android:paddingBottom="5dp"
-
                 android:textColorHint="@color/textcolor"
                 android:textSize="18sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textViewPetrol"
@@ -142,14 +139,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/textViewPetrol" />
 
             <EditText
-                android:id="@+id/editTextExtras"
+                android:id="@+id/rExtras"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:hint="Adress"
-                android:inputType="number"
+                android:inputType="text"
                 android:paddingBottom="5dp"
+                android:singleLine="false"
                 android:textColor="@color/textcolor"
                 android:textColorHint="@color/textcolor"
                 android:textSize="18sp"
@@ -158,32 +156,31 @@
                 app:layout_constraintStart_toStartOf="@+id/guideline" />
 
             <ImageView
-                android:id="@+id/add_mechanic_photo"
+                android:id="@+id/etAdd_mechanic_photo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintLeft_toLeftOf="@+id/guideline"
                 app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/textViewExtras"
                 app:srcCompat="@drawable/add_image_icon" />
 
             <Button
+                android:id="@+id/btAddDriver"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="22dp"
                 android:background="@color/colorBtnBack"
+                android:onClick="addDriver"
                 android:text="Add Driver"
                 android:textAllCaps="false"
                 android:textColor="#fff"
                 android:textSize="18sp"
-                app:layout_constraintTop_toBottomOf="@+id/add_mechanic_photo"
-                app:layout_constraintLeft_toLeftOf="@+id/add_mechanic_photo"
-                app:layout_constraintRight_toRightOf="@+id/add_mechanic_photo"
-                />
-
-
+                app:layout_constraintLeft_toLeftOf="@+id/etAdd_mechanic_photo"
+                app:layout_constraintRight_toRightOf="@+id/etAdd_mechanic_photo"
+                app:layout_constraintTop_toBottomOf="@+id/etAdd_mechanic_photo" />
 
 
         </android.support.constraint.ConstraintLayout>

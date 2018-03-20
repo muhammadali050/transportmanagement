@@ -94,16 +94,13 @@ public class RegistrationActivity extends AppCompatActivity {
         //All Fields must be fill
         if(TextUtils.isEmpty(name) || TextUtils.isEmpty(email) || TextUtils.isEmpty(password))
         {
-            Message.show(RegistrationActivity.this , "Please fill all fields. . .");
+            Message.show(RegistrationActivity.this , "Please fill all fields.");
             return;
         }
         final User user = new User();
         user.setName(name);
         user.setEmail(email);
         user.setPassword(password);
-
-//        progressDialog.setMessage("User Registration. . .");
-//        progressDialog.show();
 
         final PDialog pd = new PDialog(this).message("User Registration. . .").show();
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -121,6 +118,7 @@ public class RegistrationActivity extends AppCompatActivity {
                             pd.hide();
 
                         } else {
+                            pd.hide();
                             // If sign in fails, display a message to the user.
                            // Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(RegistrationActivity.this, "Registration failed.\n"+task.getException().getMessage(),

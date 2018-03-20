@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.climesoftt.transportmanagement.utils.Message;
+import com.climesoftt.transportmanagement.utils.PDialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -29,7 +30,6 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText etl_email,etl_password;
     private String email,password;
-    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,8 +42,6 @@ public class LoginActivity extends AppCompatActivity {
 
         }
 
-        progressDialog = new ProgressDialog(this);
-
         mAuth = FirebaseAuth.getInstance();
         etl_email = findViewById(R.id.etUserEmail);
         etl_password = findViewById(R.id.etUserPassword);
@@ -55,11 +53,10 @@ public class LoginActivity extends AppCompatActivity {
         //All Fields must be fill
         if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password))
         {
-            Message.show(LoginActivity.this , "Please fill all fields. . .");
+            Message.show(LoginActivity.this , "Please fill all fields.");
             return;
         }
-        progressDialog.setMessage("Trying to login. . .");
-        progressDialog.show();
+        final PDialog pd = new PDialog(this).message("Trying to login . . .").show();
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -75,9 +72,12 @@ public class LoginActivity extends AppCompatActivity {
                                 // Check if user's email is verified
                                 boolean emailVerified = user.isEmailVerified();
                             }
+                            pd.hide();
                             startActivity(intent);
+
                             //updateUI(user);
                         } else {
+                            pd.hide();
                             // If sign in fails, display a message to the user.
                             Toast.makeText(LoginActivity.this, "Authentication failed.\n"+task.getException().getMessage(),
                                     Toast.LENGTH_SHORT).show();

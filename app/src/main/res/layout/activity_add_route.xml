@@ -32,7 +32,7 @@
         android:scrollbarAlwaysDrawVerticalTrack="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/admin_title"
         app:layout_constraintVertical_bias="0.0">
@@ -72,14 +72,16 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/spinner"
+                android:id="@+id/rToCity"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
+                android:hint="City"
+                android:inputType="text"
                 android:paddingBottom="10dp"
                 android:paddingTop="5dp"
-                android:hint="city"
+                android:singleLine="true"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline" />
@@ -92,8 +94,8 @@
                 android:layout_marginTop="8dp"
                 android:paddingBottom="15dp"
                 android:singleLine="true"
-                android:textColor="#000"
                 android:text="From"
+                android:textColor="#000"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/guideline"
@@ -102,13 +104,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
             <EditText
-                android:id="@+id/spinner2"
+                android:id="@+id/rFromCity"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:hint="city"
+                android:hint="City"
+                android:inputType="text"
                 android:paddingBottom="10dp"
+                android:singleLine="true"
                 android:paddingTop="5dp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -132,20 +136,20 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
             <EditText
-                android:id="@+id/editTextTool"
+                android:id="@+id/rToolPlaza"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:hint="Tool plaza cost"
                 android:paddingBottom="5dp"
+                android:inputType="number"
+                android:singleLine="true"
                 android:textColor="@color/textcolor"
                 android:textSize="18sp"
-                android:inputType="number"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textViewTool"
-                app:layout_constraintStart_toStartOf="@+id/guideline"
-                tools:layout_editor_absoluteY="124dp" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline" />
 
             <TextView
                 android:id="@+id/textViewPetrol"
@@ -165,7 +169,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textViewTool" />
 
             <EditText
-                android:id="@+id/editTextPetrol"
+                android:id="@+id/rPetrol"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -173,6 +177,7 @@
                 android:hint="Petrol Cost"
                 android:inputType="number"
                 android:paddingBottom="5dp"
+                android:singleLine="true"
                 android:textColor="@color/textcolor"
                 android:textSize="18sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textViewPetrol"
@@ -197,14 +202,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/textViewPetrol" />
 
             <EditText
-                android:id="@+id/editTextExtras"
+                android:id="@+id/rExtras"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:hint="Extra Cost"
-                android:inputType="number"
                 android:paddingBottom="5dp"
+                android:singleLine="true"
+                android:inputType="number"
                 android:textColor="@color/textcolor"
                 android:textSize="18sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textViewExtras"
@@ -212,18 +218,19 @@
                 app:layout_constraintStart_toStartOf="@+id/guideline" />
 
             <Button
+                android:id="@+id/btAddRoute"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="22dp"
                 android:background="@color/colorBtnBack"
-                android:text="Sign in"
+                android:onClick="addRoute"
+                android:text="Add Route"
                 android:textAllCaps="false"
                 android:textColor="#fff"
                 android:textSize="18sp"
-                app:layout_constraintTop_toBottomOf="@+id/textViewExtras"
                 app:layout_constraintLeft_toLeftOf="@+id/textViewExtras"
-                app:layout_constraintRight_toRightOf="@+id/editTextExtras"
-                />
+                app:layout_constraintRight_toRightOf="@+id/rExtras"
+                app:layout_constraintTop_toBottomOf="@+id/textViewExtras" />
 
 
         </android.support.constraint.ConstraintLayout>
