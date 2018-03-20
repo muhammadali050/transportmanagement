@@ -16,11 +16,13 @@ public class PDialog {
         this.cot = c;
         pd = new ProgressDialog(cot);
     }
+
+    public PDialog(FetchDataPerson fetchDataPerson) {
+
+    }
+
     public PDialog message(String msg){
         pd.setMessage(msg);
-        return this;
-    }
-    public PDialog show(){
         pd.show();
         return this;
     }

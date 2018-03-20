@@ -59,7 +59,7 @@ public class AddDriver extends AppCompatActivity {
         driver.setName(name);
         driver.setPhone(phone);
         driver.setAddress(address);
-        final PDialog pd = new PDialog(this).message("Person Registration.").show();
+        final PDialog pd = new PDialog(this).message("Person Registration.");
         try
         {
             String uniqueId = String.valueOf(new Date().getTime());

@@ -107,7 +107,7 @@ public class RegistrationActivity extends AppCompatActivity {
         user.setEmail(email);
         user.setPassword(password);
 
-        final PDialog pd = new PDialog(this).message("User Registration. . .").show();
+        final PDialog pd = new PDialog(this).message("User Registration. . .");
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override

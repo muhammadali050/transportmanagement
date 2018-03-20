@@ -73,18 +73,17 @@
                 />
 
             <TextView
-                android:id="@+id/txt_mechanic_phone"
+                android:id="@+id/txt_driver_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txt_user_address"
-                android:layout_toEndOf="@+id/user_card_view"
-                android:drawableStart="@drawable/ic_call_18_black"
-                android:drawablePadding="4dp"
-                android:singleLine="true"
-                android:text="0123-12345679"
                 android:layout_marginBottom="2dp"
                 android:layout_marginTop="2dp"
-                />
+                android:layout_toEndOf="@+id/user_card_view"
+                android:drawablePadding="4dp"
+                android:drawableStart="@drawable/ic_call_18_black"
+                android:singleLine="true"
+                android:text="0123-12345679" />
 
 
 

@@ -56,7 +56,7 @@ public class AddMechanic extends AppCompatActivity {
         person.setName(name);
         person.setPhone(phone);
         person.setAddress(address);
-        final PDialog pd = new PDialog(this).message("Mechanic Registration.").show();
+        final PDialog pd = new PDialog(this).message("Mechanic Registration.");
         try {
             String uniqueId = String.valueOf(new Date().getTime());
             DatabaseReference driverRef = dbRef.child("mechanics").child(uniqueId);

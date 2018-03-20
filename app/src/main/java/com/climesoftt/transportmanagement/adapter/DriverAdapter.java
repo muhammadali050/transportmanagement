@@ -12,19 +12,23 @@ import android.widget.TextView;
 
 import com.climesoftt.transportmanagement.R;
 import com.climesoftt.transportmanagement.DriverProfile;
+import com.climesoftt.transportmanagement.model.Person;
+
+import java.util.ArrayList;
 
 /**
  * Created by Ali on 3/14/2018.
  */
 
+        /*
+        This Adapter is not use Instead of this use PersonAdapter for Re-usability
+        */
 public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.VHolder> {
     private Context context;
-    private Cursor cursor;
-    private String[] names = {"Noor","Ali" , "Asif","Noor","Ali" , "Asif","Noor","Ali" , "Asif","Noor","Ali" , "Asif"};
-
-    public DriverAdapter(Context context ){
+    private ArrayList<Person> driversList;
+    public DriverAdapter(Context context, ArrayList<Person> dList ){
         this.context = context;
-        //this.cursor = cursor;
+        this.driversList = dList;
     }
 
     public DriverAdapter.VHolder onCreateViewHolder(ViewGroup viewGroup , int resType){
@@ -34,23 +38,21 @@ public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.VHolder> {
 
 
     public int getItemCount(){
-        //return cursor.getCount();
-        return names.length;
+        return driversList.size();
     }
 
 
     public void onBindViewHolder(DriverAdapter.VHolder vh , int position){
-        //cursor.moveToPosition(position);
-
-        vh.txtName.setText(names[position]);
-        vh.txtAddress.setText("Street abc, Muhalla xxx, AAAAA");
+        vh.txtName.setText(driversList.get(position).getName());
+        vh.txtAddress.setText(driversList.get(position).getAddress());
+        vh.txtPhone.setText(driversList.get(position).getPhone());
 
     }
 
     class VHolder extends RecyclerView.ViewHolder{
 
         private ImageView imgDriver;
-        private TextView txtName;
+        private TextView txtName, txtPhone;
         private TextView txtAddress;
 
         public VHolder(View view)
@@ -66,6 +68,7 @@ public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.VHolder> {
             imgDriver = (ImageView) view.findViewById(R.id.user_photo);
             txtName = (TextView)view.findViewById(R.id.txt_user_name);
             txtAddress = (TextView)view.findViewById(R.id.txt_user_address);
+            txtPhone = view.findViewById(R.id.txt_driver_phone);
         }
 
 

@@ -13,51 +13,48 @@ import android.widget.TextView;
 import com.climesoftt.transportmanagement.MechanicProfile;
 import com.climesoftt.transportmanagement.R;
 import com.climesoftt.transportmanagement.DriverProfile;
+import com.climesoftt.transportmanagement.model.Person;
+
+import java.util.ArrayList;
 
 /**
  * Created by Ali on 3/13/2018.
  */
 
+     /*
+        This Adapter is not use Instead of this use PersonAdapter for Re-usability
+        */
+
 public class MechanicsAdaptor extends RecyclerView.Adapter<MechanicsAdaptor.VHolder>{
 
     private Context context;
-    private Cursor cursor;
-    private String[] names = {"Noor","Ali" , "Asif","Noor","Ali" , "Asif","Noor","Ali" , "Asif","Noor","Ali" , "Asif"};
-
-    public MechanicsAdaptor(Context context ){
+    private ArrayList<Person> personsList;
+    public MechanicsAdaptor(Context context, ArrayList<Person> arrayList ){
         this.context = context;
-        //this.cursor = cursor;
+        this.personsList = arrayList;
     }
 
     public MechanicsAdaptor.VHolder onCreateViewHolder(ViewGroup viewGroup , int resType){
         View view = LayoutInflater.from(context).inflate(R.layout.mechanic_item, viewGroup , false);
-
-        return new VHolder(view);
+        return new MechanicsAdaptor.VHolder(view);
     }
-
 
     public int getItemCount(){
-        //return cursor.getCount();
-        return names.length;
+        return personsList.size();
     }
 
 
-    public void onBindViewHolder(VHolder vh , int position){
-        //cursor.moveToPosition(position);
-
-        vh.txtName.setText(names[position]);
-        vh.txtAddress.setText("Street abc, Muhalla xxx, AAAAA");
-        //vh.imgDriver.setImageResource(R.drawable.mechanic_icon);
-
-        /*vh.txtNum.setText(cursor.getString(0));
-        vh.txtMess.setText(cursor.getString(1));*/
+    public void onBindViewHolder(MechanicsAdaptor.VHolder vh , int position){
+        vh.txtName.setText(personsList.get(position).getName());
+        vh.txtAddress.setText(personsList.get(position).getAddress());
+        vh.txtPhone.setText(personsList.get(position).getPhone());
 
     }
 
     class VHolder extends RecyclerView.ViewHolder{
 
         private ImageView imgDriver;
-        private TextView txtName;
+        private TextView txtName,txtPhone;
         private TextView txtAddress;
 
         public VHolder(View view)
@@ -72,9 +69,10 @@ public class MechanicsAdaptor extends RecyclerView.Adapter<MechanicsAdaptor.VHol
                 }
             });
 
-            //imgDriver = (ImageView) view.findViewById(R.id.img_mechanic_photo);
+            imgDriver = (ImageView) view.findViewById(R.id.img_mechanic_photo);
             txtName = (TextView)view.findViewById(R.id.txt_mechanic_name);
             txtAddress = (TextView)view.findViewById(R.id.txt_mechanic_address);
+            txtPhone = view.findViewById(R.id.txt_mechanic_phone);
         }
 
 

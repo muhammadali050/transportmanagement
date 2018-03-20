@@ -71,11 +71,11 @@ public class AddRoute extends AppCompatActivity {
         route.setPetrolCost(petrol);
         route.setExtras(extras);
 
-        final PDialog pd = new PDialog(this).message("Route adding. . . ").show();
+        final PDialog pd = new PDialog(this).message("Route adding. . . ");
         try
         {
             String uniqueId = String.valueOf(new Date().getTime());
-            DatabaseReference routeRef = dbRef.child("drivers").child(uniqueId);
+            DatabaseReference routeRef = dbRef.child(uniqueId);
             routeRef.setValue(route);
             Message.show(AddRoute.this,"Added successfully.");
 
