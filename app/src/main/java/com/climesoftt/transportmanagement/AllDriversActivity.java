@@ -26,6 +26,9 @@ public class AllDriversActivity extends AppCompatActivity {
         DriverAdapter adapter = new DriverAdapter(this);
         rv.setAdapter(adapter) ;
         rv.setLayoutManager(new LinearLayoutManager(this));
+
+
+
         try{
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
