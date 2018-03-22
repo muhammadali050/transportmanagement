@@ -1,5 +1,6 @@
 package com.climesoftt.transportmanagement;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import com.climesoftt.transportmanagement.model.GenerateRandomNumber;
 import com.climesoftt.transportmanagement.model.Person;
 import com.climesoftt.transportmanagement.utils.Message;
 import com.climesoftt.transportmanagement.utils.PDialog;
@@ -32,7 +34,7 @@ public class AddDriver extends AppCompatActivity {
 
         dName = findViewById(R.id.etDName);
         dPhone = findViewById(R.id.etDPhone);
-        dAddress = findViewById(R.id.rExtras);
+        dAddress = findViewById(R.id.rExtraCost);
 
 
         try{
@@ -45,27 +47,34 @@ public class AddDriver extends AppCompatActivity {
 
     public void addDriver(View view)
     {
-        String name = dName.getText().toString();
-        String phone = dPhone.getText().toString();
-        String address = dAddress.getText().toString();
+
+        int getId = GenerateRandomNumber.randomNum();
+        String id = Integer.toString(getId).trim();
+        String name = dName.getText().toString().trim();
+        String phone = dPhone.getText().toString().trim();
+        String address = dAddress.getText().toString().trim();
         //Validation
         if(TextUtils.isEmpty(name) || TextUtils.isEmpty(phone) || TextUtils.isEmpty(address))
         {
-            Message.show(AddDriver.this , "Please fill all the fields.");
+            Message.show(AddDriver.this , "Please fill all the fields!");
             return;
         }
 
         final Person driver = new Person();
+        driver.setId(id);
         driver.setName(name);
         driver.setPhone(phone);
         driver.setAddress(address);
         final PDialog pd = new PDialog(this).message("Person Registration.");
         try
         {
-            String uniqueId = String.valueOf(new Date().getTime());
-            DatabaseReference driverRef = dbRef.child("drivers").child(uniqueId);
+            //String uniqueId = String.valueOf(new Date().getTime());
+            DatabaseReference driverRef = dbRef.child("drivers").child(id);
             driverRef.setValue(driver);
             Message.show(AddDriver.this,"Registered successfully.");
+            this.finish();
+            Intent intent = new Intent(this, AllDriversActivity.class);
+            startActivity(intent);
 
         }catch (Exception e)
         {

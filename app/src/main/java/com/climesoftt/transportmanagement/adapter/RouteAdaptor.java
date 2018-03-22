@@ -12,7 +12,9 @@ import android.widget.TextView;
 
 import com.climesoftt.transportmanagement.R;
 import com.climesoftt.transportmanagement.Route;
+import com.climesoftt.transportmanagement.model.Person;
 import com.climesoftt.transportmanagement.model.Routes;
+import com.climesoftt.transportmanagement.utils.Message;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -58,7 +60,23 @@ public class RouteAdaptor extends RecyclerView.Adapter<RouteAdaptor.VHolder> {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    String toolPlaza = "";
+                    String petrol = "";
+                    String extraCost = "";
+                    // get position of current Row
+                    int pos = getAdapterPosition();
+
+                    // check if item still exists
+                    if(pos != RecyclerView.NO_POSITION){
+                        Routes clickedDataItem = arrayList.get(pos);
+                        toolPlaza = clickedDataItem.getTooPlaza();
+                        petrol = clickedDataItem.getPetrolCost();
+                        extraCost = clickedDataItem.getExtras();
+                    }
                     Intent intent = new Intent(context , Route.class);
+                    intent.putExtra("TOOLPLAZA" , toolPlaza);
+                    intent.putExtra("PETROL", petrol);
+                    intent.putExtra("EXTRACOST",extraCost);
                     context.startActivity(intent);
                 }
             });

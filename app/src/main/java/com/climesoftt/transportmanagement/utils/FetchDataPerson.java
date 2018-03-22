@@ -1,6 +1,9 @@
 package com.climesoftt.transportmanagement.utils;
 
 import android.content.Context;
+import android.util.Log;
+
+import com.climesoftt.transportmanagement.adapter.DriverAdapter;
 import com.climesoftt.transportmanagement.adapter.PersonAdapter;
 import com.climesoftt.transportmanagement.model.Person;
 import com.google.firebase.database.DataSnapshot;
@@ -23,20 +26,24 @@ public class FetchDataPerson{
         this.context = context;
     }
     public static String CHILD_REFERENCE_KEY;
-    public void fetchDataFromFirebase(final String childReference, final ArrayList<Person> arrayList, final PersonAdapter adapter)
+
+    public void fetchDataFromFirebase(final String childReference, final ArrayList<Person> arrayList, final DriverAdapter adapter)
     {
         final DatabaseReference dref = FirebaseDatabase.getInstance().getReference(childReference);
         final PDialog pd = new PDialog(context).message("Loading. . .");
+        arrayList.clear();
         dref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot driverSnapshot : dataSnapshot.getChildren())
-                {
-                    Person pData = driverSnapshot.getValue(Person.class);
-                    arrayList.add(pData);
-                }
-                adapter.notifyDataSetChanged();
-                pd.hide();
+                Person pData = new Person();
+                   for(DataSnapshot driverSnapshot : dataSnapshot.getChildren())
+                   {
+                       pData = driverSnapshot.getValue(Person.class);
+                       arrayList.add(pData);
+                   }
+                   adapter.notifyDataSetChanged();
+
+                   pd.hide();
                 // Call Function For sending child name
                 CHILD_REFERENCE_KEY = childReference;
             }

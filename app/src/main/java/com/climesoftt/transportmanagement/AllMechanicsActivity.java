@@ -9,12 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
-import com.climesoftt.transportmanagement.adapter.DriverAdapter;
 import com.climesoftt.transportmanagement.adapter.MechanicsAdaptor;
-import com.climesoftt.transportmanagement.adapter.PersonAdapter;
 import com.climesoftt.transportmanagement.model.Person;
 import com.climesoftt.transportmanagement.utils.FetchDataPerson;
 import com.climesoftt.transportmanagement.utils.PDialog;
@@ -31,29 +27,22 @@ import java.util.ArrayList;
  */
 
 public class AllMechanicsActivity extends AppCompatActivity {
-    private ArrayList<Person> personsList = new ArrayList<>();
-    private PersonAdapter personAdapter;
+    private ArrayList<Person> mechanicsList = new ArrayList<>();
+    private MechanicsAdaptor mechanicsAdapter;
     private RecyclerView  rv;
     private DatabaseReference dref;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_all_mechanics);
-        //Now use one PersonAdapter for Two Activities so here setContentView Change...Keep in mind for change
-        setContentView(R.layout.activity_all_drivers);
+        setContentView(R.layout.activity_all_mechanics);
 
-        rv = findViewById(R.id.rcvUsers);
-        personAdapter = new PersonAdapter(this, personsList);
-        rv.setAdapter(personAdapter) ;
+        rv = findViewById(R.id.rcvMechanics);
+        mechanicsAdapter = new MechanicsAdaptor(this, mechanicsList);
+        rv.setAdapter(mechanicsAdapter) ;
         rv.setLayoutManager(new LinearLayoutManager(this));
 
-        /*
-            For Reusability create function in FetchDataPerson class then use here.
-         */
-        new FetchDataPerson(this).fetchDataFromFirebase("mechanics",personsList,personAdapter);
-        // Instead of this method create separate function in FetchDataPerson Class ..
-        // fetchDataFromFirebase();
+        fetchDataFromFirebase();
 
         try{
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -63,8 +52,6 @@ public class AllMechanicsActivity extends AppCompatActivity {
         }
     }
 
-    /*
-    // Instead of this method create function in FetchDataPerson Class ..
     private void fetchDataFromFirebase()
     {
         dref = FirebaseDatabase.getInstance().getReference("mechanics");
@@ -75,9 +62,9 @@ public class AllMechanicsActivity extends AppCompatActivity {
                 for(DataSnapshot driverSnapshot : dataSnapshot.getChildren())
                 {
                     Person pData = driverSnapshot.getValue(Person.class);
-                    personsList.add(pData);
+                    mechanicsList.add(pData);
                 }
-                personAdapter.notifyDataSetChanged();
+                mechanicsAdapter.notifyDataSetChanged();
                 pd.hide();
             }
             @Override
@@ -86,7 +73,7 @@ public class AllMechanicsActivity extends AppCompatActivity {
             }
         });
     }
-    */
+
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater inflater = getMenuInflater();
@@ -95,6 +82,7 @@ public class AllMechanicsActivity extends AppCompatActivity {
     }
 
     public void addUser(MenuItem item){
+        this.finish();
         Intent intent = new Intent(this, AddMechanic.class);
         startActivity(intent);
     }
@@ -104,7 +92,9 @@ public class AllMechanicsActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                this.finish();;
+                this.finish();
+                Intent intent = new Intent(this, AdminDashboardActivity.class);
+                startActivity(intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);

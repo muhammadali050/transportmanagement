@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.climesoftt.transportmanagement.model.GenerateRandomNumber;
 import com.climesoftt.transportmanagement.model.User;
 import com.climesoftt.transportmanagement.utils.Message;
 import com.climesoftt.transportmanagement.utils.PDialog;
@@ -93,9 +94,9 @@ public class RegistrationActivity extends AppCompatActivity {
 
     public void userRegister(View view)
     {
-        String name = userName.getText().toString();
-        String email = userEmail.getText().toString();
-        String password = userPassword.getText().toString();
+        String name = userName.getText().toString().trim();
+        String email = userEmail.getText().toString().trim();
+        String password = userPassword.getText().toString().trim();
         //All Fields must be fill
         if(TextUtils.isEmpty(name) || TextUtils.isEmpty(email) || TextUtils.isEmpty(password))
         {
@@ -103,6 +104,10 @@ public class RegistrationActivity extends AppCompatActivity {
             return;
         }
         final User user = new User();
+        //final String uniqueId = String.valueOf(new Date().getTime());
+        int getId = GenerateRandomNumber.randomNum();
+        final String id = Integer.toString(getId);
+        user.setId(id);
         user.setName(name);
         user.setEmail(email);
         user.setPassword(password);
@@ -115,11 +120,13 @@ public class RegistrationActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             //String userId = mAuth.getCurrentUser().getUid();
-                            String uniqueId = String.valueOf(new Date().getTime());
-                            DatabaseReference currentUser = dbRef.child("Users").child(uniqueId);
+                            DatabaseReference currentUser = dbRef.child("Users").child(id);
                             currentUser.setValue(user);
                             Toast.makeText(RegistrationActivity.this, "Registered Successfully.",
                                     Toast.LENGTH_SHORT).show();
+                            userName.setText("");
+                            userEmail.setText("");
+                            userPassword.setText("");
                             pd.hide();
 
                         } else {

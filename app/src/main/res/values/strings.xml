@@ -19,10 +19,8 @@
     <string name="login"><u>Login</u></string>
     <string name="btnRegister"><u>Register</u></string>
 
-    <string-array name="cities">
-        <item>Sialkot</item>
-        <item>Gujranwala</item>
-        <item>Mandi</item>
-        <item>Lahore</item>
+    <string-array name="DriverName">
+        <item>None</item>
+
     </string-array>
 </resources>

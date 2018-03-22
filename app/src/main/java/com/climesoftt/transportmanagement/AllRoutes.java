@@ -31,6 +31,7 @@ public class AllRoutes extends AppCompatActivity {
     private RecyclerView rv;
     private RouteAdaptor adapter;
     private DatabaseReference dbref;
+    public static String CURRENT_CHILD_KEY;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_routes);
@@ -66,8 +67,9 @@ public class AllRoutes extends AppCompatActivity {
                 }
                 adapter.notifyDataSetChanged();
                 pd.hide();
-                String referenceChildName = dbref.getKey();
-                Message.show(AllRoutes.this , referenceChildName);
+
+                //String referenceChildName = dbref.getKey();
+                //Message.show(AllRoutes.this , referenceChildName);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -95,6 +97,8 @@ public class AllRoutes extends AppCompatActivity {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 this.finish();
+                Intent intent = new Intent(this, AdminDashboardActivity.class);
+                startActivity(intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);

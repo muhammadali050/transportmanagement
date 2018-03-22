@@ -7,23 +7,38 @@ import com.climesoftt.transportmanagement.Route;
  */
 
 public class Routes {
+    private String id = "";
     private String toCity = "";
     private String fromCity = "";
     private String tooPlaza = "";
     private String petrolCost = "";
     private  String extras = "";
+    private String driver = "";
     public Routes()
     {
     }
-    public Routes(String to , String from , String tool , String petrol, String extras)
+
+
+    public Routes(String id,String to , String from , String tool , String petrol, String extras,String driver)
     {
+        this.id = id;
         this.toCity = to;
         this.fromCity = from;
         this.tooPlaza = tool;
         this.petrolCost = petrol;
         this.extras = extras;
+        this.driver = driver;
     }
 
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
     public String getToCity() {
         return toCity;
     }
@@ -64,4 +79,12 @@ public class Routes {
         this.extras = extras;
     }
 
+    public void setDriver(String driver)
+    {
+        this.driver = driver;
+    }
+    public String getDriver()
+    {
+        return driver;
+    }
 }

@@ -2,7 +2,6 @@ package com.climesoftt.transportmanagement.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +25,10 @@ import java.util.ArrayList;
 public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.VHolder> {
     private Context context;
     private ArrayList<Person> driversList;
+    public static String DRIVER_ID = "";
+    public static String DRIVER_NAME = "";
+    public static String DRIVER_ADDRESS = "";
+    public static String DRIVER_PHONE = "";
     public DriverAdapter(Context context, ArrayList<Person> dList ){
         this.context = context;
         this.driversList = dList;
@@ -61,6 +64,27 @@ public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.VHolder> {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    String pId = "";
+                    String pName = "";
+                    String pAddress = "";
+                    String pPhone = "";
+
+                    // get position of current Row
+                    int pos = getAdapterPosition();
+
+                    // check if item still exists
+                    if(pos != RecyclerView.NO_POSITION){
+                        Person clickedDataItem = driversList.get(pos);
+                        pId = clickedDataItem.getId();
+                        pName = clickedDataItem.getName();
+                        pAddress = clickedDataItem.getAddress();
+                        pPhone = clickedDataItem.getPhone();
+                    }
+                    //Send Data to MechanicProfile.java activity
+                    DRIVER_ID = pId;
+                    DRIVER_NAME = pName;
+                    DRIVER_ADDRESS = pAddress;
+                    DRIVER_PHONE = pPhone;
                     Intent intent = new Intent(context , DriverProfile.class);
                     context.startActivity(intent);
                 }

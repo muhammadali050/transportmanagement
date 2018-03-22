@@ -30,34 +30,34 @@ import java.util.ArrayList;
  */
 
 public class AllDriversActivity extends AppCompatActivity {
-    /*
+
     //This code is for DriverAdapter
     private ArrayList<Person> driversList = new ArrayList<>();
     private DriverAdapter driverAdapter;
     private RecyclerView  rv;
     private DatabaseReference dref;
-    */
 
+
+    /*  //For Generic
     private ArrayList<Person> personsList = new ArrayList<>();
     private PersonAdapter personAdapter;
     private RecyclerView  rv;
-    private DatabaseReference dref;
-    private String referenceChildName;
+    private DatabaseReference dref;  */
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_drivers);
 
         rv = findViewById(R.id.rcvUsers);
-        personAdapter = new PersonAdapter(this, personsList);
-        rv.setAdapter(personAdapter) ;
+        driverAdapter = new DriverAdapter(this, driversList);
+        rv.setAdapter(driverAdapter) ;
         rv.setLayoutManager(new LinearLayoutManager(this));
         /*
             For Reusability create function in FetchDataPerson class then use here.
          */
-
-        new FetchDataPerson(this).fetchDataFromFirebase("drivers",personsList,personAdapter);
-       // fetchDataFromFirebase();
+        new FetchDataPerson(this).fetchDataFromFirebase("drivers",driversList,driverAdapter);
+        driversList.clear();
+        //fetchDataFromFirebase();
 
         try{
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -83,8 +83,8 @@ public class AllDriversActivity extends AppCompatActivity {
                 }
                 personAdapter.notifyDataSetChanged();
                 pd.hide();
-                referenceChildName = dref.getKey();
-                Message.show(AllDriversActivity.this , referenceChildName);
+                REFERENCE_CHILD_NAME = dref.getKey();
+                Message.show(AllDriversActivity.this , REFERENCE_CHILD_NAME);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -102,6 +102,7 @@ public class AllDriversActivity extends AppCompatActivity {
     }
 
     public void addUser(MenuItem item){
+        this.finish();
         Intent intent = new Intent(this, AddDriver.class);
         startActivity(intent);
     }
@@ -111,7 +112,9 @@ public class AllDriversActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                this.finish();;
+                this.finish();
+                Intent intent = new Intent(this, AdminDashboardActivity.class);
+                startActivity(intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);
