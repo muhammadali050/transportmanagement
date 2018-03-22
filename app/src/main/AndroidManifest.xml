@@ -62,7 +62,8 @@
         <activity android:name=".DriverFaq" />
         <activity android:name=".FaqActivity" />
         <activity android:name=".DriverDashboard" />
-        <activity android:name=".AddQuestionActivity"></activity>
+        <activity android:name=".AddQuestionActivity" />
+        <activity android:name=".EditQuestionActivity"></activity>
     </application>
 
 </manifest>

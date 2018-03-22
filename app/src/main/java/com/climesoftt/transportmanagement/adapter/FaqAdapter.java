@@ -4,7 +4,10 @@ package com.climesoftt.transportmanagement.adapter;
  * Created by Ali on 3/22/2018.
  */
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.climesoftt.transportmanagement.EditQuestionActivity;
 import com.climesoftt.transportmanagement.R;
 
 /**
@@ -30,6 +36,8 @@ public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.VHolder> {
     public FaqAdapter.VHolder onCreateViewHolder(ViewGroup viewGroup , int resType){
         View view = LayoutInflater.from(context).inflate(R.layout.faq_item, viewGroup , false);
         return new FaqAdapter.VHolder(view);
+
+
     }
 
 
@@ -63,13 +71,14 @@ public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.VHolder> {
             layout = (LinearLayout) view.findViewById(R.id.llFaq);
 
 
+
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(answer.isShown()){
                         answer.setVisibility(View.INVISIBLE);
                         android.view.ViewGroup.LayoutParams params = layout.getLayoutParams();
-                        params.height = question.getHeight()+4;
+                        params.height = question.getHeight()+4; // Add margin Value too
                         params.width = ViewGroup.LayoutParams.MATCH_PARENT;
                         layout.setLayoutParams(params);
                         question.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_drop_up, 0);
@@ -84,11 +93,41 @@ public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.VHolder> {
                     }
                 }
             });
+
+            view.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+
+                    alertDialogBuilder.create();
+                    alertDialogBuilder.setNegativeButton("Edit", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(context , EditQuestionActivity.class);
+                            context.startActivity(intent);
+                        }
+                    });
+
+                    alertDialogBuilder.setPositiveButton("Delete",new
+                            DialogInterface.OnClickListener(){
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Toast.makeText(context , "Delete" , Toast.LENGTH_SHORT).show();
+                                }
+                            }   );
+
+                    alertDialogBuilder.setTitle("Choose Action");
+                    alertDialogBuilder.setCancelable(true);
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
+                    return false;
+                }
+            });
+
+
+
+
         }
-
-
-
-
     }
 }
 
