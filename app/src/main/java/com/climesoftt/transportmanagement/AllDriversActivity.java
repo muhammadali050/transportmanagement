@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 
 import com.climesoftt.transportmanagement.adapter.DriverAdapter;
 import com.climesoftt.transportmanagement.adapter.PersonAdapter;
@@ -48,9 +47,9 @@ public class AllDriversActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_drivers);
 
-        rv = findViewById(R.id.rcvUsers);
-        driverAdapter = new DriverAdapter(this, driversList);
-        rv.setAdapter(driverAdapter) ;
+        RecyclerView  rv = (RecyclerView)findViewById(R.id.rcvUsers);
+        DriverAdapter adapter = new DriverAdapter(this);
+        rv.setAdapter(adapter) ;
         rv.setLayoutManager(new LinearLayoutManager(this));
         /*
             For Reusability create function in FetchDataPerson class then use here.
@@ -58,6 +57,9 @@ public class AllDriversActivity extends AppCompatActivity {
         new FetchDataPerson(this).fetchDataFromFirebase("drivers",driversList,driverAdapter);
         driversList.clear();
         //fetchDataFromFirebase();
+
+
+
 
         try{
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
