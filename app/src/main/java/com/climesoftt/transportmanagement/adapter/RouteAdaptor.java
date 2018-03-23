@@ -27,11 +27,11 @@ import java.util.Locale;
 
 public class RouteAdaptor extends RecyclerView.Adapter<RouteAdaptor.VHolder> {
     private Context context;
-    private ArrayList<Routes> arrayList = new ArrayList<>();
+    private ArrayList<Routes> arrayList;
 
-    public RouteAdaptor(Context context , ArrayList<Routes> arrayList){
+    public RouteAdaptor(Context context , ArrayList<Routes> rList){
         this.context = context;
-        this.arrayList = arrayList;
+        this.arrayList = rList;
     }
 
     public RouteAdaptor.VHolder onCreateViewHolder(ViewGroup viewGroup , int resType){
@@ -46,8 +46,7 @@ public class RouteAdaptor extends RecyclerView.Adapter<RouteAdaptor.VHolder> {
     public void onBindViewHolder(RouteAdaptor.VHolder vh , int position){
         vh.txtFrom.setText(arrayList.get(position).getFromCity());
         vh.txtDestination.setText(arrayList.get(position).getToCity());
-        String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-        vh.txtDate.setText(date);
+        vh.txtDate.setText(arrayList.get(position).getrDate());
     }
 
     class VHolder extends RecyclerView.ViewHolder{
@@ -60,6 +59,9 @@ public class RouteAdaptor extends RecyclerView.Adapter<RouteAdaptor.VHolder> {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    String rId = "";
+                    String rTo = "";
+                    String rFrom = "";
                     String toolPlaza = "";
                     String petrol = "";
                     String extraCost = "";
@@ -69,11 +71,17 @@ public class RouteAdaptor extends RecyclerView.Adapter<RouteAdaptor.VHolder> {
                     // check if item still exists
                     if(pos != RecyclerView.NO_POSITION){
                         Routes clickedDataItem = arrayList.get(pos);
+                        rId = clickedDataItem.getId();
+                        rTo = clickedDataItem.getToCity();
+                        rFrom = clickedDataItem.getFromCity();
                         toolPlaza = clickedDataItem.getTooPlaza();
                         petrol = clickedDataItem.getPetrolCost();
                         extraCost = clickedDataItem.getExtras();
                     }
                     Intent intent = new Intent(context , Route.class);
+                    intent.putExtra("RID" , rId);
+                    intent.putExtra("RTO", rTo);
+                    intent.putExtra("RFROM",rFrom);
                     intent.putExtra("TOOLPLAZA" , toolPlaza);
                     intent.putExtra("PETROL", petrol);
                     intent.putExtra("EXTRACOST",extraCost);

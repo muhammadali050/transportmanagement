@@ -19,9 +19,6 @@ import java.util.ArrayList;
  * Created by Ali on 3/14/2018.
  */
 
-        /*
-        This Adapter is not use Instead of this use PersonAdapter for Re-usability
-        */
 public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.VHolder> {
     private Context context;
     private ArrayList<Person> driversList;

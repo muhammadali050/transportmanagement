@@ -47,19 +47,17 @@ public class AllDriversActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_drivers);
 
-        RecyclerView  rv = (RecyclerView)findViewById(R.id.rcvUsers);
-        DriverAdapter adapter = new DriverAdapter(this);
-        rv.setAdapter(adapter) ;
+        rv = (RecyclerView)findViewById(R.id.rcvUsers);
+        driverAdapter= new DriverAdapter(this, driversList);
+        rv.setAdapter(driverAdapter) ;
         rv.setLayoutManager(new LinearLayoutManager(this));
+        fetchDataFromFirebase();
         /*
             For Reusability create function in FetchDataPerson class then use here.
-         */
+
         new FetchDataPerson(this).fetchDataFromFirebase("drivers",driversList,driverAdapter);
         driversList.clear();
-        //fetchDataFromFirebase();
-
-
-
+        */
 
         try{
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -69,7 +67,7 @@ public class AllDriversActivity extends AppCompatActivity {
         }
     }
 
-    /*
+
     // Instead of this method create function in FetchDataPerson Class ..
     private void fetchDataFromFirebase()
     {
@@ -81,12 +79,12 @@ public class AllDriversActivity extends AppCompatActivity {
                 for(DataSnapshot driverSnapshot : dataSnapshot.getChildren())
                 {
                     Person pData = driverSnapshot.getValue(Person.class);
-                    personsList.add(pData);
+                    driversList.add(pData);
                 }
-                personAdapter.notifyDataSetChanged();
+                driverAdapter.notifyDataSetChanged();
                 pd.hide();
-                REFERENCE_CHILD_NAME = dref.getKey();
-                Message.show(AllDriversActivity.this , REFERENCE_CHILD_NAME);
+               // REFERENCE_CHILD_NAME = dref.getKey();
+               // Message.show(AllDriversActivity.this , REFERENCE_CHILD_NAME);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -94,7 +92,7 @@ public class AllDriversActivity extends AppCompatActivity {
             }
         });
     }
-    */
+
 
     public boolean onCreateOptionsMenu(Menu menu) {
 

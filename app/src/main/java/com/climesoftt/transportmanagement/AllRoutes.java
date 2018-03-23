@@ -12,7 +12,6 @@ import android.view.MenuItem;
 
 import com.climesoftt.transportmanagement.adapter.RouteAdaptor;
 import com.climesoftt.transportmanagement.model.Routes;
-import com.climesoftt.transportmanagement.utils.Message;
 import com.climesoftt.transportmanagement.utils.PDialog;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,18 +27,18 @@ import java.util.ArrayList;
 
 public class AllRoutes extends AppCompatActivity {
     private ArrayList<Routes> arrayList = new ArrayList<>();
-    private RecyclerView rv;
+    private RecyclerView rvRoutes;
     private RouteAdaptor adapter;
     private DatabaseReference dbref;
-    public static String CURRENT_CHILD_KEY;
+    //public static String CURRENT_CHILD_KEY;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_routes);
 
-        rv = (RecyclerView)findViewById(R.id.rcvRoutes);
+        rvRoutes = (RecyclerView)findViewById(R.id.rcvRoutes);
         adapter = new RouteAdaptor(this , arrayList);
-        rv.setAdapter(adapter) ;
-        rv.setLayoutManager(new LinearLayoutManager(this));
+        rvRoutes.setAdapter(adapter) ;
+        rvRoutes.setLayoutManager(new LinearLayoutManager(this));
 
         //call function for fetch data from firebase
         fetchDataFromFirebase();
@@ -86,6 +85,7 @@ public class AllRoutes extends AppCompatActivity {
     }
 
     public void addRoute(MenuItem item){
+        this.finish();
         Intent intent = new Intent(this, AddRoute.class);
         startActivity(intent);
     }

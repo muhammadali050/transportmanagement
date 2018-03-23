@@ -8,6 +8,7 @@ import com.climesoftt.transportmanagement.Route;
 
 public class Routes {
     private String id = "";
+    private String rDate = "";
     private String toCity = "";
     private String fromCity = "";
     private String tooPlaza = "";
@@ -19,7 +20,7 @@ public class Routes {
     }
 
 
-    public Routes(String id,String to , String from , String tool , String petrol, String extras,String driver)
+    public Routes(String id,String to, String from, String tool, String petrol, String extras, String rDate, String driver)
     {
         this.id = id;
         this.toCity = to;
@@ -27,10 +28,20 @@ public class Routes {
         this.tooPlaza = tool;
         this.petrolCost = petrol;
         this.extras = extras;
+        this.rDate = rDate;
         this.driver = driver;
     }
 
 
+
+
+    public String getrDate() {
+        return rDate;
+    }
+
+    public void setrDate(String rDate) {
+        this.rDate = rDate;
+    }
 
     public String getId() {
         return id;

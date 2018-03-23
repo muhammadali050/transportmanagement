@@ -31,12 +31,12 @@
                 android:layout_height="30dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_toLeftOf="@+id/profileDelete"
+                android:layout_toLeftOf="@+id/rProfileDelete"
                 android:onClick="onClickEditMechanic"
                 app:srcCompat="@drawable/icon_edit_user" />
 
             <ImageView
-                android:id="@+id/profileDelete"
+                android:id="@+id/rProfileDelete"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:onClick="deleteMechanic"

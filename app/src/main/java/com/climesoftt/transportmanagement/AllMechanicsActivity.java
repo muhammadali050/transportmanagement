@@ -12,7 +12,6 @@ import android.view.MenuItem;
 
 import com.climesoftt.transportmanagement.adapter.MechanicsAdaptor;
 import com.climesoftt.transportmanagement.model.Person;
-import com.climesoftt.transportmanagement.utils.FetchDataPerson;
 import com.climesoftt.transportmanagement.utils.PDialog;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,7 +28,7 @@ import java.util.ArrayList;
 public class AllMechanicsActivity extends AppCompatActivity {
     private ArrayList<Person> mechanicsList = new ArrayList<>();
     private MechanicsAdaptor mechanicsAdapter;
-    private RecyclerView  rv;
+    private RecyclerView recyclerView;
     private DatabaseReference dref;
 
     @Override
@@ -37,10 +36,10 @@ public class AllMechanicsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_mechanics);
 
-        rv = findViewById(R.id.rcvMechanics);
+        recyclerView = findViewById(R.id.rcvMechanics);
         mechanicsAdapter = new MechanicsAdaptor(this, mechanicsList);
-        rv.setAdapter(mechanicsAdapter) ;
-        rv.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(mechanicsAdapter) ;
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         fetchDataFromFirebase();
 

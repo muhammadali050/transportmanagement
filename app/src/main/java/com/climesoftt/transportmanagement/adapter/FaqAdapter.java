@@ -17,47 +17,48 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.climesoftt.transportmanagement.AllDriversActivity;
+import com.climesoftt.transportmanagement.DriverFaq;
 import com.climesoftt.transportmanagement.EditQuestionActivity;
 import com.climesoftt.transportmanagement.R;
+import com.climesoftt.transportmanagement.model.Faq;
+import com.climesoftt.transportmanagement.model.Person;
+import com.climesoftt.transportmanagement.utils.DeleteRecord;
+import com.climesoftt.transportmanagement.utils.Message;
+import com.climesoftt.transportmanagement.utils.PDialog;
+
+import java.util.ArrayList;
 
 /**
  * Created by Ali on 3/21/2018.
  */
 public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.VHolder> {
     private Context context;
-    private Cursor cursor;
-    private String[] names = {"Noor","Ali" , "Asif","Noor","Ali" , "Asif","Noor","Ali" , "Asif","Noor","Ali" , "Asif"};
-
-    public FaqAdapter(Context context ){
+    private ArrayList<Faq> arrayList;
+    public FaqAdapter(Context context, ArrayList<Faq> arrayList ){
         this.context = context;
-        //this.cursor = cursor;
+        this.arrayList = arrayList;
     }
 
     public FaqAdapter.VHolder onCreateViewHolder(ViewGroup viewGroup , int resType){
         View view = LayoutInflater.from(context).inflate(R.layout.faq_item, viewGroup , false);
         return new FaqAdapter.VHolder(view);
 
-
     }
 
 
     public int getItemCount(){
-        //return cursor.getCount();
-        return names.length;
+        return arrayList.size();
     }
 
 
     public void onBindViewHolder(FaqAdapter.VHolder vh , int position){
-        //cursor.moveToPosition(position);
-
-        /*vh.txtName.setText(names[position]);
-        vh.txtAddress.setText("Street abc, Muhalla xxx, AAAAA");*/
+        vh.question.setText(arrayList.get(position).getQuestion());
+        vh.answer.setText(arrayList.get(position).getAnswer());
 
     }
 
     class VHolder extends RecyclerView.ViewHolder{
-
-        //private ImageView imgDriver;
         private TextView question;
         private TextView answer;
         private LinearLayout layout;
@@ -65,7 +66,6 @@ public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.VHolder> {
         public VHolder(View view)
         {
             super(view);
-           /* imgDriver = (ImageView) view.findViewById(R.id.user_photo);*/
             question = (TextView)view.findViewById(R.id.txt_question);
             answer = (TextView)view.findViewById(R.id.txt_answer);
             layout = (LinearLayout) view.findViewById(R.id.llFaq);
@@ -95,24 +95,52 @@ public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.VHolder> {
             });
 
             view.setOnLongClickListener(new View.OnLongClickListener() {
+                String qId = "";
+                String question = "";
+                String answer = "";
+
+                // get position of current Row
+                int pos = getAdapterPosition();
+
                 @Override
                 public boolean onLongClick(View v) {
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
 
                     alertDialogBuilder.create();
-                    alertDialogBuilder.setNegativeButton("Edit", new DialogInterface.OnClickListener() {
+                    alertDialogBuilder.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent(context , EditQuestionActivity.class);
+                            // check if item still exists
+                            if(pos != RecyclerView.NO_POSITION){
+                                Faq clickedDataItem = arrayList.get(pos);
+                                qId = clickedDataItem.getId();
+                            }
+                            final PDialog pd = new PDialog(context).message("Deleting. . .");
+                            DeleteRecord.deleteRecordMethod(context , "Faq" , qId);
+                            pd.hide();
+                            Toast.makeText(context , "Deleted!" , Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(context, DriverFaq.class);
                             context.startActivity(intent);
                         }
                     });
 
-                    alertDialogBuilder.setPositiveButton("Delete",new
+                    alertDialogBuilder.setPositiveButton("Edit",new
                             DialogInterface.OnClickListener(){
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    Toast.makeText(context , "Delete" , Toast.LENGTH_SHORT).show();
+                                    // check if item still exists
+                                    if(pos != RecyclerView.NO_POSITION){
+                                        Faq clickedDataItem = arrayList.get(pos);
+                                        qId = clickedDataItem.getId();
+                                        question = clickedDataItem.getQuestion();
+                                        answer = clickedDataItem.getAnswer();
+                                    }
+                                    Intent intentSendData = new Intent(context , EditQuestionActivity.class);
+                                    intentSendData.putExtra("QID", qId);
+                                    intentSendData.putExtra("QUESTION", question);
+                                    intentSendData.putExtra("ANSWER", answer);
+                                    Message.show(context, answer);
+                                    context.startActivity(intentSendData);
                                 }
                             }   );
 
