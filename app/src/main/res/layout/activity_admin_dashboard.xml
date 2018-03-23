@@ -93,7 +93,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/guideline4"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/guideline"
-                    app:srcCompat="@drawable/users_admin" />
+                    app:srcCompat="@drawable/user_admin" />
 
                 <ImageView
                     android:id="@+id/imageView"
@@ -104,7 +104,6 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:onClick="driverDashboard"
-                    app:layout_constraintBottom_toTopOf="@+id/guideline2"
                     app:layout_constraintBottom_toTopOf="@+id/textView6"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/guideline4"
