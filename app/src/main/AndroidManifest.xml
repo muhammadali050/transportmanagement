@@ -67,7 +67,8 @@
         <activity android:name=".AddQuestionActivity" />
         <activity android:name=".EditQuestionActivity" />
         <activity android:name=".AddMaintenenceActivity" />
-        <activity android:name=".EditMaintenenceActivity"></activity>
+        <activity android:name=".EditMaintenenceActivity" />
+        <activity android:name=".AllMainteneceActivity"></activity>
     </application>
 
 </manifest>
