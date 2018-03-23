@@ -33,6 +33,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
     }
 
     public void onClickMechanic(View view) {
+
         Intent intent = new Intent(this, AllMechanicsActivity.class);
         startActivity(intent);
     }
@@ -59,15 +60,16 @@ public class AdminDashboardActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         new AlertDialog.Builder(this)
                 .setTitle("Really Exit?")
-                .setMessage("Are you sure you want to exit?")
+                .setMessage("Are you sure you want to exist & logout?")
                 .setNegativeButton(android.R.string.no, null)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface arg0, int arg1) {
                         AdminDashboardActivity.super.onBackPressed();
+                        finish();
+                        System.exit(0);
                     }
                 }).create().show();
     }

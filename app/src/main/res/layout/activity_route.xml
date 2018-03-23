@@ -78,11 +78,11 @@
                 android:layout_marginTop="8dp"
                 android:onClick="onClickEditRoute"
                 android:layout_below="@+id/ll_route_head"
-                android:layout_toLeftOf="@+id/drop_down_option_menu"
+                android:layout_toLeftOf="@+id/profileDelete"
                 app:srcCompat="@drawable/icon_edit_user"/>
 
             <ImageView
-                android:id="@+id/drop_down_option_menu"
+                android:id="@+id/profileDelete"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_below="@+id/ll_route_head"
@@ -122,15 +122,16 @@
                     android:textColor="#000" />
 
                 <TextView
+                    android:id="@+id/rTool"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_marginBottom="3dp"
                     android:layout_marginTop="3dp"
+                    android:layout_weight="0.5"
                     android:background="#fff"
                     android:drawablePadding="8dp"
                     android:elevation="2dp"
-                    android:layout_weight="0.5"
                     android:padding="20dp"
                     android:text="0000"
                     android:textColor="@color/textcolor" />
@@ -156,15 +157,16 @@
                     android:textColor="#000" />
 
                 <TextView
+                    android:id="@+id/rPetrol"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_marginBottom="3dp"
                     android:layout_marginTop="3dp"
+                    android:layout_weight="0.5"
                     android:background="#fff"
                     android:drawablePadding="8dp"
                     android:elevation="2dp"
-                    android:layout_weight="0.5"
                     android:padding="20dp"
                     android:text="0000"
                     android:textColor="@color/textcolor" />
@@ -190,15 +192,16 @@
                     android:textColor="#000" />
 
                 <TextView
+                    android:id="@+id/rExtraCost"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_marginBottom="3dp"
                     android:layout_marginTop="3dp"
+                    android:layout_weight="0.5"
                     android:background="#fff"
                     android:drawablePadding="8dp"
                     android:elevation="2dp"
-                    android:layout_weight="0.5"
                     android:padding="20dp"
                     android:text="0000"
                     android:textColor="@color/textcolor" />

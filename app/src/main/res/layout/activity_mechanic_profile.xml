@@ -26,19 +26,20 @@
 
 
             <ImageView
-                android:id="@+id/add_friend"
+                android:id="@+id/profileUpdate"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_toLeftOf="@+id/drop_down_option_menu"
+                android:layout_toLeftOf="@+id/profileDelete"
                 android:onClick="onClickEditMechanic"
-                app:srcCompat="@drawable/icon_edit_user"/>
+                app:srcCompat="@drawable/icon_edit_user" />
 
             <ImageView
-                android:id="@+id/drop_down_option_menu"
+                android:id="@+id/profileDelete"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:onClick="deleteMechanic"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
@@ -82,6 +83,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/mPId"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -94,6 +96,7 @@
                 android:textColor="#000" />
 
             <TextView
+                android:id="@+id/mPPhone"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"

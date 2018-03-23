@@ -9,19 +9,40 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.climesoftt.transportmanagement.adapter.MechanicsAdaptor;
 import com.climesoftt.transportmanagement.adapter.RouteAdaptor;
+import com.climesoftt.transportmanagement.model.Routes;
+import com.climesoftt.transportmanagement.utils.Message;
+import com.climesoftt.transportmanagement.utils.PDialog;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 /**
  * Created by Ali on 3/19/2018.
  */
 
 public class AllRoutes extends AppCompatActivity {
+    private ArrayList<Routes> arrayList = new ArrayList<>();
+    private RecyclerView rv;
+    private RouteAdaptor adapter;
+    private DatabaseReference dbref;
+    public static String CURRENT_CHILD_KEY;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_routes);
+
+        rv = (RecyclerView)findViewById(R.id.rcvRoutes);
+        adapter = new RouteAdaptor(this , arrayList);
+        rv.setAdapter(adapter) ;
+        rv.setLayoutManager(new LinearLayoutManager(this));
+
+        //call function for fetch data from firebase
+        fetchDataFromFirebase();
 
         try{
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -29,13 +50,32 @@ public class AllRoutes extends AppCompatActivity {
         catch (Exception e){
 
         }
+    }
 
-        RecyclerView rv = (RecyclerView)findViewById(R.id.rcvRoutes);
-        RouteAdaptor adapter = new RouteAdaptor(this);
-        rv.setAdapter(adapter) ;
-        rv.setLayoutManager(new LinearLayoutManager(this));
+    //Fetch data
+    private void fetchDataFromFirebase()
+    {
+        dbref = FirebaseDatabase.getInstance().getReference("Routes");
+        final PDialog pd = new PDialog(this).message("Loading. . .");
+        dbref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot routesSnapshot : dataSnapshot.getChildren())
+                {
+                    Routes data = routesSnapshot.getValue(Routes.class);
+                    arrayList.add(data);
+                }
+                adapter.notifyDataSetChanged();
+                pd.hide();
 
-
+                //String referenceChildName = dbref.getKey();
+                //Message.show(AllRoutes.this , referenceChildName);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                pd.hide();
+            }
+        });
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -57,6 +97,8 @@ public class AllRoutes extends AppCompatActivity {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 this.finish();
+                Intent intent = new Intent(this, AdminDashboardActivity.class);
+                startActivity(intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);
