@@ -89,11 +89,12 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:onClick="onClickUsers"
-                    app:layout_constraintBottom_toTopOf="@+id/guideline2"
+                    app:layout_constraintBottom_toTopOf="@+id/textView5"
                     app:layout_constraintEnd_toStartOf="@+id/guideline4"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/guideline"
                     app:srcCompat="@drawable/users_admin" />
+
 
                 <ImageView
                     android:id="@+id/imageView"
@@ -103,7 +104,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    app:layout_constraintBottom_toTopOf="@+id/guideline2"
+                    app:layout_constraintBottom_toTopOf="@+id/textView6"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/guideline4"
                     app:layout_constraintTop_toTopOf="@+id/guideline"
@@ -116,14 +117,15 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
                     android:onClick="onClickRoutes"
-                    app:layout_constraintBottom_toTopOf="@+id/guideline3"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toTopOf="@+id/textView7"
                     app:layout_constraintEnd_toStartOf="@+id/guideline4"
+
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/guideline2"
-                    app:srcCompat="@drawable/route_icon"
-
-                    />
+                    app:srcCompat="@drawable/route_icon" />
 
                 <ImageView
                     android:id="@+id/imageView3"
@@ -132,13 +134,67 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
                     android:onClick="onClickMechanic"
-                    app:layout_constraintBottom_toTopOf="@+id/guideline3"
+                    app:layout_constraintBottom_toTopOf="@+id/textView8"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/guideline4"
                     app:layout_constraintTop_toTopOf="@+id/guideline2"
                     app:srcCompat="@drawable/mechanic_icon" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:textSize="14sp"
+                    android:text="Drivers"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline2"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:text="Maintenence"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline4" />
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:text="Routes"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline3"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:textSize="14sp"
+                    android:text="Mechanics"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline4" />
+
             </android.support.constraint.ConstraintLayout>
+
 
 
         </RelativeLayout>
