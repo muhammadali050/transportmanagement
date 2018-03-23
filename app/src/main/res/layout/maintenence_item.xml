@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFF"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="2dp">
+
+    <TextView
+        android:id="@+id/tvMDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingStart="16dp"
+        android:paddingBottom="8dp"
+        android:paddingEnd="16dp"
+        android:textSize="20sp"
+        android:textColor="#000"
+        android:maxLength="25"
+        android:text="My maintenence will be here"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvMStartDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingStart="16dp"
+        android:paddingBottom="8dp"
+        android:paddingEnd="16dp"
+        android:textColor="#000"
+        android:text="00/00/00"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvMDescription"
+        tools:layout_editor_absoluteY="125dp" />
+
+    <TextView
+        android:id="@+id/tvMEndDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingStart="16dp"
+        android:paddingBottom="8dp"
+        android:paddingEnd="16dp"
+        android:textColor="#ff7979"
+        android:text="00/00/00"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvMDescription"
+        tools:layout_editor_absoluteY="125dp" />
+</android.support.constraint.ConstraintLayout>
