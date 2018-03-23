@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.climesoftt.transportmanagement.model.*;
-import com.climesoftt.transportmanagement.utils.DriversList;
+import com.climesoftt.transportmanagement.utils.GenerateRandomNumber;
 import com.climesoftt.transportmanagement.utils.Message;
 import com.climesoftt.transportmanagement.utils.PDialog;
 import com.google.firebase.database.DataSnapshot;
@@ -23,7 +23,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by Ali on 3/19/2018.
@@ -35,7 +38,6 @@ public class AddRoute extends AppCompatActivity{
     private Spinner spinnerDriver;
     private ArrayAdapter adapterSpinner;
     private ArrayList<String> arrayList = new ArrayList<>();
-    private String getSelectedDriver = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,12 +53,11 @@ public class AddRoute extends AppCompatActivity{
         extraCost    = findViewById(R.id.rExtraCost);
         spinnerDriver = findViewById(R.id.rDriverSpinner);
 
-        //Method for showing driver names in spinner
-        getDriversList();
-        adapterSpinner = new ArrayAdapter(this,android.R.layout.simple_spinner_item, arrayList);
-        adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerDriver.setAdapter(adapterSpinner);
+        //Method for fetching names and showing driver names in spinner
+        getAndSetDriversListInAdapter();
 
+        /*
+        // Use simple way to get selectec item below using that
        spinnerDriver.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -78,15 +79,12 @@ public class AddRoute extends AppCompatActivity{
         catch (Exception e){
 
         }
+        */
     }
+
 
     public void addRoute(View view)
     {
-        //String dr = spinnerDriver.getSelectedItem().toString();
-        //Log.d("DR",dr);
-        Message.show(AddRoute.this, arrayList.toString());
-
-
         int getId = GenerateRandomNumber.randomNum();
         String rId = Integer.toString(getId);
         String to = toCity.getText().toString();
@@ -94,8 +92,9 @@ public class AddRoute extends AppCompatActivity{
         String tool = toolPlaza.getText().toString();
         String petrol = petrolCost.getText().toString();
         String extras = extraCost.getText().toString();
-        //String driver = spinnerDriver.getSelectedItem().toString();
-        //Message.show(AddRoute.this, driver);
+        //Get spinner Selected Item
+        String driver = spinnerDriver.getSelectedItem().toString();
+        String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         if(TextUtils.isEmpty(to) || TextUtils.isEmpty(from) || TextUtils.isEmpty(tool) || TextUtils.isEmpty(petrol) || TextUtils.isEmpty(extras))
         {
             Message.show(AddRoute.this, "Please fill all fields!");
@@ -113,14 +112,15 @@ public class AddRoute extends AppCompatActivity{
             route.setTooPlaza(tool);
             route.setPetrolCost(petrol);
             route.setExtras(extras);
-            //route.setDriver(driver);
+            route.setrDate(date);
+            route.setDriver(driver);
 
             dbRef.child(rId).setValue(route);
             Message.show(AddRoute.this,"Added successfully.");
 
-            this.finish();
-            Intent intent = new Intent(this, AllRoutes.class);
-            startActivity(intent);
+           // this.finish();
+           // Intent intent = new Intent(this, AllRoutes.class);
+           // startActivity(intent);
 
 
         }catch (Exception e)
@@ -129,14 +129,12 @@ public class AddRoute extends AppCompatActivity{
             Message.show(AddRoute.this,"Something went wrong.\n"+e.getMessage());
         }
         pd.hide();
-        
+
 
     }
 
-    public void getDriversList()
+    public void getAndSetDriversListInAdapter()
     {
-        //Call Static Fucntion and get drivers list
-        //DriversList.getDriversList(arrayList);
        DatabaseReference driverRef = FirebaseDatabase.getInstance().getReference("drivers");
         driverRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -144,23 +142,19 @@ public class AddRoute extends AppCompatActivity{
                 for(DataSnapshot driverSnapshot : dataSnapshot.getChildren())
                 {
                     Person data = driverSnapshot.getValue(Person.class);
-                    getSelectedDriver = data.getName();
-                    arrayList.add(getSelectedDriver);
-                    Log.d("KEY",getSelectedDriver);
-                    //Message.show(AddRoute.this, arrayList.toString());
+                    arrayList.add(data.getName());
+                    //Log.d("KEY",arrayList.toString());
                 }
+                adapterSpinner = new ArrayAdapter(AddRoute.this,android.R.layout.simple_spinner_item, arrayList);
+                adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerDriver.setAdapter(adapterSpinner);
+                adapterSpinner.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-
-        //Log.d("KEY",arrayList.toString());
-      /*  adapterSpinner = new ArrayAdapter(this, android.R.layout.simple_spinner_item, arrayList);
-        adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerDriver.setAdapter(adapterSpinner); */
-        //adapterSpinner.notifyDataSetChanged();
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {

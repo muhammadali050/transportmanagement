@@ -33,7 +33,6 @@ public class AdminDashboardActivity extends AppCompatActivity {
     }
 
     public void onClickMechanic(View view) {
-
         Intent intent = new Intent(this, AllMechanicsActivity.class);
         startActivity(intent);
     }
@@ -47,19 +46,28 @@ public class AdminDashboardActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AllRoutes.class);
         startActivity(intent);
     }
+    public void driverDashboard(View view) {
+        Intent intent = new Intent(this, DriverDashboard.class);
+        startActivity(intent);
+    }
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                this.finish();
-                return true;
+                //alertDialogue();
+                return false;
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onBackPressed() {
+        alertDialogue();
+    }
+
+    public void alertDialogue()
+    {
         new AlertDialog.Builder(this)
                 .setTitle("Really Exit?")
                 .setMessage("Are you sure you want to exist & logout?")

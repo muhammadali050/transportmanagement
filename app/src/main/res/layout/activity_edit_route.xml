@@ -218,13 +218,13 @@
                 app:layout_constraintStart_toStartOf="@+id/guideline" />
 
             <Button
-                android:id="@+id/btAddRoute"
+                android:id="@+id/btUpdateRoute"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="22dp"
                 android:background="@color/colorBtnBack"
-                android:onClick="addRoute"
-                android:text="Add Route"
+                android:onClick="updateRoute"
+                android:text="Upate Route"
                 android:textAllCaps="false"
                 android:textColor="#fff"
                 android:textSize="18sp"

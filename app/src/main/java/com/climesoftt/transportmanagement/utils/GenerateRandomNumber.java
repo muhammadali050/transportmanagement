@@ -1,4 +1,4 @@
-package com.climesoftt.transportmanagement.model;
+package com.climesoftt.transportmanagement.utils;
 
 import java.util.Random;
 

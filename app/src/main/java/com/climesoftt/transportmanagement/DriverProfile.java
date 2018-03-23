@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.climesoftt.transportmanagement.adapter.DriverAdapter;
 import com.climesoftt.transportmanagement.adapter.PersonAdapter;
+import com.climesoftt.transportmanagement.utils.DeleteRecord;
 import com.climesoftt.transportmanagement.utils.Message;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -74,9 +75,7 @@ public class DriverProfile extends AppCompatActivity{
     }
 
     public void deleteDriverData(View view) {
-        DatabaseReference dref = FirebaseDatabase.getInstance().getReference("drivers").child(dPId);
-        dref.removeValue();
-        Message.show(this,"Record deleted successfully!");
+        DeleteRecord.deleteRecordMethod(this , "drivers" , dPId);
         this.finish();
         Intent intent = new Intent(this, AllDriversActivity.class);
         startActivity(intent);

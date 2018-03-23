@@ -71,20 +71,21 @@
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/add_friend"
+                android:id="@+id/rUpdateProfile"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
+                android:layout_below="@+id/ll_route_head"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_toLeftOf="@+id/rProfileDelete"
                 android:onClick="onClickEditRoute"
-                android:layout_below="@+id/ll_route_head"
-                android:layout_toLeftOf="@+id/profileDelete"
-                app:srcCompat="@drawable/icon_edit_user"/>
+                app:srcCompat="@drawable/icon_edit_user" />
 
             <ImageView
-                android:id="@+id/profileDelete"
+                android:id="@+id/rProfileDelete"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
+                android:onClick="routeDelete"
                 android:layout_below="@+id/ll_route_head"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="16dp"

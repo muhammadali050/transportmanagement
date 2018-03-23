@@ -9,14 +9,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
-import com.climesoftt.transportmanagement.model.GenerateRandomNumber;
+import com.climesoftt.transportmanagement.utils.GenerateRandomNumber;
 import com.climesoftt.transportmanagement.model.Person;
 import com.climesoftt.transportmanagement.utils.Message;
 import com.climesoftt.transportmanagement.utils.PDialog;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.Date;
 
 /**
  * Created by Ali on 3/19/2018.

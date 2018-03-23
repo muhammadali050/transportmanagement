@@ -5,14 +5,6 @@ package com.climesoftt.transportmanagement.model;
  */
 
 public class Person {
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     private String id = "";
     private String name = "";
     private String phone = "";
@@ -30,6 +22,14 @@ public class Person {
         this.phone = phone;
         this.address = address;
     }
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
 
     public String getName() {
         return name;

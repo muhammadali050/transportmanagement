@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.climesoftt.transportmanagement.AddQuestionActivity">
+    tools:context="com.climesoftt.transportmanagement.EditQuestionActivity">
 
 
     <android.support.constraint.Guideline
@@ -18,10 +18,10 @@
         android:id="@+id/textView3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="20dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:padding="20dp"
         android:text="Question"
         android:textColor="#ff6262"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,8 +38,8 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:gravity="top|start"
-        android:padding="8dp"
         android:hint="Question"
+        android:padding="8dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,18 +61,31 @@
     <EditText
         android:id="@+id/faqEditAnswer"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="138dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:ems="10"
         android:gravity="top|start"
         android:hint="Answer"
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintVertical_bias="0.287" />
+
+    <Button
+        android:id="@+id/btQUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:onClick="updateQuestion"
+        android:text="Update"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>
