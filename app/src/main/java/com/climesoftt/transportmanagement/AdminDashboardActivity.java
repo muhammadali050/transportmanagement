@@ -10,25 +10,67 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.climesoftt.transportmanagement.model.Routes;
+import com.climesoftt.transportmanagement.model.User;
+import com.climesoftt.transportmanagement.utils.Message;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 /**
  * Created by Ali on 3/14/2018.
  */
 
 public class AdminDashboardActivity extends AppCompatActivity {
     private TextView tvName;
+    private String userName = "";
+    private String userEmail = "";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_dashboard);
         tvName = findViewById(R.id.admin_title);
-        String uname = getIntent().getStringExtra("userName");
-        tvName.setText(uname);
+        tvName.setText("");
+        userEmail = getIntent().getStringExtra("USER_EMAIL");
+        getUserName();
+        tvName.setText(userName);
+
 
         try{
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         catch (Exception e){
 
+        }
+    }
+
+    public void getUserName()
+    {
+        try
+        {
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users");
+            userRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for(DataSnapshot routesSnapshot : dataSnapshot.getChildren())
+                    {
+                        User user = routesSnapshot.getValue(User.class);
+                        if(userEmail.equals(user.getEmail()))
+                        {
+                            userName = user.getName();
+                        }
+                    }
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            });
+        }catch (Exception e)
+        {
+            Message.show(AdminDashboardActivity.this,"Something went wrong.\n"+e.getMessage());
         }
     }
 
@@ -47,7 +89,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void driverDashboard(View view) {
-        Intent intent = new Intent(this, DriverDashboard.class);
+        Intent intent = new Intent(this, MechanicProfile.class);
         startActivity(intent);
     }
 
@@ -55,7 +97,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                //alertDialogue();
+                alertDialogue();
                 return false;
         }
         return super.onOptionsItemSelected(item);
@@ -70,13 +112,12 @@ public class AdminDashboardActivity extends AppCompatActivity {
     {
         new AlertDialog.Builder(this)
                 .setTitle("Really Exit?")
-                .setMessage("Are you sure you want to exist & logout?")
+                .setMessage("Are you sure you want to logout?")
                 .setNegativeButton(android.R.string.no, null)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface arg0, int arg1) {
                         AdminDashboardActivity.super.onBackPressed();
-                        finish();
                         System.exit(0);
                     }
                 }).create().show();

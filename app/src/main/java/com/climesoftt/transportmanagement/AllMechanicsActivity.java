@@ -64,13 +64,15 @@ public class AllMechanicsActivity extends AppCompatActivity {
                     mechanicsList.add(pData);
                 }
                 mechanicsAdapter.notifyDataSetChanged();
-                pd.hide();
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 pd.hide();
             }
         });
+        pd.hide();
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

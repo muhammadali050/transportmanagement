@@ -8,11 +8,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.climesoftt.transportmanagement.model.User;
 import com.climesoftt.transportmanagement.utils.Message;
 import com.climesoftt.transportmanagement.utils.PDialog;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,6 +22,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * Created by Ali on 3/14/2018.
@@ -50,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
     public void onClickLogin(View view){
         Intent intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
         startActivity(intent);
-        /*
+/*
         email = etl_email.getText().toString();
         password = etl_password.getText().toString();
         //All Fields must be fill
@@ -60,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
         final PDialog pd = new PDialog(this).message("Trying to login . . .");
-       mAuth.signInWithEmailAndPassword(email, password)
+        mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -70,8 +77,9 @@ public class LoginActivity extends AppCompatActivity {
                             Intent intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
                             if (user != null) {
                                 // Name, email address, and profile photo Url
-                                String name = user.getDisplayName();
-                                intent.putExtra("userName" , name);
+                                String name = "";
+                                name = etl_email.getText().toString();
+                                intent.putExtra("USER_EMAIL" , name);
                                 // Check if user's email is verified
                                 boolean emailVerified = user.isEmailVerified();
                             }
@@ -91,6 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
                 */
+
     }
 
     @Override
@@ -111,10 +120,42 @@ public class LoginActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-               this.finish();;
+               this.finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        System.exit(0);
+    }
+
+    public void loginUser()
+    {
+        try
+        {
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users");
+            userRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for(DataSnapshot routesSnapshot : dataSnapshot.getChildren())
+                    {
+                        User user = routesSnapshot.getValue(User.class);
+                        /*if(userEmail.equals(user.getEmail()))
+                        {
+                            userName = user.getName();
+                        }*/
+                    }
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            });
+        }catch (Exception e)
+        {
+            Message.show(LoginActivity.this,"Something went wrong.\n"+e.getMessage());
+        }
+    }
 }

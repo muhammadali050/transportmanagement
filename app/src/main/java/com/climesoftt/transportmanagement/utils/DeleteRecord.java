@@ -13,10 +13,13 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class DeleteRecord {
 
+
     public static void deleteRecordMethod(Context context, String reference , String id)
     {
+        final PDialog pd = new PDialog(context).message("Deleting. . .");
         DatabaseReference dref = FirebaseDatabase.getInstance().getReference(reference).child(id);
         dref.removeValue();
+        pd.hide();
         Message.show(context,"Record deleted successfully!");
     }
 }

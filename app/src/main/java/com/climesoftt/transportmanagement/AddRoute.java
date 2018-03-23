@@ -118,9 +118,9 @@ public class AddRoute extends AppCompatActivity{
             dbRef.child(rId).setValue(route);
             Message.show(AddRoute.this,"Added successfully.");
 
-           // this.finish();
-           // Intent intent = new Intent(this, AllRoutes.class);
-           // startActivity(intent);
+            this.finish();
+            Intent intent = new Intent(this, AllRoutes.class);
+            startActivity(intent);
 
 
         }catch (Exception e)

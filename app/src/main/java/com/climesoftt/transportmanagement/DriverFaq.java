@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.climesoftt.transportmanagement.adapter.FaqAdapter;
@@ -74,5 +75,11 @@ public class DriverFaq extends AppCompatActivity {
         startActivity(intent);
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.finish();
+        Intent int_newActivity = new Intent(this, LoginActivity.class);
+        startActivity(int_newActivity);
+    }
 }

@@ -70,4 +70,12 @@ public class EditQuestionActivity extends AppCompatActivity {
         }
         pd.hide();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.finish();
+        Intent int_newActivity = new Intent(this, DriverFaq.class);
+        startActivity(int_newActivity);
+    }
 }
