@@ -13,7 +13,9 @@ import android.widget.TextView;
 import com.climesoftt.transportmanagement.model.Routes;
 import com.climesoftt.transportmanagement.model.User;
 import com.climesoftt.transportmanagement.utils.Message;
+import com.climesoftt.transportmanagement.utils.PDialog;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -49,47 +51,46 @@ public class AdminDashboardActivity extends AppCompatActivity {
 
     public void getUserName()
     {
-        try
-        {
-            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users");
-            userRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    for(DataSnapshot routesSnapshot : dataSnapshot.getChildren())
+        DatabaseReference uRef = FirebaseDatabase.getInstance().getReference("Users");
+        uRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot userSnapshot : dataSnapshot.getChildren())
+                {
+                    User data = userSnapshot.getValue(User.class);
+                    if(data.getEmail().equals(userEmail))
                     {
-                        User user = routesSnapshot.getValue(User.class);
-                        if(userEmail.equals(user.getEmail()))
-                        {
-                            userName = user.getName();
-                        }
+                        userName = data.getName();
                     }
                 }
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                }
-            });
-        }catch (Exception e)
-        {
-            Message.show(AdminDashboardActivity.this,"Something went wrong.\n"+e.getMessage());
-        }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     public void onClickMechanic(View view) {
         Intent intent = new Intent(this, AllMechanicsActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
     public void onClickUsers(View view) {
         Intent intent = new Intent(this, AllDriversActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
     public void onClickRoutes(View view) {
         Intent intent = new Intent(this, AllRoutes.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
     public void driverDashboard(View view) {
-        Intent intent = new Intent(this, MechanicProfile.class);
+        Intent intent = new Intent(this, DriverDashboard.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
@@ -97,7 +98,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                alertDialogue();
+                //alertDialogue();
                 return false;
         }
         return super.onOptionsItemSelected(item);

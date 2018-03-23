@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -55,9 +56,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onClickLogin(View view){
-        Intent intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
-        startActivity(intent);
-/*
+        /*Intent intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);*/
+
         email = etl_email.getText().toString();
         password = etl_password.getText().toString();
         //All Fields must be fill
@@ -71,43 +73,50 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                            Intent intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
-                            if (user != null) {
+                        // Sign in success, update UI with the signed-in user's information
+
+                            if (task.isSuccessful()) {
+                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                // Check if user's email is verified
+                                if (user.isEmailVerified()) {
                                 // Name, email address, and profile photo Url
                                 String name = "";
                                 name = etl_email.getText().toString();
+                                Intent intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 intent.putExtra("USER_EMAIL" , name);
-                                // Check if user's email is verified
-                                boolean emailVerified = user.isEmailVerified();
+                                startActivity(intent);
+                            }else
+                            {
+                                pd.hide();
+                                user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        Message.show(LoginActivity.this, "Email Not Verified!" +
+                                                "\nNow again Verification Email has been sent!" +
+                                                "\nPlease Register himself!");
+                                    }
+                                });
                             }
-                            pd.hide();
-                            startActivity(intent);
-
                             //updateUI(user);
                         } else {
-                            pd.hide();
+                                pd.hide();
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(LoginActivity.this, "Authentication failed.\n"+task.getException().getMessage(),
-                                    Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
+                            Message.show(LoginActivity.this, "Authentication failed.\n"+task.getException().getMessage());
                         }
-
+                        pd.hide();
                         // ...
                     }
                 });
-                */
-
     }
 
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-         FirebaseUser currentUser = mAuth.getCurrentUser();
-        //updateUI(currentUser);
+         FirebaseUser user = mAuth.getCurrentUser();
+
+
     }
 
     public void onClickRegister(View view) {

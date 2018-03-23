@@ -104,6 +104,7 @@ public class AllDriversActivity extends AppCompatActivity {
     public void addUser(MenuItem item){
         this.finish();
         Intent intent = new Intent(this, AddDriver.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
@@ -114,6 +115,7 @@ public class AllDriversActivity extends AppCompatActivity {
             case android.R.id.home:
                 this.finish();
                 Intent intent = new Intent(this, AdminDashboardActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 return true;
         }
