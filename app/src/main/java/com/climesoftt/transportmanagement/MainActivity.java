@@ -18,13 +18,17 @@ public class MainActivity extends AppCompatActivity{
         catch (Exception e){
 
         }
+
+        Intent intent = new Intent(this, AddMaintenenceActivity.class);
+        startActivity(intent);
+
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                this.finish();
+                this.finish();;
                 return true;
         }
         return super.onOptionsItemSelected(item);
