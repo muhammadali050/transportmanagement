@@ -12,6 +12,8 @@ import android.view.MenuItem;
 
 import com.climesoftt.transportmanagement.adapter.RouteAdaptor;
 import com.climesoftt.transportmanagement.model.Routes;
+import com.climesoftt.transportmanagement.model.User;
+import com.climesoftt.transportmanagement.utils.Message;
 import com.climesoftt.transportmanagement.utils.PDialog;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,11 +32,23 @@ public class AllRoutes extends AppCompatActivity {
     private RecyclerView rvRoutes;
     private RouteAdaptor adapter;
     private DatabaseReference dbref;
+    private DatabaseReference adminRef;
+    private String userTypeAdmin = "";
+    private String userTypeDriver = "";
+    private String driverName = "";
+    private String adminEmail = "";
     //public static String CURRENT_CHILD_KEY;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_routes);
 
+        userTypeDriver = DriverDashboard.USER_TYPE;
+        driverName = DriverDashboard.USERNAME;
+
+        userTypeAdmin = AdminDashboardActivity.USER_TYPE;
+        adminEmail = AdminDashboardActivity.USER_EMAIL;
+
+       // Message.show(this, userTypeDriver +" ," +driverName+ " --- "+userTypeAdmin +" , "+adminEmail);
         rvRoutes = (RecyclerView)findViewById(R.id.rcvRoutes);
         adapter = new RouteAdaptor(this , arrayList);
         rvRoutes.setAdapter(adapter) ;
@@ -55,27 +69,33 @@ public class AllRoutes extends AppCompatActivity {
     private void fetchDataFromFirebase()
     {
         dbref = FirebaseDatabase.getInstance().getReference("Routes");
-        final PDialog pd = new PDialog(this).message("Loading. . .");
+        final PDialog pd = new PDialog(AllRoutes.this).message("Loading. . .");
         dbref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot routesSnapshot : dataSnapshot.getChildren())
-                {
+                for(DataSnapshot routesSnapshot : dataSnapshot.getChildren()) {
                     Routes data = routesSnapshot.getValue(Routes.class);
-                    arrayList.add(data);
-                }
-                adapter.notifyDataSetChanged();
-                pd.hide();
+                    if (userTypeAdmin.equals("Admin")) {
+                        arrayList.add(data);
+                        adminRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
-                //String referenceChildName = dbref.getKey();
-                //Message.show(AllRoutes.this , referenceChildName);
+                    } else if (userTypeDriver.equals("Driver")) {
+                        if (driverName.equals(data.getDriver())) {
+                            arrayList.add(data);
+                        }
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+                pd.hide();
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                pd.hide();
+
             }
         });
     }
+
 
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -85,8 +105,9 @@ public class AllRoutes extends AppCompatActivity {
     }
 
     public void addRoute(MenuItem item){
-        this.finish();
+        //this.finish();
         Intent intent = new Intent(this, AddRoute.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
@@ -97,8 +118,9 @@ public class AllRoutes extends AppCompatActivity {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 this.finish();
-                Intent intent = new Intent(this, AdminDashboardActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(this, AdminDashboardActivity.class);
+                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                //startActivity(intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);

@@ -2,24 +2,16 @@ package com.climesoftt.transportmanagement;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.climesoftt.transportmanagement.model.Routes;
 import com.climesoftt.transportmanagement.model.User;
 import com.climesoftt.transportmanagement.utils.Message;
-import com.climesoftt.transportmanagement.utils.PDialog;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,59 +24,27 @@ import com.google.firebase.database.ValueEventListener;
 
 public class AdminDashboardActivity extends AppCompatActivity {
     private TextView tvName;
-    private String userName = "";
-    private String userEmail = "";
-    private ProgressBar progressBar;
+    public static String USERNAME = "";
+    public static String USER_TYPE = "";
+    public static String USER_EMAIL = "";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_dashboard);
         tvName = findViewById(R.id.admin_title);
-        userEmail = getIntent().getStringExtra("USER_EMAIL");
-        //Message.show(this, userEmail);
-        //progressBar = findViewById(R.id.progressBarName);
-        tvName.setText("");
-        //progressBar.setBackgroundColor(Color.WHITE);
-      // progressBar.setVisibility(View.VISIBLE);
-        //Display Login user Name
-        displayUserName();
-        //progressBar.setVisibility(View.GONE);
 
+        Intent intent = getIntent();
+        USERNAME = intent.getStringExtra("USER_NAME");
+        USER_TYPE = intent.getStringExtra("USER_TYPE");
+        USER_EMAIL = intent.getStringExtra("USER_EMAIL");
+        //Display Login user Name
+        tvName.setText(USERNAME);
 
         try{
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         catch (Exception e){
 
-        }
-    }
-
-    public void displayUserName()
-    {
-        try
-        {
-            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users");
-            userRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-
-                    for(DataSnapshot userSnapshot : dataSnapshot.getChildren())
-                    {
-                        User user = userSnapshot.getValue(User.class);
-                        if(userEmail.equals(user.getEmail()))
-                        {
-                            tvName.setText(user.getName());
-                        }
-                    }
-
-                }
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                }
-            });
-        }catch (Exception e)
-        {
-            Message.show(this,"Something went wrong.\n"+e.getMessage());
         }
     }
 
@@ -136,7 +96,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
 
                     public void onClick(DialogInterface arg0, int arg1) {
                         AdminDashboardActivity.super.onBackPressed();
-                        System.exit(0);
+                        Message.show(AdminDashboardActivity.this,"Click on logout");
                     }
                 }).create().show();
     }

@@ -36,6 +36,7 @@ public class AllMaintenceActivity extends AppCompatActivity {
 
     public void addMaintenence(MenuItem item){
         Intent intent = new Intent(this, AddMaintenenceActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 

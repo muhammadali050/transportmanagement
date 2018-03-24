@@ -99,19 +99,8 @@ public class RegistrationActivity extends AppCompatActivity {
         String email = userEmail.getText().toString().trim();
         String password = userPassword.getText().toString().trim();
         String accountType = spAccountType.getSelectedItem().toString().trim();
-        //Email Validation
-        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches())
-        {
-            userEmail.setError("Enter valid E-mail!");
-            userEmail.requestFocus();
-            return;
-        }
-        //All Fields must be fill
-        if(TextUtils.isEmpty(name) || TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || accountType.isEmpty())
-        {
-            Message.show(RegistrationActivity.this , "Please fill all fields.");
-            return;
-        }
+        //Call Function for validation performs
+        fieldsValidation(name, email, password, accountType);
         final User user = new User();
         //final String uniqueId = String.valueOf(new Date().getTime());
         int getId = GenerateRandomNumber.randomNum();
@@ -157,8 +146,39 @@ public class RegistrationActivity extends AppCompatActivity {
                                         "\nPlease Register himself before login!");
                             }
                         });
+
                     }
                 });
 
+    }
+    private void fieldsValidation(String name,String email,String password,String accountType)
+    {
+        //Name Validation
+        if(TextUtils.isEmpty(name))
+        {
+            userName.setError("Enter Name!");
+            userName.requestFocus();
+            return;
+        }
+        //Email Validation
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches() || TextUtils.isEmpty(email))
+        {
+            userEmail.setError("Enter valid E-mail!");
+            userEmail.requestFocus();
+            return;
+        }
+        //Password Validation
+        if(TextUtils.isEmpty(password))
+        {
+            userPassword.setError("Enter Valid Password!\nPassword length atleast 6-digits|characters|symbols");
+            userPassword.requestFocus();
+            return;
+        }
+        //Spinner account select validation
+        if(accountType.isEmpty())
+        {
+            Message.show(this , "Select User Account Type!");
+            return;
+        }
     }
 }
