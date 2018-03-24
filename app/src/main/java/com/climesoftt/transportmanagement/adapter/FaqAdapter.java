@@ -99,11 +99,10 @@ public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.VHolder> {
                 String question = "";
                 String answer = "";
 
-                // get position of current Row
-
 
                 @Override
                 public boolean onLongClick(View v) {
+                    // get position of current Row
                     final int pos = getAdapterPosition();
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
                     alertDialogBuilder.create();
@@ -117,6 +116,7 @@ public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.VHolder> {
                             }
                             DeleteRecord.deleteRecordMethod(context , "Faq" , qId);
                             Intent intent = new Intent(context, DriverFaq.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             context.startActivity(intent);
                         }
                     });
@@ -136,6 +136,7 @@ public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.VHolder> {
                                     intentSendData.putExtra("QID", qId);
                                     intentSendData.putExtra("QUESTION", question);
                                     intentSendData.putExtra("ANSWER", answer);
+                                    intentSendData.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     context.startActivity(intentSendData);
                                 }
                             });

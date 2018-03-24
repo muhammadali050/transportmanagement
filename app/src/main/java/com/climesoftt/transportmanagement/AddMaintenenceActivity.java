@@ -9,10 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.climesoftt.transportmanagement.model.Maintenance;
+import com.climesoftt.transportmanagement.utils.DateDialogs;
 import com.climesoftt.transportmanagement.utils.GenerateRandomNumber;
 import com.climesoftt.transportmanagement.utils.Message;
 import com.climesoftt.transportmanagement.utils.PDialog;
@@ -26,7 +25,7 @@ public class AddMaintenenceActivity extends AppCompatActivity {
     private Button startDate;
     private Button endDate;
     private DatePickerDialog datePickerDialogStart;
-    private DatePickerDialog datePickerDialogStartEnd;
+    private DatePickerDialog datePickerDialogEnd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,18 +37,17 @@ public class AddMaintenenceActivity extends AppCompatActivity {
         et_desc = findViewById(R.id.etDescription);
         setStartDateDialog();
         setEndDateDialog();
-
     }
 
     public void onClickStartDate(View view) {
-
         datePickerDialogStart.show();
+
     }
 
     public void onClickEndDate(View view) {
-
-        datePickerDialogStartEnd.show();
+        datePickerDialogEnd.show();
     }
+
 
     private void setStartDateDialog(){
         final Calendar c = Calendar.getInstance();
@@ -81,7 +79,7 @@ public class AddMaintenenceActivity extends AppCompatActivity {
         int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
 
         // date picker dialog
-        datePickerDialogStartEnd = new DatePickerDialog(AddMaintenenceActivity.this,
+        datePickerDialogEnd = new DatePickerDialog(AddMaintenenceActivity.this,
                 new DatePickerDialog.OnDateSetListener() {
 
                     @Override
@@ -94,6 +92,7 @@ public class AddMaintenenceActivity extends AppCompatActivity {
                     }
                 }, mYear, mMonth, mDay);
     }
+
 
     public void addMaintenance(View view) {
         int getId = GenerateRandomNumber.randomNum();
@@ -121,9 +120,9 @@ public class AddMaintenenceActivity extends AppCompatActivity {
             reference.setValue(maintenance);
             Message.show(AddMaintenenceActivity.this,"Added successfully.");
             //this.finish();
-            //Intent intent = new Intent(this, AllDriversActivity.class);
-            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            //startActivity(intent);
+            Intent intent = new Intent(this, AllMaintenceActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
 
         }catch (Exception e)
         {

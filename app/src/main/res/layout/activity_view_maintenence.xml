@@ -28,15 +28,15 @@
                 android:id="@+id/ll_route_head">
 
                 <TextView
-                    android:id="@+id/tv_Vfrom"
+                    android:id="@+id/tv_Vstart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="false"
                     android:layout_marginTop="16dp"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:text="00/00/00"
                     android:layout_weight="1"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp"
+                    android:text="00/00/00"
                     android:textColor="#fff"
                     android:textSize="24sp"
                     android:textStyle="bold" />

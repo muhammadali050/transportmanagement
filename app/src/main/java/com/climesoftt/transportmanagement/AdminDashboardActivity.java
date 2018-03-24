@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.climesoftt.transportmanagement.model.User;
+import com.climesoftt.transportmanagement.utils.Logout;
 import com.climesoftt.transportmanagement.utils.Message;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -75,7 +76,6 @@ public class AdminDashboardActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                //alertDialogue();
                 return false;
         }
         return super.onOptionsItemSelected(item);
@@ -83,6 +83,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        this.finish();
         alertDialogue();
     }
 
@@ -96,13 +97,9 @@ public class AdminDashboardActivity extends AppCompatActivity {
 
                     public void onClick(DialogInterface arg0, int arg1) {
                         AdminDashboardActivity.super.onBackPressed();
-                        Message.show(AdminDashboardActivity.this,"Click on logout");
+                        Logout.logoutUser(AdminDashboardActivity.this);
                     }
                 }).create().show();
     }
-
-
-
-
 
 }

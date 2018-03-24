@@ -83,6 +83,7 @@ public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.VHolder> {
                     DRIVER_ADDRESS = pAddress;
                     DRIVER_PHONE = pPhone;
                     Intent intent = new Intent(context , DriverProfile.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     context.startActivity(intent);
                 }
             });

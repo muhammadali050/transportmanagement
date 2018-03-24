@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.climesoftt.transportmanagement.model.User;
 import com.climesoftt.transportmanagement.utils.DisplayUserName;
+import com.climesoftt.transportmanagement.utils.Logout;
 import com.climesoftt.transportmanagement.utils.Message;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -59,6 +60,8 @@ public class DriverDashboard extends AppCompatActivity {
 
     public void onClickLogout(MenuItem item){
         // Logout Code...
+        this.finish();
+        Logout.logoutUser(DriverDashboard.this);
     }
 
 
@@ -68,7 +71,7 @@ public class DriverDashboard extends AppCompatActivity {
         startActivity(int_newActivity);
     }
     public void addMaintenance(View view) {
-        Intent intent = new Intent(this, AddMaintenenceActivity.class);
+        Intent intent = new Intent(this, AllMaintenceActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }

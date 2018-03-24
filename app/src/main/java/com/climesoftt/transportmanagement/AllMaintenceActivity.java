@@ -10,11 +10,23 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.climesoftt.transportmanagement.adapter.MaintenenceAdapter;
+import com.climesoftt.transportmanagement.model.Maintenance;
+import com.climesoftt.transportmanagement.model.Person;
+import com.climesoftt.transportmanagement.utils.PDialog;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class AllMaintenceActivity extends AppCompatActivity {
 
+    private ArrayList<Maintenance> arrayList = new ArrayList<>();
     private MaintenenceAdapter maintenenceAdapter;
     private RecyclerView  rv;
+    private DatabaseReference mref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,9 +34,33 @@ public class AllMaintenceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_all_maintenece);
 
         rv = (RecyclerView)findViewById(R.id.rcvMaintenece);
-        maintenenceAdapter= new MaintenenceAdapter(this);
+        maintenenceAdapter= new MaintenenceAdapter(this,arrayList);
         rv.setAdapter(maintenenceAdapter) ;
         rv.setLayoutManager(new LinearLayoutManager(this));
+        fetchDataFromFirebase();
+    }
+
+
+    private void fetchDataFromFirebase()
+    {
+        mref = FirebaseDatabase.getInstance().getReference("Maintenance");
+        final PDialog pd = new PDialog(this).message("Loading. . .");
+        mref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot mSnapshot : dataSnapshot.getChildren())
+                {
+                    Maintenance data = mSnapshot.getValue(Maintenance.class);
+                    arrayList.add(data);
+                }
+                maintenenceAdapter.notifyDataSetChanged();
+                pd.hide();
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                pd.hide();
+            }
+        });
     }
 
 

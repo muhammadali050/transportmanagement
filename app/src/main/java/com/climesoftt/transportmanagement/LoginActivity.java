@@ -60,10 +60,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onClickLogin(View view){
-        /*Intent intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
+        Intent intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);*/
-
+        startActivity(intent);
+/*
         email = etl_email.getText().toString();
         password = etl_password.getText().toString();
 
@@ -107,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
                                                 "\nPlease Verify himself!");
                                     }
                                 });
-                            }*/
+                            }
                             //updateUI(user);
                              pd.hide();
                         } else {
@@ -119,6 +119,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
         pd.hide();
+        */
     }
 
     @Override
