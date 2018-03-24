@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -30,6 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class AdminDashboardActivity extends AppCompatActivity {
     private TextView tvName;
+    private String userName = "";
     private String userEmail = "";
     private ProgressBar progressBar;
     @Override
@@ -137,4 +140,9 @@ public class AdminDashboardActivity extends AppCompatActivity {
                     }
                 }).create().show();
     }
+
+
+
+
+
 }

@@ -54,7 +54,7 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.VHolder>{
             vh.txtName.setText(personsList.get(position).getName());
             vh.txtAddress.setText(personsList.get(position).getAddress());
             vh.txtPhone.setText(personsList.get(position).getPhone());
-            }
+    }
 
     class VHolder extends RecyclerView.ViewHolder{
 
