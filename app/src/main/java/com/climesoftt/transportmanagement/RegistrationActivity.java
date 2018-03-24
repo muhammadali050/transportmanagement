@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -100,6 +102,12 @@ public class RegistrationActivity extends AppCompatActivity {
             Message.show(RegistrationActivity.this , "Please fill all fields.");
             return;
         }
+        if(Patterns.EMAIL_ADDRESS.matcher(email).matches())
+        {
+            userEmail.setError("Enter valid E-mail!");
+            userEmail.requestFocus();
+            return;
+        }
         final User user = new User();
         //final String uniqueId = String.valueOf(new Date().getTime());
         int getId = GenerateRandomNumber.randomNum();
@@ -116,22 +124,30 @@ public class RegistrationActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            //String userId = mAuth.getCurrentUser().getUid();
-                            DatabaseReference currentUser = dbRef.child("Users").child(id);
-                            currentUser.setValue(user);
-                            Toast.makeText(RegistrationActivity.this, "Registered Successfully.",
-                                    Toast.LENGTH_SHORT).show();
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            DatabaseReference uReF = dbRef.child("Users").child(id);
+                            uReF.setValue(user);
+                            user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    Message.show(RegistrationActivity.this,"Verification Email has been sent!" +
+                                            "\nPlease Register himself before login!");
+                                }
+                            });
                             userName.setText("");
                             userEmail.setText("");
                             userPassword.setText("");
                             pd.hide();
 
                         } else {
-                            pd.hide();
                             // If sign in fails, display a message to the user.
-                           // Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(RegistrationActivity.this, "Registration failed.\n"+task.getException().getMessage(),
-                                    Toast.LENGTH_LONG).show();
+                            if(task.getException() instanceof FirebaseAuthUserCollisionException)
+                            {
+                                Message.show(RegistrationActivity.this, "Provided e-mail address is already registered!");
+                            }else
+                            {
+                             Message.show(RegistrationActivity.this, "Registration failed.\n"+task.getException().getMessage());
+                            }
                         }
                     }
                 });

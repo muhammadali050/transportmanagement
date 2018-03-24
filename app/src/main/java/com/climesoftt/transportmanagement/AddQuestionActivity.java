@@ -56,8 +56,9 @@ public class AddQuestionActivity extends AppCompatActivity {
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Faq").child(id);
             ref.setValue(faq);
             Message.show(this,"Submitted successfully!");
-            etQuestn.setText("");
-            etAns.setText("");
+            this.finish();
+            Intent int_newActivity = new Intent(this, DriverFaq.class);
+            startActivity(int_newActivity);
         }catch (Exception e)
         {
             pd.hide();
@@ -66,4 +67,11 @@ public class AddQuestionActivity extends AppCompatActivity {
         pd.hide();
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.finish();
+        Intent int_newActivity = new Intent(this, DriverFaq.class);
+        startActivity(int_newActivity);
+    }
 }

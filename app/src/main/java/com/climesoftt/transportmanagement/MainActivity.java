@@ -18,17 +18,13 @@ public class MainActivity extends AppCompatActivity{
         catch (Exception e){
 
         }
-
-        Intent intent = new Intent(this, AllMaintenceActivity.class);
-        startActivity(intent);
-
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                this.finish();;
+                this.finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -37,11 +33,13 @@ public class MainActivity extends AppCompatActivity{
 
     public void onClickLogin(View view) {
         Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
     public void onClickRegister(View view) {
         Intent intent = new Intent(this, RegistrationActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 }

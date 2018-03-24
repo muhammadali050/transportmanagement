@@ -72,6 +72,7 @@ public class AddDriver extends AppCompatActivity {
             Message.show(AddDriver.this,"Registered successfully.");
             this.finish();
             Intent intent = new Intent(this, AllDriversActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
 
         }catch (Exception e)

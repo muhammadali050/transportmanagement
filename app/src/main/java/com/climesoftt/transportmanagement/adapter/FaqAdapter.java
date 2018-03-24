@@ -100,12 +100,12 @@ public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.VHolder> {
                 String answer = "";
 
                 // get position of current Row
-                int pos = getAdapterPosition();
+
 
                 @Override
                 public boolean onLongClick(View v) {
+                    final int pos = getAdapterPosition();
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-
                     alertDialogBuilder.create();
                     alertDialogBuilder.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
                         @Override
@@ -115,10 +115,7 @@ public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.VHolder> {
                                 Faq clickedDataItem = arrayList.get(pos);
                                 qId = clickedDataItem.getId();
                             }
-                            final PDialog pd = new PDialog(context).message("Deleting. . .");
                             DeleteRecord.deleteRecordMethod(context , "Faq" , qId);
-                            pd.hide();
-                            Toast.makeText(context , "Deleted!" , Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(context, DriverFaq.class);
                             context.startActivity(intent);
                         }
@@ -132,17 +129,16 @@ public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.VHolder> {
                                     if(pos != RecyclerView.NO_POSITION){
                                         Faq clickedDataItem = arrayList.get(pos);
                                         qId = clickedDataItem.getId();
-                                        question = clickedDataItem.getQuestion();
-                                        answer = clickedDataItem.getAnswer();
+                                        question= clickedDataItem.getQuestion();
+                                        answer= clickedDataItem.getAnswer();
                                     }
                                     Intent intentSendData = new Intent(context , EditQuestionActivity.class);
                                     intentSendData.putExtra("QID", qId);
                                     intentSendData.putExtra("QUESTION", question);
                                     intentSendData.putExtra("ANSWER", answer);
-                                    Message.show(context, answer);
                                     context.startActivity(intentSendData);
                                 }
-                            }   );
+                            });
 
                     alertDialogBuilder.setTitle("Choose Action");
                     alertDialogBuilder.setCancelable(true);
@@ -151,10 +147,6 @@ public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.VHolder> {
                     return false;
                 }
             });
-
-
-
-
         }
     }
 }
