@@ -72,6 +72,7 @@ public class DriverFaq extends AppCompatActivity {
 
     public void addQuestion(MenuItem item){
         Intent intent = new Intent(this, AddQuestionActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
@@ -79,7 +80,8 @@ public class DriverFaq extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         this.finish();
-        Intent int_newActivity = new Intent(this, LoginActivity.class);
+        Intent int_newActivity = new Intent(this, DriverDashboard.class);
+        int_newActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(int_newActivity);
     }
 }

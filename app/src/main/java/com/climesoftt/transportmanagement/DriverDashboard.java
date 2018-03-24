@@ -9,23 +9,66 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.climesoftt.transportmanagement.model.User;
+import com.climesoftt.transportmanagement.utils.DisplayUserName;
+import com.climesoftt.transportmanagement.utils.Message;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 /**
  * Created by Ali on 3/22/2018.
  */
 
 public class DriverDashboard extends AppCompatActivity {
     private TextView tvName;
+    private String userName = "";
+    private String userEmail = "";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_dashboard);
         tvName = findViewById(R.id.admin_title);
-        String uname = getIntent().getStringExtra("USERNAME");
-        tvName.setText(uname);
+
+        //userEmail = getIntent().getStringExtra("USER_EMAIL");
+        //Message.show(this, userEmail);
+        //Display Login user Name
+        //displayUserName();
+
+    }
+    public void displayUserName()
+    {
+        try
+        {
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users");
+            userRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    for(DataSnapshot userSnapshot : dataSnapshot.getChildren())
+                    {
+                        User user = userSnapshot.getValue(User.class);
+                        if(userEmail.equals(user.getEmail()))
+                        {
+                            tvName.setText(user.getName());
+                        }
+                    }
+
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            });
+        }catch (Exception e)
+        {
+            Message.show(this,"Something went wrong.\n"+e.getMessage());
+        }
     }
 
     public void onClickFaq(View view){
-        Intent intent = new Intent(this , FaqActivity.class);
+        Intent intent = new Intent(this , DriverFaq.class);
         startActivity(intent);
     }
 
@@ -53,5 +96,11 @@ public class DriverDashboard extends AppCompatActivity {
                         System.exit(0);
                     }
                 }).create().show();
+    }
+
+    public void addMaintenance(View view) {
+        Intent intent = new Intent(this, AddMaintenenceActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

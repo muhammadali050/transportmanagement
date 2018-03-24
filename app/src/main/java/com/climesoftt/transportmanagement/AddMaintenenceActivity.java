@@ -1,8 +1,10 @@
 package com.climesoftt.transportmanagement;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -10,13 +12,21 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.climesoftt.transportmanagement.model.Maintenance;
+import com.climesoftt.transportmanagement.utils.GenerateRandomNumber;
+import com.climesoftt.transportmanagement.utils.Message;
+import com.climesoftt.transportmanagement.utils.PDialog;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.Calendar;
 
 public class AddMaintenenceActivity extends AppCompatActivity {
-    Button startDate;
-    Button endDate;
-    DatePickerDialog datePickerDialogStart;
-    DatePickerDialog datePickerDialogStartEnd;
+    private EditText et_desc;
+    private Button startDate;
+    private Button endDate;
+    private DatePickerDialog datePickerDialogStart;
+    private DatePickerDialog datePickerDialogStartEnd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +35,7 @@ public class AddMaintenenceActivity extends AppCompatActivity {
 
         startDate = (Button) findViewById(R.id.btnStartDate);
         endDate = (Button) findViewById(R.id.btnEndDate);
+        et_desc = findViewById(R.id.etDescription);
         setStartDateDialog();
         setEndDateDialog();
 
@@ -84,4 +95,41 @@ public class AddMaintenenceActivity extends AppCompatActivity {
                 }, mYear, mMonth, mDay);
     }
 
+    public void addMaintenance(View view) {
+        int getId = GenerateRandomNumber.randomNum();
+        String id = Integer.toString(getId).trim();
+        String sDate = startDate.getText().toString().trim();
+        String eDate = endDate.getText().toString().trim();
+        String description = et_desc.getText().toString().trim();
+        //Validation
+        if(TextUtils.isEmpty(sDate) || TextUtils.isEmpty(eDate) || TextUtils.isEmpty(description))
+        {
+            Message.show(AddMaintenenceActivity.this , "Please fill all the fields!");
+            return;
+        }
+
+        final Maintenance maintenance = new Maintenance();
+        maintenance.setId(id);
+        maintenance.setStartDate(sDate);
+        maintenance.setEndDate(eDate);
+        maintenance.setDescription(description);
+        final PDialog pd = new PDialog(this).message("Adding . . .");
+        try
+        {
+            //String uniqueId = String.valueOf(new Date().getTime());
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Maintenance").child(id);
+            reference.setValue(maintenance);
+            Message.show(AddMaintenenceActivity.this,"Added successfully.");
+            //this.finish();
+            //Intent intent = new Intent(this, AllDriversActivity.class);
+            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            //startActivity(intent);
+
+        }catch (Exception e)
+        {
+            pd.hide();
+            Message.show(this,"Something went wrong.\n"+e.getMessage());
+        }
+        pd.hide();
+    }
 }

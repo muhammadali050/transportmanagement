@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.climesoftt.transportmanagement.utils.GenerateRandomNumber;
@@ -37,6 +38,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference dbRef;
     private ProgressDialog progressDialog;
+    private Spinner spAccountType;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,7 +49,7 @@ public class RegistrationActivity extends AppCompatActivity {
         userName = findViewById(R.id.uName);
         userEmail = findViewById(R.id.uEmail);
         userPassword = findViewById(R.id.uPassword);
-
+        spAccountType = findViewById(R.id.spinnerAccountType);
 
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
@@ -96,16 +98,18 @@ public class RegistrationActivity extends AppCompatActivity {
         String name = userName.getText().toString().trim();
         String email = userEmail.getText().toString().trim();
         String password = userPassword.getText().toString().trim();
-        //All Fields must be fill
-        if(TextUtils.isEmpty(name) || TextUtils.isEmpty(email) || TextUtils.isEmpty(password))
-        {
-            Message.show(RegistrationActivity.this , "Please fill all fields.");
-            return;
-        }
-        if(Patterns.EMAIL_ADDRESS.matcher(email).matches())
+        String accountType = spAccountType.getSelectedItem().toString().trim();
+        //Email Validation
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches())
         {
             userEmail.setError("Enter valid E-mail!");
             userEmail.requestFocus();
+            return;
+        }
+        //All Fields must be fill
+        if(TextUtils.isEmpty(name) || TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || accountType.isEmpty())
+        {
+            Message.show(RegistrationActivity.this , "Please fill all fields.");
             return;
         }
         final User user = new User();
@@ -116,24 +120,20 @@ public class RegistrationActivity extends AppCompatActivity {
         user.setName(name);
         user.setEmail(email);
         user.setPassword(password);
+        user.setAccountType(accountType);
 
         final PDialog pd = new PDialog(this).message("User Registration. . .");
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        FirebaseUser currentUser = mAuth.getCurrentUser();
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            FirebaseUser user = mAuth.getCurrentUser();
+
                             DatabaseReference uReF = dbRef.child("Users").child(id);
                             uReF.setValue(user);
-                            user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    Message.show(RegistrationActivity.this,"Verification Email has been sent!" +
-                                            "\nPlease Register himself before login!");
-                                }
-                            });
+
                             userName.setText("");
                             userEmail.setText("");
                             userPassword.setText("");
@@ -149,6 +149,14 @@ public class RegistrationActivity extends AppCompatActivity {
                              Message.show(RegistrationActivity.this, "Registration failed.\n"+task.getException().getMessage());
                             }
                         }
+
+                        currentUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Message.show(RegistrationActivity.this,"Verification Email has been sent!" +
+                                        "\nPlease Register himself before login!");
+                            }
+                        });
                     }
                 });
 

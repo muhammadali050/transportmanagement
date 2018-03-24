@@ -104,6 +104,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="60dp"
                     app:layout_constraintEnd_toEndOf="parent"
+                    android:onClick="addMaintenance"
                     app:layout_constraintStart_toStartOf="@+id/guideline4"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/maintenance_driver_icon" />
