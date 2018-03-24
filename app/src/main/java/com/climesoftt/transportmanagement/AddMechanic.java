@@ -27,11 +27,11 @@ public class AddMechanic extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_driver);
+        setContentView(R.layout.activity_add_mechanic);
         dbRef = FirebaseDatabase.getInstance().getReference();
 
-        mName = findViewById(R.id.etDName);
-        mPhone = findViewById(R.id.etDPhone);
+        mName = findViewById(R.id.etMName);
+        mPhone = findViewById(R.id.etMPhone);
         mAddress = findViewById(R.id.rExtraCost);
 
 

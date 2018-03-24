@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity{
 
         }
 
-        Intent intent = new Intent(this, AllMainteneceActivity.class);
+        Intent intent = new Intent(this, AllMaintenceActivity.class);
         startActivity(intent);
 
     }

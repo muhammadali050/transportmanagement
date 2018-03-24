@@ -21,6 +21,7 @@ import com.climesoftt.transportmanagement.AllDriversActivity;
 import com.climesoftt.transportmanagement.DriverFaq;
 import com.climesoftt.transportmanagement.EditQuestionActivity;
 import com.climesoftt.transportmanagement.R;
+import com.climesoftt.transportmanagement.ViewMaintenenceActivity;
 import com.climesoftt.transportmanagement.model.Faq;
 import com.climesoftt.transportmanagement.model.Person;
 import com.climesoftt.transportmanagement.utils.DeleteRecord;
@@ -75,6 +76,8 @@ public class MaintenenceAdapter extends RecyclerView.Adapter<MaintenenceAdapter.
                 @Override
                 public void onClick(View v) {
                     // View Question Activity Code here
+                    Intent intent = new Intent(context, ViewMaintenenceActivity.class);
+                    context.startActivity(intent);
                 }
             });
 
@@ -99,7 +102,7 @@ public class MaintenenceAdapter extends RecyclerView.Adapter<MaintenenceAdapter.
                                     // Go to edit question activity Code
 
                                 }
-                            }   );
+                            });
 
                     alertDialogBuilder.setTitle("Choose Action");
                     alertDialogBuilder.setCancelable(true);

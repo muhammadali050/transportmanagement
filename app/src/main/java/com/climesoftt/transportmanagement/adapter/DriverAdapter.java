@@ -91,9 +91,5 @@ public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.VHolder> {
             txtAddress = (TextView)view.findViewById(R.id.txt_user_address);
             txtPhone = view.findViewById(R.id.txt_driver_phone);
         }
-
-
-
-
     }
 }

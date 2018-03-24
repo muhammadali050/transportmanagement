@@ -19,7 +19,7 @@
         android:paddingEnd="16dp"
         android:textSize="20sp"
         android:textColor="#000"
-        android:maxLength="25"
+        android:maxLength="30"
         android:text="My maintenence will be here"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
