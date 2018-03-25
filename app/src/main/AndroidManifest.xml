@@ -64,8 +64,6 @@
             android:label="@string/title_activity_edit_route"/>
         <activity android:name=".DriverFaq"
             android:label="@string/title_activity_driver_faq"/>
-        <activity android:name=".FaqActivity"
-            android:label="@string/title_activity_faq"/>
         <activity android:name=".DriverDashboard"
             android:label="@string/title_activity_driver_dashboard"/>
         <activity android:name=".AddQuestionActivity"

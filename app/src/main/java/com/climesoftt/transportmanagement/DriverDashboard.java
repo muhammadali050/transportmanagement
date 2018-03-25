@@ -28,7 +28,7 @@ public class DriverDashboard extends AppCompatActivity {
     }
 
     public void onClickFaq(View view){
-        Intent intent = new Intent(this , FaqActivity.class);
+        Intent intent = new Intent(this , DriverFaq.class);
         startActivity(intent);
     }
 
