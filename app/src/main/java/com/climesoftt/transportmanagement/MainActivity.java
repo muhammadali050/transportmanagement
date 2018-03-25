@@ -18,6 +18,9 @@ public class MainActivity extends AppCompatActivity{
         catch (Exception e){
 
         }
+
+        Intent intent = new Intent(this, AdminDashboardActivity.class);
+        startActivity(intent);
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {

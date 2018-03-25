@@ -14,6 +14,16 @@
     <string name="title_activity_add_driver">Add Driver</string>
     <string name="title_activity_edit_driver">Edit Driver</string>
     <string name="title_activity_edit_mechanic">Edit Mechanic</string>
+    <string name="title_activity_edit_route">Edit Route</string>
+    <string name="title_activity_driver_faq">FAQ</string>
+    <string name="title_activity_faq">All FAQ</string>
+    <string name="title_activity_driver_dashboard">Dashboard</string>
+    <string name="title_activity_add_question">Add Question</string>
+    <string name="title_activity_edit_question">Edit Question</string>
+    <string name="title_activity_add_maintenence">Add Maintenece</string>
+    <string name="title_activity_edit_maintenence">Edit Maintenece</string>
+    <string name="title_activity_all_maintenece">All Maintenence</string>
+    <string name="title_activity_view_maintenence">View Maintenence</string>
 
 
     <string name="login"><u>Login</u></string>

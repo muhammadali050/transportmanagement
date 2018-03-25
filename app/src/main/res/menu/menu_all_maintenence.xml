@@ -5,7 +5,7 @@
     <item
         android:id="@+id/addMaintainenece"
         android:checkable="false"
-        android:icon="@android:drawable/ic_input_add"
+        android:icon="@drawable/ic_add_maintenence"
         android:onClick="addMaintenence"
         android:title="Add"
         app:showAsAction="always" />

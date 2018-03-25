@@ -60,16 +60,26 @@
         <activity
             android:name=".MechanicProfile"
             android:label="@string/title_activity_edit_mechanic" />
-        <activity android:name=".EditRoute" />
-        <activity android:name=".DriverFaq" />
-        <activity android:name=".FaqActivity" />
-        <activity android:name=".DriverDashboard" />
-        <activity android:name=".AddQuestionActivity" />
-        <activity android:name=".EditQuestionActivity" />
-        <activity android:name=".AddMaintenenceActivity" />
-        <activity android:name=".EditMaintenenceActivity" />
-        <activity android:name=".AllMaintenceActivity" />
-        <activity android:name=".ViewMaintenenceActivity"></activity>
+        <activity android:name=".EditRoute"
+            android:label="@string/title_activity_edit_route"/>
+        <activity android:name=".DriverFaq"
+            android:label="@string/title_activity_driver_faq"/>
+        <activity android:name=".FaqActivity"
+            android:label="@string/title_activity_faq"/>
+        <activity android:name=".DriverDashboard"
+            android:label="@string/title_activity_driver_dashboard"/>
+        <activity android:name=".AddQuestionActivity"
+            android:label="@string/title_activity_add_question"/>
+        <activity android:name=".EditQuestionActivity"
+            android:label="@string/title_activity_edit_question"/>
+        <activity android:name=".AddMaintenenceActivity"
+            android:label="@string/title_activity_add_maintenence"/>
+        <activity android:name=".EditMaintenenceActivity"
+            android:label="@string/title_activity_edit_maintenence" />
+        <activity android:name=".AllMaintenceActivity"
+            android:label="@string/title_activity_all_maintenece" />
+        <activity android:name=".ViewMaintenenceActivity"
+            android:label="@string/title_activity_view_maintenence"/>
     </application>
 
 </manifest>
