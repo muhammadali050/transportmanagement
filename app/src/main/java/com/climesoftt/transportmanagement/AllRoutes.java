@@ -77,8 +77,6 @@ public class AllRoutes extends AppCompatActivity {
                     Routes data = routesSnapshot.getValue(Routes.class);
                     if (userTypeAdmin.equals("Admin")) {
                         arrayList.add(data);
-                        adminRef = FirebaseDatabase.getInstance().getReference().child("Users");
-
                     } else if (userTypeDriver.equals("Driver")) {
                         if (driverName.equals(data.getDriver())) {
                             arrayList.add(data);
