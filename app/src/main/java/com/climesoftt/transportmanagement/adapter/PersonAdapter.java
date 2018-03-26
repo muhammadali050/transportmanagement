@@ -104,11 +104,13 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.VHolder>{
                     if(REFERENCE_CHILD_NAME.equals("drivers"))
                     {
                         Intent intent = new Intent(context , DriverProfile.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         context.startActivity(intent);
                     }
                     if(REFERENCE_CHILD_NAME.equals("mechanics"))
                     {
                         Intent intent = new Intent(context , MechanicProfile.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         context.startActivity(intent);
                     }
 

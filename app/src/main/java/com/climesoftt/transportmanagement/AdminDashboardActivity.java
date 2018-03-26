@@ -6,18 +6,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.climesoftt.transportmanagement.model.Routes;
 import com.climesoftt.transportmanagement.model.User;
+import com.climesoftt.transportmanagement.utils.Logout;
 import com.climesoftt.transportmanagement.utils.Message;
-import com.climesoftt.transportmanagement.utils.PDialog;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,18 +25,21 @@ import com.google.firebase.database.ValueEventListener;
 
 public class AdminDashboardActivity extends AppCompatActivity {
     private TextView tvName;
-    private String userName = "";
-    private String userEmail = "";
+    public static String USERNAME = "";
+    public static String USER_TYPE = "";
+    public static String USER_EMAIL = "";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_dashboard);
         tvName = findViewById(R.id.admin_title);
-        tvName.setText("");
-        userEmail = getIntent().getStringExtra("USER_EMAIL");
-        getUserName();
-        tvName.setText(userName);
 
+        Intent intent = getIntent();
+        USERNAME = intent.getStringExtra("USER_NAME");
+        USER_TYPE = intent.getStringExtra("USER_TYPE");
+        USER_EMAIL = intent.getStringExtra("USER_EMAIL");
+        //Display Login user Name
+        tvName.setText(USERNAME);
 
         try{
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -49,39 +47,6 @@ public class AdminDashboardActivity extends AppCompatActivity {
         catch (Exception e){
 
         }
-    }
-
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_dashboard, menu);
-        return true;
-    }
-
-    public void onClickLogout(MenuItem item){
-        // Logout Code...
-    }
-
-
-    public void getUserName()
-    {
-        DatabaseReference uRef = FirebaseDatabase.getInstance().getReference("Users");
-        uRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot userSnapshot : dataSnapshot.getChildren())
-                {
-                    User data = userSnapshot.getValue(User.class);
-                    if(data.getEmail().equals(userEmail))
-                    {
-                        userName = data.getName();
-                    }
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
     }
 
     public void onClickMechanic(View view) {
@@ -111,7 +76,6 @@ public class AdminDashboardActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                //alertDialogue();
                 return false;
         }
         return super.onOptionsItemSelected(item);
@@ -119,6 +83,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        this.finish();
         alertDialogue();
     }
 
@@ -132,13 +97,9 @@ public class AdminDashboardActivity extends AppCompatActivity {
 
                     public void onClick(DialogInterface arg0, int arg1) {
                         AdminDashboardActivity.super.onBackPressed();
-                        System.exit(0);
+                        Logout.logoutUser(AdminDashboardActivity.this);
                     }
                 }).create().show();
     }
-
-
-
-
 
 }

@@ -84,6 +84,7 @@ public class MechanicsAdaptor extends RecyclerView.Adapter<MechanicsAdaptor.VHol
                     MECHANIC_PHONE = pPhone;
 
                     Intent intent = new Intent(context , MechanicProfile.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     context.startActivity(intent);
                 }
             });

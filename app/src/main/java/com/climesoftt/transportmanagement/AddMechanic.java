@@ -42,7 +42,7 @@ public class AddMechanic extends AppCompatActivity {
         }
     }
 
-    public void addDriver(View view) {
+    public void addMechanic(View view) {
        // String uniqueId = String.valueOf(new Date().getTime());
         int getId = GenerateRandomNumber.randomNum();
         String id = Integer.toString(getId).trim();
@@ -85,4 +85,5 @@ public class AddMechanic extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

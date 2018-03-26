@@ -9,6 +9,7 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -38,6 +39,9 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText etl_email,etl_password;
     private String email,password;
+    private String loginUserName = "";
+    private String loginUserType = "";
+    private String loginUserEmail = "";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,16 +60,25 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onClickLogin(View view){
-        /*Intent intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
+        Intent intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);*/
-
+        startActivity(intent);
+/*
         email = etl_email.getText().toString();
         password = etl_password.getText().toString();
-        //All Fields must be fill
-        if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password))
+
+        //Email Validation
+        if(TextUtils.isEmpty(email) || !Patterns.EMAIL_ADDRESS.matcher(email).matches())
         {
-            Message.show(LoginActivity.this , "Please fill all fields.");
+            etl_email.setError("Enter Valid Email!");
+            etl_email.requestFocus();
+            return;
+        }
+        //Password Validation
+        if(TextUtils.isEmpty(password))
+        {
+            etl_password.setError("Enter Valid Password!");
+            etl_password.requestFocus();
             return;
         }
         final PDialog pd = new PDialog(this).message("Trying to login . . .");
@@ -77,15 +90,12 @@ public class LoginActivity extends AppCompatActivity {
 
                             if (task.isSuccessful()) {
                                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                                moveLoginUserHisDashboard();
                                 // Check if user's email is verified
-                                if (user.isEmailVerified()) {
-                                // Name, email address, and profile photo Url
-                                String name = "";
-                                name = etl_email.getText().toString();
-                                Intent intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                intent.putExtra("USER_EMAIL" , name);
-                                startActivity(intent);
+                                /*if (user.isEmailVerified()) {
+                                    moveLoginUserHisDashboard();
+
                             }else
                             {
                                 pd.hide();
@@ -94,20 +104,22 @@ public class LoginActivity extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<Void> task) {
                                         Message.show(LoginActivity.this, "Email Not Verified!" +
                                                 "\nNow again Verification Email has been sent!" +
-                                                "\nPlease Register himself!");
+                                                "\nPlease Verify himself!");
                                     }
                                 });
                             }
                             //updateUI(user);
+                             pd.hide();
                         } else {
                                 pd.hide();
                             // If sign in fails, display a message to the user.
                             Message.show(LoginActivity.this, "Authentication failed.\n"+task.getException().getMessage());
                         }
-                        pd.hide();
                         // ...
                     }
                 });
+        pd.hide();
+        */
     }
 
     @Override
@@ -141,22 +153,59 @@ public class LoginActivity extends AppCompatActivity {
         System.exit(0);
     }
 
-    public void loginUser()
+    private void moveLoginUserHisDashboard()
     {
+        final PDialog pd = new PDialog(this).message("Trying to login . . .");
+
         try
         {
+            loginUserName = "";
+            loginUserType = "";
+            loginUserEmail = "";
             DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users");
             userRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    for(DataSnapshot routesSnapshot : dataSnapshot.getChildren())
+                    for(DataSnapshot userSnapshot : dataSnapshot.getChildren())
                     {
-                        User user = routesSnapshot.getValue(User.class);
-                        /*if(userEmail.equals(user.getEmail()))
+                        User user = userSnapshot.getValue(User.class);
+                        if(email.equals(user.getEmail()))
                         {
-                            userName = user.getName();
-                        }*/
+                            //Move to Admin Dashboard
+                            if(user.getAccountType().equals("Admin"))
+                            {
+                                loginUserName = user.getName();
+                                loginUserType = user.getAccountType();
+                                loginUserEmail = user.getEmail();
+                                pd.hide();
+                                Intent intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                intent.putExtra("USER_NAME" , loginUserName);
+                                intent.putExtra("USER_TYPE" , loginUserType);
+                                intent.putExtra("USER_EMAIL" , loginUserEmail);
+                                startActivity(intent);
+                            }else if(user.getAccountType().equals("Driver"))
+                            {
+                                loginUserName = user.getName();
+                                loginUserType = user.getAccountType();
+                                loginUserEmail = user.getEmail();
+                                pd.hide();
+                                Intent intent = new Intent(LoginActivity.this, DriverDashboard.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                intent.putExtra("USER_NAME" , loginUserName);
+                                intent.putExtra("USER_TYPE" , loginUserType);
+                                intent.putExtra("USER_EMAIL" , loginUserEmail);
+                                startActivity(intent);
+                            }else if(user.getAccountType().equals("Personal"))
+                            {
+
+                            }else
+                            {
+                                Message.show(LoginActivity.this, "User does not exist!\nFirst Register himself!\n Regards : Admin \nThanks.");
+                            }
+                        }
                     }
+                    pd.hide();
                 }
                 @Override
                 public void onCancelled(DatabaseError databaseError) {

@@ -102,7 +102,7 @@ public class AllDriversActivity extends AppCompatActivity {
     }
 
     public void addUser(MenuItem item){
-        this.finish();
+        //this.finish();
         Intent intent = new Intent(this, AddDriver.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
@@ -114,9 +114,9 @@ public class AllDriversActivity extends AppCompatActivity {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 this.finish();
-                Intent intent = new Intent(this, AdminDashboardActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+                //Intent intent = new Intent(this, AdminDashboardActivity.class);
+                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                //startActivity(intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);

@@ -85,6 +85,8 @@ public class RouteAdaptor extends RecyclerView.Adapter<RouteAdaptor.VHolder> {
                     intent.putExtra("TOOLPLAZA" , toolPlaza);
                     intent.putExtra("PETROL", petrol);
                     intent.putExtra("EXTRACOST",extraCost);
+
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     context.startActivity(intent);
                 }
             });

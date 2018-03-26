@@ -14,7 +14,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:gravity="center_horizontal"
-        android:text="Admin Name"
+        android:text="Admin"
         android:textColor="#fff"
         android:textSize="26sp"
         android:textStyle="bold"
@@ -23,6 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="395dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
@@ -165,8 +166,8 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
-                    android:textSize="14sp"
                     android:text="Drivers"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toTopOf="@+id/guideline2"
                     app:layout_constraintEnd_toStartOf="@+id/guideline4"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -203,8 +204,8 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
-                    android:textSize="14sp"
                     android:text="Mechanics"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toTopOf="@+id/guideline3"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/guideline4" />
@@ -224,7 +225,6 @@
             </android.support.constraint.ConstraintLayout>
 
 
-
         </RelativeLayout>
 
         <!--<ImageButton
@@ -238,7 +238,6 @@
             android:elevation="4dp"
             android:src="@drawable/profile_icon" />-->
     </RelativeLayout>
-
 
 
 </android.support.constraint.ConstraintLayout>
