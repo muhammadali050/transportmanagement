@@ -47,6 +47,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:drawableTint="#FF4081"
+                    android:maxLength="30"
                     android:hint="Email"
                     android:inputType="textEmailAddress"
                     android:singleLine="true" />
@@ -62,6 +63,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:drawableTint="#FF4081"
+                    android:maxLength="30"
                     android:hint="Password"
                     android:inputType="textPassword"
                     android:singleLine="true" />

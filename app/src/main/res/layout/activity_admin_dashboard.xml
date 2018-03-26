@@ -43,7 +43,7 @@
             android:layout_below="@+id/login_title"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="10dp"
             android:background="#fff"
             android:elevation="4dp"
             android:orientation="vertical"
@@ -53,26 +53,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <android.support.constraint.Guideline
-                    android:id="@+id/guideline"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.1" />
 
                 <android.support.constraint.Guideline
                     android:id="@+id/guideline2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.5" />
+                    app:layout_constraintGuide_percent="0.33" />
 
                 <android.support.constraint.Guideline
                     android:id="@+id/guideline3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.90" />
+                    app:layout_constraintGuide_percent="0.66" />
+
+                <android.support.constraint.Guideline
+                    android:id="@+id/guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.99" />
 
                 <android.support.constraint.Guideline
                     android:id="@+id/guideline4"
@@ -93,7 +94,7 @@
                     app:layout_constraintBottom_toTopOf="@+id/textView5"
                     app:layout_constraintEnd_toStartOf="@+id/guideline4"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/guideline"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/user_admin" />
 
                 <ImageView
@@ -108,7 +109,7 @@
                     app:layout_constraintBottom_toTopOf="@+id/textView6"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/guideline4"
-                    app:layout_constraintTop_toTopOf="@+id/guideline"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/maintenance_icon" />
 
                 <ImageView
@@ -142,6 +143,21 @@
                     app:layout_constraintStart_toStartOf="@+id/guideline4"
                     app:layout_constraintTop_toTopOf="@+id/guideline2"
                     app:srcCompat="@drawable/mechanic_icon" />
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:onClick="onClickMechanic"
+                    app:layout_constraintBottom_toTopOf="@+id/textView3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/guideline3"
+                    app:srcCompat="@drawable/faq_driver" />
 
                 <TextView
                     android:id="@+id/textView5"
@@ -194,12 +210,24 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/guideline4" />
 
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:text="FAQ"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
             </android.support.constraint.ConstraintLayout>
 
 
         </RelativeLayout>
 
-        <ImageButton
+        <!--<ImageButton
             android:id="@+id/user_profile_photo"
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -208,7 +236,7 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/user_profile_image_background"
             android:elevation="4dp"
-            android:src="@drawable/profile_icon" />
+            android:src="@drawable/profile_icon" />-->
     </RelativeLayout>
 
 

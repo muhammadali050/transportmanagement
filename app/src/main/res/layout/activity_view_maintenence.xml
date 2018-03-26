@@ -79,7 +79,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_toLeftOf="@+id/rProfileDelete"
                 android:onClick="onClickEditMaintenence"
-                app:srcCompat="@drawable/icon_edit_user" />
+                app:srcCompat="@drawable/ic_edit_maintainence" />
 
             <ImageView
                 android:id="@+id/rProfileDelete"
