@@ -79,6 +79,7 @@ public class EditRoute extends AppCompatActivity {
             Message.show(this,"Record updated successfully.");
             this.finish();
             Intent int_newActivity = new Intent(this, AllRoutes.class);
+            int_newActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(int_newActivity);
         }catch (Exception e)
         {

@@ -8,29 +8,18 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.climesoftt.transportmanagement.AllDriversActivity;
 import com.climesoftt.transportmanagement.AllMaintenceActivity;
-import com.climesoftt.transportmanagement.DriverFaq;
 import com.climesoftt.transportmanagement.EditMaintenenceActivity;
-import com.climesoftt.transportmanagement.EditQuestionActivity;
 import com.climesoftt.transportmanagement.R;
 import com.climesoftt.transportmanagement.ViewMaintenenceActivity;
-import com.climesoftt.transportmanagement.model.Faq;
 import com.climesoftt.transportmanagement.model.Maintenance;
-import com.climesoftt.transportmanagement.model.Person;
 import com.climesoftt.transportmanagement.utils.DeleteRecord;
-import com.climesoftt.transportmanagement.utils.Message;
-import com.climesoftt.transportmanagement.utils.PDialog;
-import com.rengwuxian.materialedittext.MaterialEditText;
 
 import java.util.ArrayList;
 

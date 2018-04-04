@@ -114,12 +114,13 @@
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/etAdd_mechanic_photo"
+                android:id="@+id/imgViewAdd_photo"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_gravity="center"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
+                android:onClick="selectImage"
                 app:srcCompat="@drawable/add_image_icon" />
 
 

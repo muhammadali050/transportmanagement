@@ -1,7 +1,5 @@
 package com.climesoftt.transportmanagement.model;
 
-import com.climesoftt.transportmanagement.Route;
-
 /**
  * Created by AtoZ on 3/20/2018.
  */
@@ -15,25 +13,27 @@ public class Routes {
     private String petrolCost = "";
     private  String extras = "";
     private String driver = "";
+    private String accountType = "";
+    private String personName = "";
     public Routes()
     {
     }
 
-
-    public Routes(String id,String to, String from, String tool, String petrol, String extras, String rDate, String driver)
-    {
-        this.id = id;
-        this.toCity = to;
-        this.fromCity = from;
-        this.tooPlaza = tool;
-        this.petrolCost = petrol;
-        this.extras = extras;
-        this.rDate = rDate;
-        this.driver = driver;
+    public String getAccountType() {
+        return accountType;
     }
 
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
+    }
 
+    public String getPersonName() {
+        return personName;
+    }
 
+    public void setPersonName(String personName) {
+        this.personName = personName;
+    }
 
     public String getrDate() {
         return rDate;

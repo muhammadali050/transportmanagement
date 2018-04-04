@@ -1,5 +1,7 @@
 package com.climesoftt.transportmanagement.model;
 
+import android.provider.Contacts;
+
 /**
  * Created by AtoZ on 3/20/2018.
  */
@@ -9,19 +11,22 @@ public class Person {
     private String name = "";
     private String phone = "";
     private String address = "";
+    private String image;
 
     public Person()
     {
 
     }
 
-    public Person(String id, String name,String phone,String address)
+    public Person(String id, String name,String phone,String address,String img)
     {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.address = address;
+        this.image = img;
     }
+
     public String getId() {
         return id;
     }
@@ -55,4 +60,11 @@ public class Person {
         this.address = address;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 }

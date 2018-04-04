@@ -1,10 +1,15 @@
 package com.climesoftt.transportmanagement;
 
+import android.accounts.Account;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -16,6 +21,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.climesoftt.transportmanagement.model.User;
+import com.climesoftt.transportmanagement.utils.AccountManager;
 import com.climesoftt.transportmanagement.utils.Message;
 import com.climesoftt.transportmanagement.utils.PDialog;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,18 +36,21 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import kotlin.jvm.internal.PackageReference;
+
 /**
  * Created by Ali on 3/14/2018.
  */
 
 public class LoginActivity extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
+    public static FirebaseAuth mAuth;
     private EditText etl_email,etl_password;
     private String email,password;
     private String loginUserName = "";
     private String loginUserType = "";
     private String loginUserEmail = "";
+    private String loginUserImage = "";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,11 +68,13 @@ public class LoginActivity extends AppCompatActivity {
         etl_password = findViewById(R.id.etUserPassword);
     }
 
+
+    @RequiresApi(api = Build.VERSION_CODES.FROYO)
     public void onClickLogin(View view){
-        Intent intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
+        /*Intent intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-/*
+        startActivity(intent);*/
+
         email = etl_email.getText().toString();
         password = etl_password.getText().toString();
 
@@ -87,13 +98,12 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         // Sign in success, update UI with the signed-in user's information
-
                             if (task.isSuccessful()) {
+                                pd.hide();
                                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-                                moveLoginUserHisDashboard();
+                                moveLoginUserHisDashboard(email);
                                 // Check if user's email is verified
-                                /*if (user.isEmailVerified()) {
+                              /*  if (user.isEmailVerified()) {
                                     moveLoginUserHisDashboard();
 
                             }else
@@ -107,32 +117,47 @@ public class LoginActivity extends AppCompatActivity {
                                                 "\nPlease Verify himself!");
                                     }
                                 });
-                            }
+                            }*/
                             //updateUI(user);
-                             pd.hide();
                         } else {
                                 pd.hide();
                             // If sign in fails, display a message to the user.
                             Message.show(LoginActivity.this, "Authentication failed.\n"+task.getException().getMessage());
-                        }
+                            }
                         // ...
                     }
                 });
-        pd.hide();
-        */
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        final PDialog pd = new PDialog(this).message("logging . . .");
+
         // Check if user is signed in (non-null) and update UI accordingly.
-         FirebaseUser user = mAuth.getCurrentUser();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user == null)
+        {
+            pd.hide();
+            return;
+        }
+        else if(user!=null)
+        {
+            String email = user.getEmail();
+            moveLoginUserHisDashboard(email);
+            pd.hide();
+        }else
+        {
+            pd.hide();
+           return;
 
-
+        }
+        pd.hide();
     }
 
     public void onClickRegister(View view) {
         Intent intent = new Intent(this, RegistrationActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
@@ -142,6 +167,9 @@ public class LoginActivity extends AppCompatActivity {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                this.finish();
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -153,64 +181,72 @@ public class LoginActivity extends AppCompatActivity {
         System.exit(0);
     }
 
-    private void moveLoginUserHisDashboard()
+    public void moveLoginUserHisDashboard(final String userEmail)
     {
-        final PDialog pd = new PDialog(this).message("Trying to login . . .");
-
+        final AccountManager accountManager = new AccountManager(this);
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users");
         try
         {
+
             loginUserName = "";
             loginUserType = "";
             loginUserEmail = "";
-            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users");
+
+            final PDialog pd = new PDialog(this).message("Trying to login . . .");
             userRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for(DataSnapshot userSnapshot : dataSnapshot.getChildren())
                     {
                         User user = userSnapshot.getValue(User.class);
-                        if(email.equals(user.getEmail()))
+                        if(userEmail.equals(user.getEmail()))
                         {
+                            loginUserName = user.getName();
+                            loginUserType = user.getAccountType();
+                            loginUserEmail = user.getEmail();
+                            loginUserImage = user.getUserImage();
+                            //Saved user credentials in sharedPreference
+                            accountManager.saveUserCredentials(loginUserName, loginUserType, loginUserEmail, loginUserImage);
                             //Move to Admin Dashboard
                             if(user.getAccountType().equals("Admin"))
                             {
-                                loginUserName = user.getName();
-                                loginUserType = user.getAccountType();
-                                loginUserEmail = user.getEmail();
                                 pd.hide();
                                 Intent intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                intent.putExtra("USER_NAME" , loginUserName);
-                                intent.putExtra("USER_TYPE" , loginUserType);
-                                intent.putExtra("USER_EMAIL" , loginUserEmail);
                                 startActivity(intent);
                             }else if(user.getAccountType().equals("Driver"))
                             {
-                                loginUserName = user.getName();
-                                loginUserType = user.getAccountType();
-                                loginUserEmail = user.getEmail();
                                 pd.hide();
                                 Intent intent = new Intent(LoginActivity.this, DriverDashboard.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                intent.putExtra("USER_NAME" , loginUserName);
-                                intent.putExtra("USER_TYPE" , loginUserType);
-                                intent.putExtra("USER_EMAIL" , loginUserEmail);
                                 startActivity(intent);
+
                             }else if(user.getAccountType().equals("Personal"))
                             {
-
+                                pd.hide();
+                                Intent intent = new Intent(LoginActivity.this, Personal.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
                             }else
                             {
+                                pd.hide();
                                 Message.show(LoginActivity.this, "User does not exist!\nFirst Register himself!\n Regards : Admin \nThanks.");
                             }
+                        }else
+                        {
+                            pd.hide();
                         }
                     }
-                    pd.hide();
+
                 }
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
+                    pd.hide();
+                    return;
                 }
+
             });
+
         }catch (Exception e)
         {
             Message.show(LoginActivity.this,"Something went wrong.\n"+e.getMessage());

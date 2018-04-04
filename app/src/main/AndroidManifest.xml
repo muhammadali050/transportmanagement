@@ -3,6 +3,8 @@
     package="com.climesoftt.transportmanagement">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -62,7 +64,7 @@
             android:label="@string/title_activity_edit_mechanic" />
         <activity android:name=".EditRoute"
             android:label="@string/title_activity_edit_route"/>
-        <activity android:name=".DriverFaq"
+        <activity android:name=".DriverAndPersonalFaq"
             android:label="@string/title_activity_driver_faq"/>
         <activity android:name=".DriverDashboard"
             android:label="@string/title_activity_driver_dashboard"/>
@@ -78,6 +80,8 @@
             android:label="@string/title_activity_all_maintenece" />
         <activity android:name=".ViewMaintenenceActivity"
             android:label="@string/title_activity_view_maintenence"/>
+        <activity android:name=".Personal"
+            android:label="Personal"/>
     </application>
 
 </manifest>

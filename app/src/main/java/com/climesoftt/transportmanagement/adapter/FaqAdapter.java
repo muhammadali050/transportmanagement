@@ -8,24 +8,18 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.climesoftt.transportmanagement.AllDriversActivity;
-import com.climesoftt.transportmanagement.DriverFaq;
+import com.climesoftt.transportmanagement.DriverAndPersonalFaq;
 import com.climesoftt.transportmanagement.EditQuestionActivity;
 import com.climesoftt.transportmanagement.R;
 import com.climesoftt.transportmanagement.model.Faq;
-import com.climesoftt.transportmanagement.model.Person;
 import com.climesoftt.transportmanagement.utils.DeleteRecord;
-import com.climesoftt.transportmanagement.utils.Message;
-import com.climesoftt.transportmanagement.utils.PDialog;
 
 import java.util.ArrayList;
 
@@ -115,7 +109,7 @@ public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.VHolder> {
                                 qId = clickedDataItem.getId();
                             }
                             DeleteRecord.deleteRecordMethod(context , "Faq" , qId);
-                            Intent intent = new Intent(context, DriverFaq.class);
+                            Intent intent = new Intent(context, DriverAndPersonalFaq.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             context.startActivity(intent);
                         }

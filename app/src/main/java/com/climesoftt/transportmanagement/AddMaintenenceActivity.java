@@ -11,8 +11,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.climesoftt.transportmanagement.model.Maintenance;
-import com.climesoftt.transportmanagement.utils.DateDialogs;
-import com.climesoftt.transportmanagement.utils.GenerateRandomNumber;
+import com.climesoftt.transportmanagement.utils.GenerateUniqueNumber;
 import com.climesoftt.transportmanagement.utils.Message;
 import com.climesoftt.transportmanagement.utils.PDialog;
 import com.google.firebase.database.DatabaseReference;
@@ -95,7 +94,7 @@ public class AddMaintenenceActivity extends AppCompatActivity {
 
 
     public void addMaintenance(View view) {
-        int getId = GenerateRandomNumber.randomNum();
+        int getId = GenerateUniqueNumber.randomNum();
         String id = Integer.toString(getId).trim();
         String sDate = startDate.getText().toString().trim();
         String eDate = endDate.getText().toString().trim();

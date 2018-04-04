@@ -13,6 +13,8 @@ public class User {
     private String email;
     private String password;
     private String accountType;
+    private String UId;
+    private String userImage;
     public User()
     {
 
@@ -29,6 +31,14 @@ public class User {
         return name;
     }
 
+
+    public String getUId() {
+        return UId;
+    }
+
+    public void setUId(String UId) {
+        this.UId = UId;
+    }
     public void setName(String name) {
         this.name = name;
     }
@@ -56,4 +66,11 @@ public class User {
         this.accountType = accountType;
     }
 
+    public String getUserImage() {
+        return userImage;
+    }
+
+    public void setUserImage(String userImage) {
+        this.userImage = userImage;
+    }
 }

@@ -61,7 +61,7 @@ public class EditQuestionActivity extends AppCompatActivity {
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Faq").child(qId);
             ref.setValue(faq);
             Message.show(this,"Updated successfully!");
-            Intent intent = new Intent(this, DriverFaq.class);
+            Intent intent = new Intent(this, DriverAndPersonalFaq.class);
             startActivity(intent);
         }catch (Exception e)
         {
@@ -75,7 +75,7 @@ public class EditQuestionActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         this.finish();
-        Intent int_newActivity = new Intent(this, DriverFaq.class);
+        Intent int_newActivity = new Intent(this, DriverAndPersonalFaq.class);
         startActivity(int_newActivity);
     }
 }

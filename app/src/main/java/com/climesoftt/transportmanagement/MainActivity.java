@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.climesoftt.transportmanagement.utils.PDialog;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,8 +23,33 @@ public class MainActivity extends AppCompatActivity{
 
         }
 
-        Intent intent = new Intent(this, AdminDashboardActivity.class);
-        startActivity(intent);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+       /* final PDialog pd = new PDialog(this).message("logging . . .");
+        LoginActivity login = new LoginActivity();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user == null)
+        {
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        }
+        else if(user != null)
+        {
+            String email = user.getEmail();
+            login.moveLoginUserHisDashboard(email);
+            pd.hide();
+        }else
+        {
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        }
+        pd.hide();*/
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {

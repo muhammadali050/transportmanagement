@@ -94,8 +94,7 @@ public class AllMechanicsActivity extends AppCompatActivity {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 this.finish();
-                //Intent intent = new Intent(this, AdminDashboardActivity.class);
-                //startActivity(intent);
+                recyclerView.notifyAll();
                 return true;
         }
         return super.onOptionsItemSelected(item);

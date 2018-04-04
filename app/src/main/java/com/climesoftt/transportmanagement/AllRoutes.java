@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import com.climesoftt.transportmanagement.adapter.RouteAdaptor;
 import com.climesoftt.transportmanagement.model.Routes;
 import com.climesoftt.transportmanagement.model.User;
+import com.climesoftt.transportmanagement.utils.AccountManager;
 import com.climesoftt.transportmanagement.utils.Message;
 import com.climesoftt.transportmanagement.utils.PDialog;
 import com.google.firebase.database.DataSnapshot;
@@ -33,92 +34,127 @@ public class AllRoutes extends AppCompatActivity {
     private RouteAdaptor adapter;
     private DatabaseReference dbref;
     private DatabaseReference adminRef;
-    private String userTypeAdmin = "";
-    private String userTypeDriver = "";
-    private String driverName = "";
-    private String adminEmail = "";
+    private String USER_TYPE = "";
+    private String USER_NAME = "";
+    private String USER_EMAIL = "";
+    private AccountManager accountManager;
     //public static String CURRENT_CHILD_KEY;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_routes);
 
-        userTypeDriver = DriverDashboard.USER_TYPE;
-        driverName = DriverDashboard.USERNAME;
-
-        userTypeAdmin = AdminDashboardActivity.USER_TYPE;
-        adminEmail = AdminDashboardActivity.USER_EMAIL;
-
-       // Message.show(this, userTypeDriver +" ," +driverName+ " --- "+userTypeAdmin +" , "+adminEmail);
         rvRoutes = (RecyclerView)findViewById(R.id.rcvRoutes);
         adapter = new RouteAdaptor(this , arrayList);
         rvRoutes.setAdapter(adapter) ;
         rvRoutes.setLayoutManager(new LinearLayoutManager(this));
 
         //call function for fetch data from firebase
-        fetchDataFromFirebase();
+        accountManager = new AccountManager(this);
+        USER_NAME = accountManager.getUserName();
+        USER_TYPE = accountManager.getUserAccountType();
+        Message.show(this,USER_TYPE);
+        //call function for fetch data from firebase
+        if(USER_TYPE.equals("Driver"))
+        {
+            fetchDataFromFirebase("Routes");
+        }
+        else if(USER_TYPE.equals("Admin"))
+        {
+            fetchDataFromFirebase("Routes");
+        }
+        else if(USER_TYPE.equals("Personal"))
+        {
+            fetchDataFromFirebase("Personal");
+        }
+        else {
+            return;
+        }
+        //fetchDataFromFirebase("Personal");
 
         try{
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         catch (Exception e){
-
         }
     }
 
     //Fetch data
-    private void fetchDataFromFirebase()
+    private void fetchDataFromFirebase(String reference)
     {
-        dbref = FirebaseDatabase.getInstance().getReference("Routes");
         final PDialog pd = new PDialog(AllRoutes.this).message("Loading. . .");
+        dbref = FirebaseDatabase.getInstance().getReference(reference);
         dbref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                arrayList.clear();
                 for(DataSnapshot routesSnapshot : dataSnapshot.getChildren()) {
                     Routes data = routesSnapshot.getValue(Routes.class);
-                    if (userTypeAdmin.equals("Admin")) {
+                    if(USER_TYPE.equals("Admin"))
+                    {
                         arrayList.add(data);
-                    } else if (userTypeDriver.equals("Driver")) {
-                        if (driverName.equals(data.getDriver())) {
+                    }
+                    else if(USER_TYPE.equals("Driver"))
+                    {
+                        if(USER_NAME.equals(data.getDriver()))
+                        {
                             arrayList.add(data);
+                        }else {
+                            pd.hide();
+                            return;
                         }
                     }
-                    adapter.notifyDataSetChanged();
+                    else if(USER_TYPE.equals("Personal"))
+                    {
+                        if(USER_NAME.equals(data.getPersonName()))
+                        {
+                            arrayList.add(data);
+                        }else {
+                            pd.hide();
+                            return;
+                        }
+                    } else {
+                        pd.hide();
+                        return;
+                    }
                 }
+                adapter.notifyDataSetChanged();
                 pd.hide();
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                pd.hide();
             }
         });
     }
-
 
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_add_route, menu);
+        MenuItem item = menu.findItem(R.id.add_route);
+        if(USER_TYPE.equals("Personal") || USER_TYPE.equals("Admin"))
+        {
+            item.setVisible(true);
+        }else
+        {
+            item.setVisible(false);
+        }
         return true;
     }
 
     public void addRoute(MenuItem item){
-        //this.finish();
+        this.finish();
         Intent intent = new Intent(this, AddRoute.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
-
-
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
+                rvRoutes.notifyAll();
                 this.finish();
-                //Intent intent = new Intent(this, AdminDashboardActivity.class);
-                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                //startActivity(intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);

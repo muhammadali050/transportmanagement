@@ -5,14 +5,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import com.climesoftt.transportmanagement.adapter.FaqAdapter;
 import com.climesoftt.transportmanagement.model.Faq;
+import com.climesoftt.transportmanagement.utils.AccountManager;
+import com.climesoftt.transportmanagement.utils.Message;
 import com.climesoftt.transportmanagement.utils.PDialog;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,18 +23,22 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class DriverFaq extends AppCompatActivity {
+public class DriverAndPersonalFaq extends AppCompatActivity {
 
+    private AccountManager accountManager;
     private RecyclerView rvFaq;
     private DatabaseReference faqRef;
-    private FaqAdapter faqAdapter;
+    public static FaqAdapter faqAdapter;
     private ArrayList<Faq> arrayList = new ArrayList<>();
+    private String USER_TYPE = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faq);
 
-
+        accountManager = new AccountManager(this);
+        USER_TYPE = accountManager.getUserAccountType();
+        Message.show(this, USER_TYPE);
         rvFaq = findViewById(R.id.rcvFaq);
         faqAdapter = new FaqAdapter(this , arrayList);
         rvFaq.setAdapter(faqAdapter);
@@ -64,10 +69,23 @@ public class DriverFaq extends AppCompatActivity {
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
+        //this.menu = menu;
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu_add_faq, menu);
+            MenuItem faqIcon = menu.findItem(R.id.ic_add_faq);
+            if(USER_TYPE.equals("Admin"))
+            {
+                faqIcon.setVisible(true);
+            }else
+            {
+                faqIcon.setVisible(false);
+            }
+            return true;
+    }
 
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_add_faq, menu);
-        return true;
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return false;
     }
 
     public void addQuestion(MenuItem item){
@@ -78,10 +96,34 @@ public class DriverFaq extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        this.finish();
-        Intent int_newActivity = new Intent(this, DriverDashboard.class);
-        int_newActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(int_newActivity);
+        try{
+            if(!TextUtils.isEmpty(USER_TYPE))
+            {
+                if(USER_TYPE.equals("Personal"))
+                {
+                    this.finish();
+                    Intent intent = new Intent(this, Personal.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                }
+                else if(USER_TYPE.equals("Driver"))
+                {
+                    this.finish();
+                    Intent intent = new Intent(this, DriverDashboard.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                }
+                else if(USER_TYPE.equals("Admin"))
+                {
+                    this.finish();
+                    Intent intent = new Intent(this, AdminDashboardActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                }
+            }
+        }catch (Exception ex)
+        {
+            Message.show(this,ex.getMessage());
+        }
     }
 }

@@ -32,7 +32,7 @@ public class AllDriversActivity extends AppCompatActivity {
 
     //This code is for DriverAdapter
     private ArrayList<Person> driversList = new ArrayList<>();
-    private DriverAdapter driverAdapter;
+    public static DriverAdapter driverAdapter;
     private RecyclerView  rv;
     private DatabaseReference dref;
 
@@ -113,6 +113,8 @@ public class AllDriversActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
+                driversList.clear();
+                rv.notifyAll();
                 this.finish();
                 //Intent intent = new Intent(this, AdminDashboardActivity.class);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

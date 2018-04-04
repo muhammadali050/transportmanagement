@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.climesoftt.transportmanagement.model.Faq;
-import com.climesoftt.transportmanagement.utils.GenerateRandomNumber;
+import com.climesoftt.transportmanagement.utils.GenerateUniqueNumber;
 import com.climesoftt.transportmanagement.utils.Message;
 import com.climesoftt.transportmanagement.utils.PDialog;
 import com.google.firebase.database.DatabaseReference;
@@ -33,7 +33,7 @@ public class AddQuestionActivity extends AppCompatActivity {
 
     public void addQuestion()
     {
-        int getId = GenerateRandomNumber.randomNum();
+        int getId = GenerateUniqueNumber.randomNum();
         String id = Integer.toString(getId).trim();
         String question = etQuestn.getText().toString().trim();
         String answer = etAns.getText().toString().trim();
@@ -57,7 +57,7 @@ public class AddQuestionActivity extends AppCompatActivity {
             ref.setValue(faq);
             Message.show(this,"Submitted successfully!");
             this.finish();
-            Intent int_newActivity = new Intent(this, DriverFaq.class);
+            Intent int_newActivity = new Intent(this, DriverAndPersonalFaq.class);
             startActivity(int_newActivity);
         }catch (Exception e)
         {
@@ -71,7 +71,7 @@ public class AddQuestionActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         this.finish();
-        Intent int_newActivity = new Intent(this, DriverFaq.class);
+        Intent int_newActivity = new Intent(this, DriverAndPersonalFaq.class);
         startActivity(int_newActivity);
     }
 }

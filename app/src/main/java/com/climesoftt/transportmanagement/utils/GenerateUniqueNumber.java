@@ -6,7 +6,7 @@ import java.util.Random;
  * Created by AtoZ on 3/21/2018.
  */
 
-public class GenerateRandomNumber {
+public class GenerateUniqueNumber {
 
     public static int randomNum() {
         Random r = new Random( System.currentTimeMillis() );

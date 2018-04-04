@@ -36,7 +36,6 @@
 
 
     <string-array name="userType">
-        <item>Admin</item>
         <item>Driver</item>
         <item>Personal</item>
 
