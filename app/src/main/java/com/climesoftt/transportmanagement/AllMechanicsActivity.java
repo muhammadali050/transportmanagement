@@ -12,6 +12,8 @@ import android.view.MenuItem;
 
 import com.climesoftt.transportmanagement.adapter.MechanicsAdaptor;
 import com.climesoftt.transportmanagement.model.Person;
+import com.climesoftt.transportmanagement.utils.AccountManager;
+import com.climesoftt.transportmanagement.utils.MoveUserToDashboard;
 import com.climesoftt.transportmanagement.utils.PDialog;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,11 +32,16 @@ public class AllMechanicsActivity extends AppCompatActivity {
     private MechanicsAdaptor mechanicsAdapter;
     private RecyclerView recyclerView;
     private DatabaseReference dref;
+    private String USER_TYPE = "";
+    private AccountManager accountManager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_mechanics);
+
+        accountManager = new AccountManager(this);
+        USER_TYPE = accountManager.getUserAccountType();
 
         recyclerView = findViewById(R.id.rcvMechanics);
         mechanicsAdapter = new MechanicsAdaptor(this, mechanicsList);
@@ -94,9 +101,16 @@ public class AllMechanicsActivity extends AppCompatActivity {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 this.finish();
-                recyclerView.notifyAll();
+                MoveUserToDashboard.moveUser(this,USER_TYPE);
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        MoveUserToDashboard.moveUser(this,USER_TYPE);
     }
 }

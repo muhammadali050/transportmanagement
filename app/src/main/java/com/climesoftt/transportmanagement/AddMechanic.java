@@ -57,7 +57,6 @@ public class AddMechanic extends AppCompatActivity {
         mAddress = findViewById(R.id.rExtraCost);
         imgViewMechanic = findViewById(R.id.imgViewAdd_mechanic_photo);
         bt_addMechanic = findViewById(R.id.btAddMechanic);
-        bt_addMechanic.setVisibility(View.GONE);
 
         try {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -112,6 +111,7 @@ public class AddMechanic extends AppCompatActivity {
     }
 
     public void selectImage(View view) {
+        bt_addMechanic.setVisibility(View.GONE);
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_GET_CONTENT);
         // 'i' of "image/*"  must be small letter instead of Image otherwise it cannot pick image
@@ -144,7 +144,7 @@ public class AddMechanic extends AppCompatActivity {
                             // Get a URL to the uploaded content
                             //Uri downloadUrl = taskSnapshot.getDownloadUrl();
                             imgUri = taskSnapshot.getDownloadUrl().toString();
-                            bt_addMechanic.setVisibility(View.GONE);
+                            bt_addMechanic.setVisibility(View.VISIBLE);
                             //Message.show(AddMechanic.this,"Image uploaded!Go for Registration...");
                         }
                     })
@@ -164,5 +164,12 @@ public class AddMechanic extends AppCompatActivity {
                 //e.printStackTrace();
             }
         }
+    }
+    @Override
+    public void onBackPressed() {
+        this.finish();
+        Intent intent = new Intent(this, AllMechanicsActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

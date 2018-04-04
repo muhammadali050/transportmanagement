@@ -18,7 +18,6 @@ public class DeleteRecord {
     {
         final PDialog pd = new PDialog(context).message("Deleting. . .");
         DatabaseReference dref = FirebaseDatabase.getInstance().getReference(reference).child(id);
-
         dref.removeValue();
         pd.hide();
         Message.show(context,"Record deleted successfully!");

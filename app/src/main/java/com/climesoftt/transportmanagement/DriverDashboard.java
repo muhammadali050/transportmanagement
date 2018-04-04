@@ -70,14 +70,13 @@ public class DriverDashboard extends AppCompatActivity {
         startActivity(intent);
     }
     public void addMaintenance(View view) {
-        Intent intent = new Intent(this, AllMaintenceActivity.class);
+        Intent intent = new Intent(this, AddMaintenenceActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         // Logout Code...
         clearUserCredentials();
         accountManager.deleteUserCredentials();
@@ -88,5 +87,11 @@ public class DriverDashboard extends AppCompatActivity {
     {
         USER_NAME = "";
         USER_IMAGE = "";
+    }
+
+    public void onClickMaintenance(View view) {
+        Intent intent = new Intent(this, AllMaintenceActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

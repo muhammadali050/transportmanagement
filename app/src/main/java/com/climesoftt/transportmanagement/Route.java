@@ -90,7 +90,7 @@ public class Route extends AppCompatActivity {
 
         DeleteRecord.deleteRecordMethod(this , "Routes" , RouteID);
         this.finish();
-        Intent intent = new Intent(this, AllDriversActivity.class);
+        Intent intent = new Intent(this, AllRoutes.class);
         this.startActivity(intent);
     }
 }

@@ -34,14 +34,6 @@ public class AdminDashboardActivity extends AppCompatActivity {
         USER_NAME = accountManager.getUserName();
         //Display Login user Name
         tvName.setText(USER_NAME);
-
-        try{
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().hide();
-        }
-        catch (Exception e){
-
-        }
     }
 
     public void onClickMechanic(View view) {
@@ -92,17 +84,10 @@ public class AdminDashboardActivity extends AppCompatActivity {
         return true;
     }
 
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                return false;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     @Override
     public void onBackPressed() {
+        USER_NAME = "";
+        accountManager.deleteUserCredentials();
         AlertDialogClass.alertDialogue(this);
     }
 

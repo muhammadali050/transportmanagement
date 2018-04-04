@@ -15,6 +15,7 @@ import com.climesoftt.transportmanagement.model.Routes;
 import com.climesoftt.transportmanagement.model.User;
 import com.climesoftt.transportmanagement.utils.AccountManager;
 import com.climesoftt.transportmanagement.utils.Message;
+import com.climesoftt.transportmanagement.utils.MoveUserToDashboard;
 import com.climesoftt.transportmanagement.utils.PDialog;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -52,7 +53,7 @@ public class AllRoutes extends AppCompatActivity {
         accountManager = new AccountManager(this);
         USER_NAME = accountManager.getUserName();
         USER_TYPE = accountManager.getUserAccountType();
-        Message.show(this,USER_TYPE);
+        //Message.show(this,USER_TYPE);
         //call function for fetch data from firebase
         if(USER_TYPE.equals("Driver"))
         {
@@ -153,10 +154,17 @@ public class AllRoutes extends AppCompatActivity {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                rvRoutes.notifyAll();
                 this.finish();
+                MoveUserToDashboard.moveUser(this,USER_TYPE);
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.finish();
+        MoveUserToDashboard.moveUser(this,USER_TYPE);
     }
 }

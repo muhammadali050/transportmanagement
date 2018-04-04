@@ -13,8 +13,10 @@ import android.view.MenuItem;
 import com.climesoftt.transportmanagement.adapter.DriverAdapter;
 import com.climesoftt.transportmanagement.adapter.PersonAdapter;
 import com.climesoftt.transportmanagement.model.Person;
+import com.climesoftt.transportmanagement.utils.AccountManager;
 import com.climesoftt.transportmanagement.utils.FetchDataPerson;
 import com.climesoftt.transportmanagement.utils.Message;
+import com.climesoftt.transportmanagement.utils.MoveUserToDashboard;
 import com.climesoftt.transportmanagement.utils.PDialog;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,7 +37,8 @@ public class AllDriversActivity extends AppCompatActivity {
     public static DriverAdapter driverAdapter;
     private RecyclerView  rv;
     private DatabaseReference dref;
-
+    private String USER_TYPE = "";
+    private AccountManager accountManager;
 
     /*  //For Generic
     private ArrayList<Person> personsList = new ArrayList<>();
@@ -47,6 +50,8 @@ public class AllDriversActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_drivers);
 
+        accountManager = new AccountManager(this);
+        USER_TYPE = accountManager.getUserAccountType();
         rv = (RecyclerView)findViewById(R.id.rcvUsers);
         driverAdapter= new DriverAdapter(this, driversList);
         rv.setAdapter(driverAdapter) ;
@@ -102,7 +107,7 @@ public class AllDriversActivity extends AppCompatActivity {
     }
 
     public void addUser(MenuItem item){
-        //this.finish();
+        this.finish();
         Intent intent = new Intent(this, AddDriver.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
@@ -113,14 +118,16 @@ public class AllDriversActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                driversList.clear();
-                rv.notifyAll();
                 this.finish();
-                //Intent intent = new Intent(this, AdminDashboardActivity.class);
-                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                //startActivity(intent);
+                MoveUserToDashboard.moveUser(this,USER_TYPE);
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        this.finish();
+        MoveUserToDashboard.moveUser(this,USER_TYPE);
     }
 }

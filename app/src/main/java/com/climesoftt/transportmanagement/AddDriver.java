@@ -58,7 +58,6 @@ public class AddDriver extends AppCompatActivity {
         dAddress = findViewById(R.id.rExtraCost);
         imgViewDriver = findViewById(R.id.imgViewAdd_driver);
         bt_add = findViewById(R.id.btAddDriver);
-        bt_add.setVisibility(View.GONE);
 
         try {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -87,7 +86,7 @@ public class AddDriver extends AppCompatActivity {
         driver.setAddress(address);
         driver.setImage(imgUriDriver);
 
-        Message.show(this, imgUriDriver);
+        //Message.show(this, imgUriDriver);
         final PDialog pd = new PDialog(this).message("Person Registration.");
         try {
             //String uniqueId = String.valueOf(new Date().getTime());
@@ -117,6 +116,7 @@ public class AddDriver extends AppCompatActivity {
     }
 
     public void selectImage(View view) {
+        bt_add.setVisibility(View.GONE);
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_GET_CONTENT);
         // 'i' of "image/*"  must be small letter instead of Image otherwise it cannot pick image
@@ -168,5 +168,13 @@ public class AddDriver extends AppCompatActivity {
                 //e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        this.finish();
+        Intent intent = new Intent(this, AllDriversActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

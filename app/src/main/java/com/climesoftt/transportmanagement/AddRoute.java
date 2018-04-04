@@ -143,6 +143,7 @@ public class AddRoute extends AppCompatActivity{
                     Message.show(AddRoute.this,"Added successfully.");
                     this.finish();
                     Intent intent = new Intent(this, AllRoutes.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
 
                 }
@@ -190,5 +191,13 @@ public class AddRoute extends AppCompatActivity{
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        this.finish();
+        Intent intent = new Intent(this, AllRoutes.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

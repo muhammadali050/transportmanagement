@@ -100,6 +100,7 @@ public class DriverProfile extends AppCompatActivity{
         DeleteRecord.deleteRecordMethod(this , "drivers" , dPId);
         this.finish();
         Intent intent = new Intent(this, AllDriversActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
 
     }

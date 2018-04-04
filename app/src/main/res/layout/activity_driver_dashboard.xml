@@ -98,6 +98,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginBottom="8dp"
+                    android:onClick="onClickMaintenance"
                     app:layout_constraintBottom_toTopOf="@+id/textView10"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/guideline1"

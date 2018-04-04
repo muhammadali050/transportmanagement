@@ -14,6 +14,7 @@ import com.climesoftt.transportmanagement.adapter.FaqAdapter;
 import com.climesoftt.transportmanagement.model.Faq;
 import com.climesoftt.transportmanagement.utils.AccountManager;
 import com.climesoftt.transportmanagement.utils.Message;
+import com.climesoftt.transportmanagement.utils.MoveUserToDashboard;
 import com.climesoftt.transportmanagement.utils.PDialog;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,7 +39,7 @@ public class DriverAndPersonalFaq extends AppCompatActivity {
 
         accountManager = new AccountManager(this);
         USER_TYPE = accountManager.getUserAccountType();
-        Message.show(this, USER_TYPE);
+        //Message.show(this, USER_TYPE);
         rvFaq = findViewById(R.id.rcvFaq);
         faqAdapter = new FaqAdapter(this , arrayList);
         rvFaq.setAdapter(faqAdapter);
@@ -99,27 +100,8 @@ public class DriverAndPersonalFaq extends AppCompatActivity {
         try{
             if(!TextUtils.isEmpty(USER_TYPE))
             {
-                if(USER_TYPE.equals("Personal"))
-                {
-                    this.finish();
-                    Intent intent = new Intent(this, Personal.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
-                }
-                else if(USER_TYPE.equals("Driver"))
-                {
-                    this.finish();
-                    Intent intent = new Intent(this, DriverDashboard.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
-                }
-                else if(USER_TYPE.equals("Admin"))
-                {
-                    this.finish();
-                    Intent intent = new Intent(this, AdminDashboardActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
-                }
+                this.finish();
+                MoveUserToDashboard.moveUser(this,USER_TYPE);
             }
         }catch (Exception ex)
         {
