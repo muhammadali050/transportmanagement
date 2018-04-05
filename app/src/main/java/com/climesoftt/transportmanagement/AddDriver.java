@@ -44,7 +44,7 @@ public class AddDriver extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private DatabaseReference dbRef;
-    private EditText dName,dMail, dPhone, dAddress;
+    private EditText dName,dMail, dPassword, dPhone, dAddress;
     private static final int chooseImageCode = 1;
     private Uri filePath;
     private StorageReference mStorageRef;
@@ -65,6 +65,7 @@ public class AddDriver extends AppCompatActivity {
         dName = findViewById(R.id.etDName);
         dPhone = findViewById(R.id.etDPhone);
         dMail = findViewById(R.id.etDEmail);
+        dPassword = findViewById(R.id.etDPass);
         dAddress = findViewById(R.id.mEmail);
         imgViewDriver = findViewById(R.id.imgViewAdd_driver);
         bt_add = findViewById(R.id.btAddDriver);
@@ -83,7 +84,7 @@ public class AddDriver extends AppCompatActivity {
         String phone = dPhone.getText().toString().trim();
         String address = dAddress.getText().toString().trim();
         String email = dMail.getText().toString().trim();
-        String password = "123456";
+        String password = dPassword.getText().toString().trim();
         //Validation
         if (TextUtils.isEmpty(name) || TextUtils.isEmpty(phone) || TextUtils.isEmpty(address)
                 || TextUtils.isEmpty(password)) {

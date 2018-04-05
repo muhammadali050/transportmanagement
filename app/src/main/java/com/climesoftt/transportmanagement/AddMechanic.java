@@ -42,7 +42,7 @@ import java.io.IOException;
 
 public class AddMechanic extends AppCompatActivity {
     private DatabaseReference dbRef;
-    private EditText mName,mEmail, mPhone, mAddress;
+    private EditText mName,mEmail, mPassword,  mPhone, mAddress;
     private ImageView imgViewMechanic;
     private Button bt_addMechanic;
     private FirebaseAuth mAuth;
@@ -63,6 +63,7 @@ public class AddMechanic extends AppCompatActivity {
         mName = findViewById(R.id.etMName);
         mPhone = findViewById(R.id.etMPhone);
         mEmail = findViewById(R.id.mEmail);
+        mPassword = findViewById(R.id.etMPass);
         mAddress = findViewById(R.id.mEmail);
         imgViewMechanic = findViewById(R.id.imgViewAdd_mechanic_photo);
         bt_addMechanic = findViewById(R.id.btAddMechanic);
@@ -81,7 +82,7 @@ public class AddMechanic extends AppCompatActivity {
         String phone = mPhone.getText().toString().trim();
         String address = mAddress.getText().toString().trim();
         String email = mEmail.getText().toString().trim();
-        String password = "123456";
+        String password = mPassword.getText().toString().trim();
         //Validation
         if (TextUtils.isEmpty(name) || TextUtils.isEmpty(password) || TextUtils.isEmpty(phone) || TextUtils.isEmpty(address)) {
             Message.show(AddMechanic.this, "Please fill all the fields!");
