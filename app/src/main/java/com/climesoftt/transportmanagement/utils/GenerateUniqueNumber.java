@@ -1,5 +1,14 @@
 package com.climesoftt.transportmanagement.utils;
 
+import android.text.TextUtils;
+
+import com.climesoftt.transportmanagement.model.User;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.Random;
 
 /**
@@ -7,6 +16,39 @@ import java.util.Random;
  */
 
 public class GenerateUniqueNumber {
+
+    private static String id = "";
+    public static String uniqueId() {
+        // Read from the database
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Users");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                for(DataSnapshot userSnapshot : dataSnapshot.getChildren())
+                {
+                    User data = userSnapshot.getValue(User.class);
+                    id = data.getId();
+                }
+
+                if(TextUtils.isEmpty(id) || id == null || id.equals(""))
+                {
+                    id = "1";
+                }
+                else
+                {
+                    int uid = Integer.parseInt(id);
+                    uid = uid+1;
+                    id = Integer.toString(uid);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+            }
+        });
+        return id;
+    }
 
     public static int randomNum() {
         Random r = new Random( System.currentTimeMillis() );

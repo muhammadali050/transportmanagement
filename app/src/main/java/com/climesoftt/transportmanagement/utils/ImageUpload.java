@@ -39,30 +39,26 @@ public class ImageUpload {
         if(filePath!=null)
         {
             StorageReference imagesRef = mStorageRef.child("images/"+filePath.getLastPathSegment());
-            Message.show(context,"Please wait Image is uploading...");
+            Message.show(context,"Please wait...");
             UploadTask uploadTask = imagesRef.putFile(filePath);
-            final PDialog pd = new PDialog(context).message("Please wait Image is uploading. . .");
             uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     // Get a URL to the uploaded content
                     //Uri downloadUrl = taskSnapshot.getDownloadUrl();
                     imgUrl = taskSnapshot.getDownloadUrl().toString();
-                    Message.show(context,"Image uploaded!Go for Registration...");
-                    pd.hide();
+                    //Message.show(context,"Image uploaded!Go for Registration...");
                 }
 
             })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception exception) {
-                            pd.hide();
                             // Handle unsuccessful uploads
                             // ...
                             Message.show(context, "Failed image uploading..\n"+exception.getMessage());
                         }
                     });
-            pd.hide();
         }
         return imgUrl;
     }

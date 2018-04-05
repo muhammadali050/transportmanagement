@@ -124,9 +124,8 @@
                 app:srcCompat="@drawable/add_image_icon" />
 
 
-
-
             <Button
+                android:id="@+id/bt_add"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"

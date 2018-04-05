@@ -4,16 +4,15 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -51,6 +50,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private DatabaseReference dbRef;
     private ProgressDialog progressDialog;
     private Spinner spAccountType;
+    private Button bt_add;
 
     private static final int chooseImageCode = 1;
     private Uri filePath;
@@ -62,6 +62,7 @@ public class RegistrationActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+        GenerateUniqueNumber.uniqueId();
         progressDialog = new ProgressDialog(this);
         mStorageRef = FirebaseStorage.getInstance().getReference();
 
@@ -70,6 +71,7 @@ public class RegistrationActivity extends AppCompatActivity {
         userEmail = findViewById(R.id.uEmail);
         userPassword = findViewById(R.id.uPassword);
         spAccountType = findViewById(R.id.spinnerAccountType);
+        bt_add = findViewById(R.id.bt_add);
 
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
@@ -121,12 +123,10 @@ public class RegistrationActivity extends AppCompatActivity {
         String accountType = spAccountType.getSelectedItem().toString().trim();
         //Call Function for validation performs
         fieldsValidation(name, email, password, accountType);
-        //Call Function for uploading image
-        uploadImage();
+
         final User user = new User();
         //final String uniqueId = String.valueOf(new Date().getTime());
-        int getId = GenerateUniqueNumber.randomNum();
-        final String id = Integer.toString(getId);
+        final String id = GenerateUniqueNumber.uniqueId();
         user.setId(id);
         user.setName(name);
         user.setEmail(email);
@@ -147,7 +147,13 @@ public class RegistrationActivity extends AppCompatActivity {
 
                             DatabaseReference uReF = dbRef.child("Users").child(id);
                             uReF.setValue(user);
-
+                            currentUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    Message.show(RegistrationActivity.this,"Verification Email has been sent!" +
+                                            "\nPlease Register himself before login!");
+                                }
+                            });
                             userName.setText("");
                             userEmail.setText("");
                             userPassword.setText("");
@@ -167,14 +173,6 @@ public class RegistrationActivity extends AppCompatActivity {
                              Message.show(RegistrationActivity.this, "Registration failed.\n"+task.getException().getMessage());
                             }
                         }
-
-                        currentUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                Message.show(RegistrationActivity.this,"Verification Email has been sent!" +
-                                        "\nPlease Register himself before login!");
-                            }
-                        });
 
                     }
                 });
@@ -213,6 +211,7 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     public void selectImage(View view) {
+        bt_add.setVisibility(View.GONE);
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_GET_CONTENT);
         // 'i' of "image/*"  must be small letter instead of Image otherwise it cannot pick image
@@ -223,42 +222,46 @@ public class RegistrationActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if(requestCode == chooseImageCode && resultCode==RESULT_OK && data!=null && data.getData()!=null)
         {
             filePath = data.getData();
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 imgViewUser.setImageBitmap(bitmap);
+                if(filePath==null)
+                {
+                    bt_add.setVisibility(View.VISIBLE);
+                }
+                if (filePath != null) {
+                    Message.show(this,"Please wait...");
+                    StorageReference imagesRef = mStorageRef.child("images/" + filePath.getLastPathSegment());
+                    UploadTask uploadTask = imagesRef.putFile(filePath);
+                    uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            //pd.hide();
+                            // Get a URL to the uploaded content
+                            //Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                            imgUrl = taskSnapshot.getDownloadUrl().toString();
+                            bt_add.setVisibility(View.VISIBLE);
+                            //Message.show(AddDriver.this,"Image uploaded!Go for Registration...");
+                        }
+                    })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception exception) {
+                                    // pd.hide();
+                                    // Handle unsuccessful uploads
+                                    // ...
+                                    Message.show(RegistrationActivity.this, "Failed image uploading..\n" + exception.getMessage());
+                                }
+                            });
+                }
+
             } catch (IOException e) {
                 //e.printStackTrace();
             }
-        }
-    }
-
-    //Upload Image
-    public void uploadImage() {
-        if(filePath!=null)
-        {
-            StorageReference imagesRef = mStorageRef.child("images/"+filePath.getLastPathSegment());
-
-            UploadTask uploadTask = imagesRef.putFile(filePath);
-            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    // Get a URL to the uploaded content
-                    //Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                    //imgUrl = downloadUrl.toString();
-                    imgUrl = taskSnapshot.getDownloadUrl().toString();
-                }
-            })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            // Handle unsuccessful uploads
-                            // ...
-                            Message.show(RegistrationActivity.this, "Failed image uploading..\n"+exception.getMessage());
-                        }
-                    });
         }
     }
 }

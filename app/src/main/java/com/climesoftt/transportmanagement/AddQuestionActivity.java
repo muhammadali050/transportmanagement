@@ -33,8 +33,7 @@ public class AddQuestionActivity extends AppCompatActivity {
 
     public void addQuestion()
     {
-        int getId = GenerateUniqueNumber.randomNum();
-        String id = Integer.toString(getId).trim();
+        String id = GenerateUniqueNumber.uniqueId();
         String question = etQuestn.getText().toString().trim();
         String answer = etAns.getText().toString().trim();
         //Validation

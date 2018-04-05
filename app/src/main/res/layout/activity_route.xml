@@ -195,7 +195,7 @@
                     android:textColor="#000" />
 
                 <TextView
-                    android:id="@+id/rExtraCost"
+                    android:id="@+id/mEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"

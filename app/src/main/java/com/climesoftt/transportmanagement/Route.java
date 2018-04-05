@@ -33,7 +33,7 @@ public class Route extends AppCompatActivity {
         tvFrom = findViewById(R.id.tv_from);
         tvToolPlaza = findViewById(R.id.rTool);
         tvPetrol = findViewById(R.id.rPetrol);
-        tvExtras = findViewById(R.id.rExtraCost);
+        tvExtras = findViewById(R.id.mEmail);
 
         //Call Function Below defined
         getDataOfCurrentSelectedRow();

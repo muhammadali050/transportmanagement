@@ -60,7 +60,7 @@ public class AddRoute extends AppCompatActivity{
         fromCity = findViewById(R.id.rFromCity);
         toolPlaza  = findViewById(R.id.rToolPlaza);
         petrolCost   = findViewById(R.id.rPetrol);
-        extraCost    = findViewById(R.id.rExtraCost);
+        extraCost    = findViewById(R.id.mEmail);
         spinnerDriver = findViewById(R.id.rDriverSpinner);
 
         if(USER_TYPE.equals("Personal"))
@@ -89,8 +89,7 @@ public class AddRoute extends AppCompatActivity{
 
     public void addRoute(View view)
     {
-        int getId = GenerateUniqueNumber.randomNum();
-        String rId = Integer.toString(getId);
+        final String rId = GenerateUniqueNumber.uniqueId();
         String to = toCity.getText().toString();
         String from = fromCity.getText().toString();
         String tool = toolPlaza.getText().toString();
