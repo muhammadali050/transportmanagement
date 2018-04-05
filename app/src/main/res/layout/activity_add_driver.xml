@@ -157,6 +157,41 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline" />
 
+            <TextView
+                android:id="@+id/textViewEmail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:paddingBottom="15dp"
+                android:singleLine="true"
+                android:text="Email"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewExtras" />
+
+            <EditText
+                android:id="@+id/etDEmail"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:hint="Email"
+                android:inputType="textWebEmailAddress"
+                android:maxLength="100"
+                android:paddingBottom="5dp"
+                android:singleLine="false"
+                android:textColor="#000"
+                android:textColorHint="@color/textcolor"
+                android:textSize="18sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textViewEmail"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline" />
+
             <ImageView
                 android:id="@+id/imgViewAdd_driver"
                 android:layout_width="wrap_content"
@@ -165,7 +200,7 @@
                 android:onClick="selectImage"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toLeftOf="@+id/guideline"
-                app:layout_constraintTop_toBottomOf="@+id/textViewExtras"
+                app:layout_constraintTop_toBottomOf="@+id/textViewEmail"
                 app:srcCompat="@drawable/add_image_icon" />
 
             <Button

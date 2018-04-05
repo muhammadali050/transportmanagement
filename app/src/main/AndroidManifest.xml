@@ -76,7 +76,8 @@
             android:label="@string/title_activity_add_maintenence"/>
         <activity android:name=".EditMaintenenceActivity"
             android:label="@string/title_activity_edit_maintenence" />
-        <activity android:name=".AllMaintenceActivity"
+        <activity
+            android:name=".AllMaintenceActivity"
             android:label="@string/title_activity_all_maintenece" />
         <activity android:name=".ViewMaintenenceActivity"
             android:label="@string/title_activity_view_maintenence"/>
