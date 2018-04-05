@@ -42,7 +42,7 @@ import java.io.IOException;
 
 public class AddMechanic extends AppCompatActivity {
     private DatabaseReference dbRef;
-    private EditText mName, mPhone, mAddress;
+    private EditText mName,mEmail, mPhone, mAddress;
     private ImageView imgViewMechanic;
     private Button bt_addMechanic;
     private FirebaseAuth mAuth;
@@ -62,7 +62,8 @@ public class AddMechanic extends AppCompatActivity {
 
         mName = findViewById(R.id.etMName);
         mPhone = findViewById(R.id.etMPhone);
-        mAddress = findViewById(R.id.rExtraCost);
+        mEmail = findViewById(R.id.mEmail);
+        mAddress = findViewById(R.id.mEmail);
         imgViewMechanic = findViewById(R.id.imgViewAdd_mechanic_photo);
         bt_addMechanic = findViewById(R.id.btAddMechanic);
 
@@ -79,7 +80,7 @@ public class AddMechanic extends AppCompatActivity {
         String name = mName.getText().toString().trim();
         String phone = mPhone.getText().toString().trim();
         String address = mAddress.getText().toString().trim();
-        String email = "jk@gmail.com";
+        String email = mEmail.getText().toString().trim();
         String password = "123456";
         //Validation
         if (TextUtils.isEmpty(name) || TextUtils.isEmpty(password) || TextUtils.isEmpty(phone) || TextUtils.isEmpty(address)) {
@@ -89,9 +90,8 @@ public class AddMechanic extends AppCompatActivity {
         //Email Validation
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches() || TextUtils.isEmpty(email))
         {
-            Message.show(AddMechanic.this, "Enter valid email!");
-            //userEmail.setError("Enter valid E-mail!");
-            //userEmail.requestFocus();
+            mEmail.setError("Enter valid E-mail!");
+            mEmail.requestFocus();
             return;
         }
         final Person person = new Person();
@@ -185,6 +185,10 @@ public class AddMechanic extends AppCompatActivity {
 
                 /*ImageUpload imageUpload = new ImageUpload();
                 imgUri = imageUpload.uploadImage(this,filePath);*/
+                if(filePath==null)
+                {
+                    bt_addMechanic.setVisibility(View.VISIBLE);
+                }
 
                 //final PDialog pd = new PDialog(this).message("Image is uploading. . .");
                 if (filePath != null) {

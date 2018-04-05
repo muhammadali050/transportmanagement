@@ -44,7 +44,7 @@ public class AddDriver extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private DatabaseReference dbRef;
-    private EditText dName, dPhone, dAddress;
+    private EditText dName,dMail, dPhone, dAddress;
     private static final int chooseImageCode = 1;
     private Uri filePath;
     private StorageReference mStorageRef;
@@ -64,7 +64,8 @@ public class AddDriver extends AppCompatActivity {
 
         dName = findViewById(R.id.etDName);
         dPhone = findViewById(R.id.etDPhone);
-        dAddress = findViewById(R.id.rExtraCost);
+        dMail = findViewById(R.id.etDEmail);
+        dAddress = findViewById(R.id.mEmail);
         imgViewDriver = findViewById(R.id.imgViewAdd_driver);
         bt_add = findViewById(R.id.btAddDriver);
 
@@ -81,7 +82,7 @@ public class AddDriver extends AppCompatActivity {
         String name = dName.getText().toString().trim();
         String phone = dPhone.getText().toString().trim();
         String address = dAddress.getText().toString().trim();
-        String email = "asps@gmail.com";
+        String email = dMail.getText().toString().trim();
         String password = "123456";
         //Validation
         if (TextUtils.isEmpty(name) || TextUtils.isEmpty(phone) || TextUtils.isEmpty(address)
@@ -92,9 +93,8 @@ public class AddDriver extends AppCompatActivity {
         //Email Validation
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches() || TextUtils.isEmpty(email))
         {
-            Message.show(AddDriver.this, "Enter valid email!");
-            //userEmail.setError("Enter valid E-mail!");
-            //userEmail.requestFocus();
+            dMail.setError("Enter valid E-mail!");
+            dMail.requestFocus();
             return;
         }
         final Person driver = new Person();
@@ -199,8 +199,10 @@ public class AddDriver extends AppCompatActivity {
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 imgViewDriver.setImageBitmap(bitmap);
-
-                //final PDialog pd = new PDialog(this).message("Image is uploading. . .");
+                if(filePath==null)
+                {
+                    bt_add.setVisibility(View.VISIBLE);
+                }
                 if (filePath != null) {
                     Message.show(this,"Please wait...");
                     StorageReference imagesRef = mStorageRef.child("images/" + filePath.getLastPathSegment());
@@ -225,9 +227,7 @@ public class AddDriver extends AppCompatActivity {
                                     Message.show(AddDriver.this, "Failed image uploading..\n" + exception.getMessage());
                                 }
                             });
-                    //pd.hide();
                 }
-
             } catch (IOException e) {
                 //e.printStackTrace();
             }

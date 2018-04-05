@@ -30,7 +30,7 @@ public class EditRoute extends AppCompatActivity {
         fromCity = findViewById(R.id.rFromCity);
         toolPlaza  = findViewById(R.id.rToolPlaza);
         petrolCost   = findViewById(R.id.rPetrol);
-        extraCost    = findViewById(R.id.rExtraCost);
+        extraCost    = findViewById(R.id.mEmail);
 
         Intent intent = getIntent();
         if(intent!= null)
