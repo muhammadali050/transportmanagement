@@ -42,7 +42,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:background="#fff"
             android:elevation="4dp"
             android:padding="20dp">
@@ -193,6 +193,41 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline" />
 
+            <TextView
+                android:id="@+id/textViewPass"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:paddingBottom="15dp"
+                android:singleLine="true"
+                android:text="Password"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewEmail" />
+
+            <EditText
+                android:id="@+id/etMPass"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:hint="Password"
+                android:inputType="textWebPassword"
+                android:maxLength="100"
+                android:paddingBottom="5dp"
+                android:singleLine="false"
+                android:textColor="@color/textcolor"
+                android:textColorHint="@color/textcolor"
+                android:textSize="18sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textViewPass"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline" />
+
             <ImageView
                 android:id="@+id/imgViewAdd_mechanic_photo"
                 android:layout_width="wrap_content"
@@ -202,7 +237,7 @@
                 android:onClick="selectImage"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toLeftOf="@+id/guideline"
-                app:layout_constraintTop_toBottomOf="@+id/textViewEmail"
+                app:layout_constraintTop_toBottomOf="@+id/textViewPass"
                 app:srcCompat="@drawable/add_image_icon" />
 
             <Button
