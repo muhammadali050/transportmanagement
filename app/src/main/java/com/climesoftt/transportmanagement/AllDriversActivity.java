@@ -98,7 +98,6 @@ public class AllDriversActivity extends AppCompatActivity {
         });
     }
 
-
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater inflater = getMenuInflater();
@@ -113,8 +112,7 @@ public class AllDriversActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
-    public boolean onOptionsItemSelected(MenuItem item) {
+     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
