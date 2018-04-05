@@ -89,8 +89,7 @@ public class AddRoute extends AppCompatActivity{
 
     public void addRoute(View view)
     {
-        int getId = GenerateUniqueNumber.randomNum();
-        String rId = Integer.toString(getId);
+        final String rId = GenerateUniqueNumber.uniqueId();
         String to = toCity.getText().toString();
         String from = fromCity.getText().toString();
         String tool = toolPlaza.getText().toString();

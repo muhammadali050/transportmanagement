@@ -82,6 +82,7 @@ public class MechanicProfile extends AppCompatActivity {
 
     public void deleteMechanic(View view) {
         DeleteRecord.deleteRecordMethod(this , "mechanics" , mcPId);
+        DeleteRecord.deleteRecordMethod(this , "Users" , mcPId);
         this.finish();
         Intent intent = new Intent(this, AllMechanicsActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

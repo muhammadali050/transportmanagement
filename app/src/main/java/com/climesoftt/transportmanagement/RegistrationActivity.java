@@ -4,12 +4,10 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -62,6 +60,7 @@ public class RegistrationActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+        GenerateUniqueNumber.uniqueId();
         progressDialog = new ProgressDialog(this);
         mStorageRef = FirebaseStorage.getInstance().getReference();
 
@@ -125,8 +124,7 @@ public class RegistrationActivity extends AppCompatActivity {
         uploadImage();
         final User user = new User();
         //final String uniqueId = String.valueOf(new Date().getTime());
-        int getId = GenerateUniqueNumber.randomNum();
-        final String id = Integer.toString(getId);
+        final String id = GenerateUniqueNumber.uniqueId();
         user.setId(id);
         user.setName(name);
         user.setEmail(email);
@@ -147,7 +145,13 @@ public class RegistrationActivity extends AppCompatActivity {
 
                             DatabaseReference uReF = dbRef.child("Users").child(id);
                             uReF.setValue(user);
-
+                            currentUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    Message.show(RegistrationActivity.this,"Verification Email has been sent!" +
+                                            "\nPlease Register himself before login!");
+                                }
+                            });
                             userName.setText("");
                             userEmail.setText("");
                             userPassword.setText("");
@@ -167,14 +171,6 @@ public class RegistrationActivity extends AppCompatActivity {
                              Message.show(RegistrationActivity.this, "Registration failed.\n"+task.getException().getMessage());
                             }
                         }
-
-                        currentUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                Message.show(RegistrationActivity.this,"Verification Email has been sent!" +
-                                        "\nPlease Register himself before login!");
-                            }
-                        });
 
                     }
                 });
