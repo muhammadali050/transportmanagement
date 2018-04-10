@@ -20,6 +20,7 @@ import com.climesoftt.transportmanagement.EditQuestionActivity;
 import com.climesoftt.transportmanagement.R;
 import com.climesoftt.transportmanagement.model.Faq;
 import com.climesoftt.transportmanagement.utils.DeleteRecord;
+import com.climesoftt.transportmanagement.utils.FaqViewManager;
 
 import java.util.ArrayList;
 
@@ -69,13 +70,27 @@ public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.VHolder> {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(answer.isShown()){
-                        answer.setVisibility(View.INVISIBLE);
+
+                    answer.setVisibility(View.VISIBLE);
+                    android.view.ViewGroup.LayoutParams params = layout.getLayoutParams();
+                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                    params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                    layout.setLayoutParams(params);
+                    question.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_drop_down, 0);
+
+                    if(FaqViewManager.getInstance(context).isClicked()){
+                        FaqViewManager.getInstance(context).closePrevious();
+                    }
+                    FaqViewManager.getInstance(context).setPreviousValues(v);
+
+
+                    /*if(answer.isShown()){
+                        *//*answer.setVisibility(View.INVISIBLE);
                         android.view.ViewGroup.LayoutParams params = layout.getLayoutParams();
                         params.height = question.getHeight()+4; // Add margin Value too
                         params.width = ViewGroup.LayoutParams.MATCH_PARENT;
                         layout.setLayoutParams(params);
-                        question.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_drop_up, 0);
+                        question.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_drop_up, 0);*//*
                     }
                     else{
                         answer.setVisibility(View.VISIBLE);
@@ -84,7 +99,7 @@ public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.VHolder> {
                         params.width = ViewGroup.LayoutParams.MATCH_PARENT;
                         layout.setLayoutParams(params);
                         question.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_drop_down, 0);
-                    }
+                    }*/
                 }
             });
 
