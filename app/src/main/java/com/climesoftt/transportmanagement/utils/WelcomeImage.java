@@ -1,6 +1,8 @@
 package com.climesoftt.transportmanagement.utils;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 import android.widget.ImageView;
 
@@ -24,7 +26,14 @@ public class WelcomeImage {
                     .into(imageView);
         }else
         {
-            imageView.setImageResource(R.drawable.profile_icon);
+
+            Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(),R.drawable.profile_icon);
+            Bitmap circularBitmap = ImageConverter.getRoundedCornerBitmap(bitmap, 100);
+
+            //ImageView circularImageView = (ImageView)findViewById(R.id.imageView);
+            //circularImageView.setImageBitmap(circularBitmap);
+            imageView.setImageBitmap(circularBitmap);
+            imageView.setBackgroundResource(R.drawable.user_profile_image_background);
         }
     }
 }
