@@ -21,7 +21,7 @@ public class AddQuestionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_question);
-
+        
         etQuestn = findViewById(R.id.etQuestion);
         etAns = findViewById(R.id.etAnswer);
     }
@@ -33,7 +33,8 @@ public class AddQuestionActivity extends AppCompatActivity {
 
     public void addQuestion()
     {
-        String id = GenerateUniqueNumber.uniqueId();
+        int qId = GenerateUniqueNumber.randomNum();
+        String id = Integer.toString(qId);
         String question = etQuestn.getText().toString().trim();
         String answer = etAns.getText().toString().trim();
         //Validation

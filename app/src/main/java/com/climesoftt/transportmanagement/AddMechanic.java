@@ -42,10 +42,9 @@ import java.io.IOException;
 
 public class AddMechanic extends AppCompatActivity {
     private DatabaseReference dbRef;
-    private EditText mName,mEmail, mPassword,  mPhone, mAddress;
+    private EditText mName, mPhone, mAddress;
     private ImageView imgViewMechanic;
     private Button bt_addMechanic;
-    private FirebaseAuth mAuth;
 
     private static final int chooseImageCode = 1;
     private Uri filePath;
@@ -56,15 +55,14 @@ public class AddMechanic extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_mechanic);
+        //Get Mechanic Id
+        GenerateUniqueNumber.mechanicId();
         dbRef = FirebaseDatabase.getInstance().getReference();
         mStorageRef = FirebaseStorage.getInstance().getReference();
-        mAuth = FirebaseAuth.getInstance();
 
         mName = findViewById(R.id.etMName);
         mPhone = findViewById(R.id.etMPhone);
-        mEmail = findViewById(R.id.mEmail);
-        mPassword = findViewById(R.id.etMPass);
-        mAddress = findViewById(R.id.mEmail);
+        mAddress = findViewById(R.id.etMAddress);
         imgViewMechanic = findViewById(R.id.imgViewAdd_mechanic_photo);
         bt_addMechanic = findViewById(R.id.btAddMechanic);
 
@@ -76,83 +74,40 @@ public class AddMechanic extends AppCompatActivity {
     }
 
     public void addMechanic(View view) {
-       // String uniqueId = String.valueOf(new Date().getTime());
-        final String id = GenerateUniqueNumber.uniqueId();
+
+        final String id = GenerateUniqueNumber.mechanicId();
         String name = mName.getText().toString().trim();
         String phone = mPhone.getText().toString().trim();
         String address = mAddress.getText().toString().trim();
-        String email = mEmail.getText().toString().trim();
-        String password = mPassword.getText().toString().trim();
         //Validation
-        if (TextUtils.isEmpty(name) || TextUtils.isEmpty(password) || TextUtils.isEmpty(phone) || TextUtils.isEmpty(address)) {
+        if (TextUtils.isEmpty(name) || TextUtils.isEmpty(phone) || TextUtils.isEmpty(address)) {
             Message.show(AddMechanic.this, "Please fill all the fields!");
             return;
         }
-        //Email Validation
-        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches() || TextUtils.isEmpty(email))
-        {
-            mEmail.setError("Enter valid E-mail!");
-            mEmail.requestFocus();
-            return;
-        }
+
         final Person person = new Person();
         person.setId(id);
         person.setName(name);
-        person.setEmail(email);
-        person.setPassword(password);
         person.setAccountType("Mechanic");
         person.setPhone(phone);
         person.setAddress(address);
         person.setImage(imgUri);
+        final PDialog pd = new PDialog(this).message("Mechanic Registration.");
         try {
-            mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            FirebaseUser currentUser = mAuth.getCurrentUser();
-                            final PDialog pd = new PDialog(AddMechanic.this).message("Mechanic Registration.");
+            DatabaseReference personRef = dbRef.child("mechanics").child(id);
+            personRef.setValue(person);
+            Message.show(AddMechanic.this, "Registered successfully.");
 
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                // String UId = currentUser.getUid();
-                                // Store data in Users
-                                DatabaseReference uReF = dbRef.child("Users").child(id);
-                                uReF.setValue(person);
+            this.finish();
+            Intent intent = new Intent(this, AllMechanicsActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
 
-                                //Store Data in drivers
-                                DatabaseReference pRef = dbRef.child("mechanics").child(id);
-                                pRef.setValue(person);
-                                pd.hide();
-                                //Message.show(AddMechanic.this, "Registered successfully.");
-                                currentUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        Message.show(AddMechanic.this,"Verification Email has been sent!" +
-                                                "\nVerify himself before login!");
-                                    }
-                                });
-                                AddMechanic.this.finish();
-                                Intent intent = new Intent(AddMechanic.this, AllMechanicsActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(intent);
-
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                if(task.getException() instanceof FirebaseAuthUserCollisionException)
-                                {
-                                    pd.hide();
-                                    Message.show(AddMechanic.this, "Provided e-mail address is already registered!");
-                                }else
-                                {
-                                    pd.hide();
-                                    Message.show(AddMechanic.this, "Registration failed.\n"+task.getException().getMessage());
-                                }
-                            }
-                        }
-                    });
         } catch (Exception e) {
+            pd.hide();
             Message.show(AddMechanic.this, "Something went wrong.\n" + e.getMessage());
         }
+        pd.hide();
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {

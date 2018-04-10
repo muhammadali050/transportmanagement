@@ -16,6 +16,7 @@ import com.climesoftt.transportmanagement.model.Person;
 import com.climesoftt.transportmanagement.model.User;
 import com.climesoftt.transportmanagement.utils.DeleteRecord;
 import com.climesoftt.transportmanagement.utils.Message;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -23,6 +24,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -37,6 +40,7 @@ public class DriverProfile extends AppCompatActivity{
     private String pAddress = "";
     private String pPhone = "";
     private String pImage = "";
+    private FirebaseStorage mStorageRef;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +51,8 @@ public class DriverProfile extends AppCompatActivity{
         tvAddress = findViewById(R.id.user_profile_short_bio);
         tvPhone = findViewById(R.id.pPhone);
         imgProfile = findViewById(R.id.header_cover_image);
+
+        mStorageRef = FirebaseStorage.getInstance();
 
         //Receive data from PersonAdapter.java Class
         dPId = DriverAdapter.DRIVER_ID;
@@ -97,6 +103,7 @@ public class DriverProfile extends AppCompatActivity{
     }
 
     public void deleteDriverData(View view) {
+        DeleteRecord.deleteImage(pImage);
         DeleteRecord.deleteRecordMethod(this , "drivers" , dPId);
         DeleteRecord.deleteRecordMethod(this , "Users" , dPId);
         this.finish();
@@ -105,4 +112,6 @@ public class DriverProfile extends AppCompatActivity{
         startActivity(intent);
 
     }
+
+
 }

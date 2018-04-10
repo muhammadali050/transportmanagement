@@ -49,7 +49,7 @@ public class DriverAndPersonalFaq extends AppCompatActivity {
 
     private void fetchDataFromFirebase()
     {
-        faqRef = FirebaseDatabase.getInstance().getReference("Faq");
+        faqRef = FirebaseDatabase.getInstance().getReference().child("Faq");
         final PDialog pd = new PDialog(this).message("Loading. . .");
         faqRef.addValueEventListener(new ValueEventListener() {
             @Override

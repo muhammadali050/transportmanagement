@@ -81,6 +81,7 @@ public class MechanicProfile extends AppCompatActivity {
     }
 
     public void deleteMechanic(View view) {
+        DeleteRecord.deleteImage(pImage);
         DeleteRecord.deleteRecordMethod(this , "mechanics" , mcPId);
         DeleteRecord.deleteRecordMethod(this , "Users" , mcPId);
         this.finish();

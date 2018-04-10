@@ -5,15 +5,16 @@ package com.climesoftt.transportmanagement.model;
  */
 
 public class Maintenance {
+    private String id;
+    private String startDate;
+    private String endDate;
+    private String description;
+
     public Maintenance()
     {
 
     }
 
-    private String id;
-    private String startDate;
-    private String endDate;
-    private String description;
 
     public String getId() {
         return id;
