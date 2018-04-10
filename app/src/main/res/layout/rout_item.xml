@@ -7,8 +7,6 @@
     android:background="#e1e1e1"
     android:paddingBottom="2dp"
     android:paddingTop="4dp"
-    android:paddingEnd="8dp"
-    android:paddingStart="8dp"
     android:elevation="4dp">
 
     <android.support.v7.widget.CardView
