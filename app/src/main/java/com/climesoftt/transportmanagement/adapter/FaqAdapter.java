@@ -83,7 +83,6 @@ public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.VHolder> {
                     }
                     FaqViewManager.getInstance(context).setPreviousValues(v);
 
-
                     /*if(answer.isShown()){
                         *//*answer.setVisibility(View.INVISIBLE);
                         android.view.ViewGroup.LayoutParams params = layout.getLayoutParams();
