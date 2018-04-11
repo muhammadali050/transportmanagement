@@ -45,10 +45,10 @@ public class MechanicProfile extends AppCompatActivity {
         tv_mPhone.setText(pPhone);
         if(pImage != null && !TextUtils.isEmpty(pImage))
         {
-            Picasso.with(this).load(pImage).placeholder(R.drawable.profile_headwer_photo).fit().centerCrop().into(imgProfile);
+            Picasso.with(this).load(pImage).placeholder(R.drawable.user_default).fit().centerCrop().into(imgProfile);
         }else
         {
-            imgProfile.setImageResource(R.drawable.profile_headwer_photo);
+            imgProfile.setImageResource(R.drawable.user_default);
         }
 
         try{

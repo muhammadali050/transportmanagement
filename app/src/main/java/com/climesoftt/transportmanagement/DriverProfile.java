@@ -67,10 +67,10 @@ public class DriverProfile extends AppCompatActivity{
         tvPhone.setText(pPhone);
         if(pImage != null && !TextUtils.isEmpty(pImage))
         {
-            Picasso.with(this).load(pImage).placeholder(R.drawable.profile_headwer_photo).fit().centerCrop().into(imgProfile);
+            Picasso.with(this).load(pImage).placeholder(R.drawable.user_default).fit().centerCrop().into(imgProfile);
         }else
         {
-            imgProfile.setImageResource(R.drawable.profile_headwer_photo);
+            imgProfile.setImageResource(R.drawable.user_default);
         }
 
         try{
@@ -114,4 +114,7 @@ public class DriverProfile extends AppCompatActivity{
     }
 
 
+    public void onClickDriverRoutes(View view) {
+        //Start activity to show Driver Routes...
+    }
 }
