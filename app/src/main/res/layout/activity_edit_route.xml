@@ -29,6 +29,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:orientation="vertical"
+        android:background="#FFF"
         android:scrollbarAlwaysDrawVerticalTrack="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,11 +42,11 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="10dp"
             android:background="#fff"
-            android:elevation="4dp"
+            android:elevation="0dp"
             android:padding="20dp">
 
             <android.support.constraint.Guideline
@@ -222,20 +223,42 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline" />
 
+            <EditText
+                android:id="@+id/textViewREDescription"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:background="#fff"
+                android:ems="10"
+                android:gravity="top|left"
+                android:hint="Description"
+                android:inputType="textMultiLine|textCapSentences"
+                android:maxLength="200"
+                android:padding="8dp"
+                android:textSize="18sp"
+                android:elevation="2dp"
+                app:layout_constraintBottom_toTopOf="@+id/btUpdateRoute"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewExtras" />
+
             <Button
                 android:id="@+id/btUpdateRoute"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="22dp"
+                android:layout_marginBottom="8dp"
                 android:background="@color/colorBtnBack"
                 android:onClick="updateRoute"
                 android:text="Upate Route"
                 android:textAllCaps="false"
                 android:textColor="#fff"
                 android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="@+id/textViewExtras"
-                app:layout_constraintRight_toRightOf="@+id/mEmail"
-                app:layout_constraintTop_toBottomOf="@+id/textViewExtras" />
+                app:layout_constraintRight_toRightOf="@+id/mEmail" />
 
 
         </android.support.constraint.ConstraintLayout>

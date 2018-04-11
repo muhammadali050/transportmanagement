@@ -15,7 +15,7 @@
         android:layout_marginTop="8dp"
         android:gravity="center_horizontal"
         android:text="Add Route"
-        android:textColor="#000"
+        android:textColor="#FFF"
         android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
