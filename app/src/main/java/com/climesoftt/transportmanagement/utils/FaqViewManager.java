@@ -59,4 +59,8 @@ public class FaqViewManager {
             return true;
         }
     }
+
+    public TextView getQuestion(){
+        return question;
+    }
 }

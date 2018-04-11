@@ -80,4 +80,9 @@ public class Personal extends AppCompatActivity{
         accountManager.deleteUserCredentials();
         AlertDialogClass.alertDialogue(this);
     }
+
+    public void onPersonalMechanicClick(View view) {
+
+
+    }
 }

@@ -78,10 +78,11 @@ public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.VHolder> {
                     layout.setLayoutParams(params);
                     question.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_drop_down, 0);
 
-                    if(FaqViewManager.getInstance(context).isClicked()){
-                        FaqViewManager.getInstance(context).closePrevious();
+                    FaqViewManager faqViewManager = FaqViewManager.getInstance(context);
+                    if(faqViewManager.isClicked() && faqViewManager.getQuestion() != question){
+                        faqViewManager.closePrevious();
                     }
-                    FaqViewManager.getInstance(context).setPreviousValues(v);
+                    faqViewManager.setPreviousValues(v);
 
 
                     /*if(answer.isShown()){
