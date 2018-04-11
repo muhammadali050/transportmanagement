@@ -72,6 +72,20 @@
                 android:text="Street aaa, Muhalla BBB, XXXX"
                 android:textColor="#fff"
                 android:textSize="14sp" />
+            <TextView
+                android:id="@+id/user_profile_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_below="@+id/user_profile_short_bio"
+                android:layout_alignParentRight="false"
+                android:drawableLeft="@drawable/ic_city"
+                android:drawablePadding="8dp"
+                android:layout_marginTop="12dp"
+                android:text="Driver city"
+                android:textColor="#fff"
+                android:textSize="14sp" />
         </RelativeLayout>
 
 

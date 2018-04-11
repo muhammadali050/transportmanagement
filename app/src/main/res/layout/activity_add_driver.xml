@@ -169,7 +169,7 @@
                 android:layout_marginStart="8dp"
                 android:hint="Adress"
                 android:inputType="textMultiLine"
-                android:maxLength="100"
+                android:maxLength="30"
                 android:paddingBottom="5dp"
                 android:singleLine="false"
                 android:textColor="#000"

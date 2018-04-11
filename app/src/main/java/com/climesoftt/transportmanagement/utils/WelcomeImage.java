@@ -27,13 +27,15 @@ public class WelcomeImage {
         }else
         {
 
-            Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(),R.drawable.profile_icon);
+            /*Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(),R.drawable.profile_icon);
             Bitmap circularBitmap = ImageConverter.getRoundedCornerBitmap(bitmap, 100);
 
             //ImageView circularImageView = (ImageView)findViewById(R.id.imageView);
             //circularImageView.setImageBitmap(circularBitmap);
             imageView.setImageBitmap(circularBitmap);
-            imageView.setBackgroundResource(R.drawable.user_profile_image_background);
+            imageView.setBackgroundResource(R.drawable.user_profile_image_background);*/
+
+
         }
     }
 }

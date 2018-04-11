@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
         //getActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Intent intent = new Intent(this, EditDriver.class);
+        Intent intent = new Intent(this, DriverDashboard.class);
         startActivity(intent);
         try{
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

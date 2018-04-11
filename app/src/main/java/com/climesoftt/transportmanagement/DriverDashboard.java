@@ -38,7 +38,7 @@ public class DriverDashboard extends AppCompatActivity {
         USER_NAME = accountManager.getUserName();
         USER_IMAGE = accountManager.getUserImage();
         //Display Login user Name
-        tvName.setText(USER_NAME);
+        //tvName.setText(USER_NAME);
         WelcomeImage.setWelcomeImage(this, USER_IMAGE, imgViewDriverWelcome);
 
     }

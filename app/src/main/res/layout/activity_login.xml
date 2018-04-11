@@ -79,15 +79,36 @@
                 android:textColor="#fff"
                 android:textSize="18sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:paddingTop="5dp"
-                android:textColor="@color/colorBtnBack"
-                android:textSize="16sp"
-                android:onClick="onClickRegister"
-                android:text="@string/btnRegister" />
+                android:orientation="horizontal"
+                android:padding="2dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:paddingTop="5dp"
+                    android:textColor="@color/colorBtnBack"
+                    android:textSize="16sp"
+                    android:onClick="onClickRegisterPersonal"
+                    android:layout_weight="1"
+                    android:text="@string/btnRegisterPersonal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:paddingTop="5dp"
+                    android:textColor="@color/colorBtnBack"
+                    android:textSize="16sp"
+                    android:onClick="onClickRegisterDriver"
+                    android:layout_weight="1"
+                    android:text="@string/btnRegisterDrive" />
+            </LinearLayout>
+
+
         </LinearLayout>
     </RelativeLayout>
 

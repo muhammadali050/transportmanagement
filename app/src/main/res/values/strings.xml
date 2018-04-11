@@ -27,7 +27,8 @@
 
 
     <string name="login"><u>Login</u></string>
-    <string name="btnRegister"><u>Register</u></string>
+    <string name="btnRegisterDrive"><u>Driver Register</u></string>
+    <string name="btnRegisterPersonal"><u>Personal Register</u></string>
 
     <string-array name="DriverName">
         <item>None</item>

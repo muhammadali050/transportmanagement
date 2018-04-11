@@ -155,8 +155,14 @@ public class LoginActivity extends AppCompatActivity {
         pd.hide();
     }
 
-    public void onClickRegister(View view) {
+    public void onClickRegisterPersonal(View view) {
         Intent intent = new Intent(this, RegistrationActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    public void onClickRegisterDriver(View view) {
+        Intent intent = new Intent(this, AddDriver.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
@@ -252,4 +258,6 @@ public class LoginActivity extends AppCompatActivity {
             Message.show(LoginActivity.this,"Something went wrong.\n"+e.getMessage());
         }
     }
+
+
 }

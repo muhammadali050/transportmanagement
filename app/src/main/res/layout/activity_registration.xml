@@ -86,32 +86,7 @@
                     android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="User Type"
-                    android:textColor="#000"
-                    android:textSize="18sp"
-                    android:padding="5dp" />
-
-                <Spinner
-                    android:id="@+id/spinnerAccountType"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:entries="@array/userType"
-                    android:padding="5dp"
-                    android:textSize="18sp" />
-
-
-            </LinearLayout>
 
             <ImageView
                 android:id="@+id/imgViewAdd_photo"
