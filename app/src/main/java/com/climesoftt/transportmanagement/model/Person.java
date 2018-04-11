@@ -20,7 +20,7 @@ public class Person {
     {
 
     }
-
+/*
     public Person(String id, String name,String phone,String address,String img)
     {
         this.id = id;
@@ -29,7 +29,7 @@ public class Person {
         this.address = address;
         this.image = img;
     }
-
+ */
     public String getId() {
         return id;
     }

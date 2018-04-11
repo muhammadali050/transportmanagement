@@ -65,9 +65,9 @@ public class AllMechanicsActivity extends AppCompatActivity {
         dref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot driverSnapshot : dataSnapshot.getChildren())
+                for(DataSnapshot mSnapshot : dataSnapshot.getChildren())
                 {
-                    Person pData = driverSnapshot.getValue(Person.class);
+                    Person pData = mSnapshot.getValue(Person.class);
                     mechanicsList.add(pData);
                 }
                 mechanicsAdapter.notifyDataSetChanged();

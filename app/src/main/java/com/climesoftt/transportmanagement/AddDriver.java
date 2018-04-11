@@ -78,7 +78,7 @@ public class AddDriver extends AppCompatActivity {
     }
 
     public void addDriver(View view) {
-        final PDialog pd = new PDialog(this).message("Driver Registration. . .");
+
         final String id = GenerateUniqueNumber.uniqueId();
         String name = dName.getText().toString().trim();
         String phone = dPhone.getText().toString().trim();
@@ -107,7 +107,7 @@ public class AddDriver extends AppCompatActivity {
         driver.setAccountType("Driver");
         driver.setAddress(address);
         driver.setImage(imgUriDriver);
-
+        final PDialog pd = new PDialog(this).message("Driver Registration. . .");
          mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -123,19 +123,21 @@ public class AddDriver extends AppCompatActivity {
                             //Store Data in drivers
                             DatabaseReference driverRef = dbRef.child("drivers").child(id);
                             driverRef.setValue(driver);
-                            pd.hide();
+
                            // Message.show(AddDriver.this, "Registered successfully.");
                             currentUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     Message.show(AddDriver.this,"Verification Email has been sent!" +
                                             "\nVerify himself before login!");
+                                    pd.hide();
+                                    AddDriver.this.finish();
+                                    Intent intent = new Intent(AddDriver.this, AllDriversActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(intent);
                                 }
                             });
-                            AddDriver.this.finish();
-                            Intent intent = new Intent(AddDriver.this, AllDriversActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(intent);
+
 
                         } else {
                             // If sign in fails, display a message to the user.
@@ -170,7 +172,7 @@ public class AddDriver extends AppCompatActivity {
             pd.hide();
             Message.show(AddDriver.this, "Something went wrong.\n" + e.getMessage());
         } */
-        pd.hide();
+       // pd.hide();
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
