@@ -55,13 +55,13 @@ public class AddRoute extends AppCompatActivity{
 
         dbRef = FirebaseDatabase.getInstance().getReference("Routes");
 
-        tv_driver = findViewById(R.id.textViewDriver);
+       // tv_driver = findViewById(R.id.textViewDriver);
         toCity = findViewById(R.id.rToCity);
         fromCity = findViewById(R.id.rFromCity);
         toolPlaza  = findViewById(R.id.rToolPlaza);
         petrolCost   = findViewById(R.id.rPetrol);
         extraCost    = findViewById(R.id.mEmail);
-        spinnerDriver = findViewById(R.id.rDriverSpinner);
+        //spinnerDriver = findViewById(R.id.rDriverSpinner);
 
         if(USER_TYPE.equals("Personal"))
         {

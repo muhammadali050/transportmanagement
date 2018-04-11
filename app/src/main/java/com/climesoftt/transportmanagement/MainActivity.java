@@ -15,6 +15,9 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //getActionBar().setDisplayHomeAsUpEnabled(true);
+
+        Intent intent = new Intent(this, AddRoute.class);
+        startActivity(intent);
         try{
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().hide();
