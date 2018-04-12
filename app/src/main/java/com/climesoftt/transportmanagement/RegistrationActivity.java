@@ -70,7 +70,7 @@ public class RegistrationActivity extends AppCompatActivity {
         userName = findViewById(R.id.uName);
         userEmail = findViewById(R.id.uEmail);
         userPassword = findViewById(R.id.uPassword);
-        spAccountType = findViewById(R.id.spinnerAccountType);
+        //spAccountType = findViewById(R.id.spinnerAccountType);
         bt_add = findViewById(R.id.bt_add);
 
         mAuth = FirebaseAuth.getInstance();

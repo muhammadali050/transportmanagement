@@ -15,9 +15,6 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //getActionBar().setDisplayHomeAsUpEnabled(true);
-
-        Intent intent = new Intent(this, DriverDashboard.class);
-        startActivity(intent);
         try{
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().hide();
@@ -73,8 +70,14 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void onClickRegister(View view) {
+        Intent intent = new Intent(this, AddDriver.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+    public void onClickRegisterPersonal(View view) {
         Intent intent = new Intent(this, RegistrationActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
+
 }

@@ -40,6 +40,7 @@
 
 
     <Button
+        android:id="@+id/btnSRegister"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="22dp"
@@ -52,4 +53,19 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginEnd="22dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:onClick="onClickRegisterPersonal"
+        android:paddingTop="5dp"
+        android:text="@string/btnRegisterPersonal"
+        android:textColor="@color/colorBtnBack"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnSRegister" />
 </android.support.constraint.ConstraintLayout>
