@@ -20,21 +20,21 @@ public class WelcomeImage {
         {
             Picasso.with(context)
                     .load(userImage)
-                    .placeholder(R.drawable.users_admin)
+                    .placeholder(R.drawable.user_default)
                     .fit()
                     .centerCrop()
                     .into(imageView);
         }else
         {
 
-            /*Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(),R.drawable.profile_icon);
+           // Message.show(context, "Not Image Show");
+            Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(),R.drawable.profile_icon);
             Bitmap circularBitmap = ImageConverter.getRoundedCornerBitmap(bitmap, 100);
 
             //ImageView circularImageView = (ImageView)findViewById(R.id.imageView);
             //circularImageView.setImageBitmap(circularBitmap);
             imageView.setImageBitmap(circularBitmap);
-            imageView.setBackgroundResource(R.drawable.user_profile_image_background);*/
-
+            imageView.setBackgroundResource(R.drawable.user_profile_image_background);
 
         }
     }

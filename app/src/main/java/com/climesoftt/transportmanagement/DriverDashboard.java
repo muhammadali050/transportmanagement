@@ -32,7 +32,7 @@ public class DriverDashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_dashboard);
         tvName = findViewById(R.id.admin_title);
-        imgViewDriverWelcome = findViewById(R.id.user_profile_photo);
+        imgViewDriverWelcome = findViewById(R.id.user_photo);
 
         accountManager = new AccountManager(this);
         USER_NAME = accountManager.getUserName();

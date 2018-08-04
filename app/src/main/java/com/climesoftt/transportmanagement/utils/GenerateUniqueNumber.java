@@ -2,6 +2,7 @@ package com.climesoftt.transportmanagement.utils;
 
 import android.text.TextUtils;
 
+import com.climesoftt.transportmanagement.model.Maintenance;
 import com.climesoftt.transportmanagement.model.Person;
 import com.climesoftt.transportmanagement.model.User;
 import com.google.firebase.database.DataSnapshot;
@@ -20,6 +21,7 @@ public class GenerateUniqueNumber {
 
     private static String id = "";
     private static String mId = "";
+    private static String maintenanceId = "";
     public static String uniqueId() {
         // Read from the database
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Users");
@@ -54,9 +56,9 @@ public class GenerateUniqueNumber {
 
     public static int randomNum() {
         Random r = new Random( System.currentTimeMillis() );
-        int firstNum = 1000 + r.nextInt(2000);
-        int secondNum = 100 + r.nextInt(500) ;
-        int thirdNum =  501 + r.nextInt(999);
+        int firstNum = 1000 + r.nextInt(20000);
+        int secondNum = 100 + r.nextInt(10000) ;
+        int thirdNum =  501 + r.nextInt(50000);
         int fourthNum =  1 + r.nextInt(98);
         int randomNum = firstNum+secondNum+thirdNum+fourthNum;
 
@@ -94,5 +96,39 @@ public class GenerateUniqueNumber {
             }
         });
         return mId;
+    }
+
+    ////////////////
+    public static String maintenanceId()
+    {
+        // Read from the database
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Maintenance");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                for(DataSnapshot mSnapshot : dataSnapshot.getChildren())
+                {
+                    Maintenance data = mSnapshot.getValue(Maintenance.class);
+                    maintenanceId = data.getId();
+                }
+
+                if(TextUtils.isEmpty(mId) || mId == null || mId.equals(""))
+                {
+                    maintenanceId = "1";
+                }
+                else
+                {
+                    int uid = Integer.parseInt(maintenanceId);
+                    uid = uid+1;
+                    maintenanceId = Integer.toString(uid);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+            }
+        });
+        return maintenanceId;
     }
 }

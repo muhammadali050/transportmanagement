@@ -1,4 +1,5 @@
 package com.climesoftt.transportmanagement;
+import  com.climesoftt.transportmanagement.utils.NotificationManager;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -53,7 +54,7 @@ public class AddMaintenenceActivity extends AppCompatActivity {
         int mYear = c.get(Calendar.YEAR); // current year
         int mMonth = c.get(Calendar.MONTH); // current month
         int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
-
+        addNotification(mYear, mMonth, mDay);
         // date picker dialog
         datePickerDialogStart = new DatePickerDialog(AddMaintenenceActivity.this,
                 new DatePickerDialog.OnDateSetListener() {
@@ -94,9 +95,9 @@ public class AddMaintenenceActivity extends AppCompatActivity {
 
 
     public void addMaintenance(View view) {
-       /* int getId = GenerateUniqueNumber.uniqueId();
+        /*int getId = GenerateUniqueNumber.randomNum();
         String id = Integer.toString(getId).trim();*/
-        String id = GenerateUniqueNumber.uniqueId();
+        final String id = GenerateUniqueNumber.uniqueId();
         String sDate = startDate.getText().toString().trim();
         String eDate = endDate.getText().toString().trim();
         String description = et_desc.getText().toString().trim();
@@ -119,6 +120,8 @@ public class AddMaintenenceActivity extends AppCompatActivity {
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Maintenance").child(id);
             reference.setValue(maintenance);
             Message.show(AddMaintenenceActivity.this,"Added successfully.");
+
+
             //this.finish();
             Intent intent = new Intent(this, AllMaintenceActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -130,5 +133,11 @@ public class AddMaintenenceActivity extends AppCompatActivity {
             Message.show(this,"Something went wrong.\n"+e.getMessage());
         }
         pd.hide();
+    }
+
+    public void addNotification(int year, int month, int day){
+        Calendar c = Calendar.getInstance();
+        c.set(year,month,day, 8 , 30);
+        NotificationManager.setAlarm(this, c);
     }
 }

@@ -88,8 +88,7 @@ public class AllDriversActivity extends AppCompatActivity {
                 }
                 driverAdapter.notifyDataSetChanged();
                 pd.hide();
-               // REFERENCE_CHILD_NAME = dref.getKey();
-               // Message.show(AllDriversActivity.this , REFERENCE_CHILD_NAME);
+
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {

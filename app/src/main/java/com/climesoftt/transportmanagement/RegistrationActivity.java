@@ -120,9 +120,9 @@ public class RegistrationActivity extends AppCompatActivity {
         String name = userName.getText().toString().trim();
         String email = userEmail.getText().toString().trim();
         String password = userPassword.getText().toString().trim();
-        String accountType = spAccountType.getSelectedItem().toString().trim();
+        //String accountType = spAccountType.getSelectedItem().toString().trim();
         //Call Function for validation performs
-        fieldsValidation(name, email, password, accountType);
+        fieldsValidation(name, email, password);
 
         final User user = new User();
         //final String uniqueId = String.valueOf(new Date().getTime());
@@ -131,9 +131,9 @@ public class RegistrationActivity extends AppCompatActivity {
         user.setName(name);
         user.setEmail(email);
         user.setPassword(password);
-        user.setAccountType(accountType);
+        user.setAccountType("Personal");
         user.setUserImage(imgUrl);
-        Message.show(this,imgUrl);
+        //Message.show(this,imgUrl);
         final PDialog pd = new PDialog(this).message("User Registration. . .");
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -179,7 +179,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     }
 
-    private void fieldsValidation(String name, String email, String password, String accountType)
+    private void fieldsValidation(String name, String email, String password)
     {
         //Name Validation
         if(TextUtils.isEmpty(name))
@@ -200,12 +200,6 @@ public class RegistrationActivity extends AppCompatActivity {
         {
             userPassword.setError("Enter Valid Password!\nPassword length atleast 6-digits|characters|symbols");
             userPassword.requestFocus();
-            return;
-        }
-        //Spinner account select validation
-        if(TextUtils.isEmpty(accountType))
-        {
-            Message.show(this , "Select User Account Type!");
             return;
         }
     }

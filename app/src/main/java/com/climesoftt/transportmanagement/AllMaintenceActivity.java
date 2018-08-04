@@ -1,5 +1,6 @@
 package com.climesoftt.transportmanagement;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -50,11 +51,12 @@ public class AllMaintenceActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot mSnapshot : dataSnapshot.getChildren())
                 {
-                    Maintenance data = mSnapshot.getValue(Maintenance.class);
-                    arrayList.add(data);
+                    Maintenance mData = mSnapshot.getValue(Maintenance.class);
+                    arrayList.add(mData);
                 }
                 maintenenceAdapter.notifyDataSetChanged();
                 pd.hide();
+
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -75,6 +77,5 @@ public class AllMaintenceActivity extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
-
 
 }

@@ -95,17 +95,5 @@ public class DriverAndPersonalFaq extends AppCompatActivity {
         startActivity(intent);
     }
 
-    @Override
-    public void onBackPressed() {
-        try{
-            if(!TextUtils.isEmpty(USER_TYPE))
-            {
-                this.finish();
-                MoveUserToDashboard.moveUser(this,USER_TYPE);
-            }
-        }catch (Exception ex)
-        {
-            Message.show(this,ex.getMessage());
-        }
-    }
+
 }

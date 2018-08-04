@@ -132,7 +132,7 @@ public class AddDriver extends AppCompatActivity {
                                             "\nVerify himself before login!");
                                     pd.hide();
                                     AddDriver.this.finish();
-                                    Intent intent = new Intent(AddDriver.this, AllDriversActivity.class);
+                                    Intent intent = new Intent(AddDriver.this, DriverDashboard.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(intent);
                                 }
@@ -241,7 +241,7 @@ public class AddDriver extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         this.finish();
-        Intent intent = new Intent(this, AllDriversActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }

@@ -82,7 +82,8 @@ public class Personal extends AppCompatActivity{
     }
 
     public void onPersonalMechanicClick(View view) {
-
-
+        Intent intent = new Intent(this , AllMechanicsActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }
