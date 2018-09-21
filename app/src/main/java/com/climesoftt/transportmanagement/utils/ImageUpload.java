@@ -46,7 +46,7 @@ public class ImageUpload {
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     // Get a URL to the uploaded content
                     //Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                    imgUrl = taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
+                    imgUrl = taskSnapshot.getDownloadUrl().toString();
                     //Message.show(context,"Image uploaded!Go for Registration...");
                 }
 

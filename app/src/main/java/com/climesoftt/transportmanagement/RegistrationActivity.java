@@ -242,35 +242,31 @@ public class RegistrationActivity extends AppCompatActivity {
                 if (filePath != null) {
                     Message.show(this,"Please wait...");
                     final StorageReference imagesRef = mStorageRef.child("images/" + filePath.getLastPathSegment());
-                    imagesRef.putFile(filePath).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    final UploadTask uploadTask = imagesRef.putFile(filePath);
+                    uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
-                        public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                            if (!task.isSuccessful()){
-                                throw task.getException();
-                            }
-                            imgUrl = imagesRef.getDownloadUrl().toString();
-                            bt_add.setVisibility(View.VISIBLE);
-                            return imagesRef.getDownloadUrl();
-                        }
-                    }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Uri> task) {
-                            if (task.isSuccessful()){
-                            imgUrl = imagesRef.getDownloadUrl().toString();
-                            }
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            // pd.hide();
-                            // Handle unsuccessful uploads
-                            // ...
-                            Message.show(RegistrationActivity.this, "Failed image uploading..\n" + exception.getMessage());
-                        }
-                    });
-                }
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            //pd.hide();
+                            // Get a URL to the uploaded content
+                            //Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                            imgUrl = taskSnapshot.getDownloadUrl().toString();
 
-            } catch (IOException e) {
+                            bt_add.setVisibility(View.VISIBLE);
+                        }
+                    })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception exception) {
+                                    // pd.hide();
+                                    // Handle unsuccessful uploads
+                                    // ...
+                                    Message.show(RegistrationActivity.this, "Failed image uploading..\n" + exception.getMessage());
+                                    bt_add.setVisibility(View.VISIBLE);
+                                }
+                            });
+                }
+            }
+            catch (IOException e) {
                 //e.printStackTrace();
             }
         }

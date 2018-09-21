@@ -172,7 +172,7 @@ public class EditMechanic extends AppCompatActivity {
                             //pd.hide();
                             // Get a URL to the uploaded content
                             //Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                            imgUri = imagesRef.getDownloadUrl().toString();
+                            imgUri  = taskSnapshot.getDownloadUrl().toString();
                             bt_update.setVisibility(View.VISIBLE);
                             //Message.show(EditMechanic.this,"Image updated!Go for updation...");
                         }
@@ -184,6 +184,7 @@ public class EditMechanic extends AppCompatActivity {
                                     // Handle unsuccessful uploads
                                     // ...
                                     Message.show(EditMechanic.this, "Failed to image updateing..\n" + exception.getMessage());
+                                    bt_update.setVisibility(View.VISIBLE);
                                 }
                             });
                     //pd.hide();

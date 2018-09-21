@@ -215,16 +215,14 @@ public class AddDriver extends AppCompatActivity {
                 if (filePath != null) {
                     Message.show(this,"Please wait...");
                     final StorageReference imagesRef = mStorageRef.child("images/" + filePath.getLastPathSegment());
-                    UploadTask uploadTask = imagesRef.putFile(filePath);
+                    final UploadTask uploadTask = imagesRef.putFile(filePath);
                     uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             //pd.hide();
                             // Get a URL to the uploaded content
                             //Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                          //  imgUriDriver = taskSnapshot.getDownloadUrl().toString();
-
-                            imgUriDriver = taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
+                           imgUriDriver = taskSnapshot.getDownloadUrl().toString();
 
                             bt_add.setVisibility(View.VISIBLE);
                             //Message.show(AddDriver.this,"Image uploaded!Go for Registration...");
@@ -237,6 +235,7 @@ public class AddDriver extends AppCompatActivity {
                                     // Handle unsuccessful uploads
                                     // ...
                                     Message.show(AddDriver.this, "Failed image uploading..\n" + exception.getMessage());
+                                    bt_add.setVisibility(View.VISIBLE);
                                 }
                             });
                 }

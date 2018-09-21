@@ -20,7 +20,7 @@ public class WelcomeImage {
         {
             Picasso.with(context)
                     .load(userImage)
-                    .placeholder(R.drawable.user_default)
+                    .placeholder(R.drawable.profile_icon)
                     .fit()
                     .centerCrop()
                     .into(imageView);

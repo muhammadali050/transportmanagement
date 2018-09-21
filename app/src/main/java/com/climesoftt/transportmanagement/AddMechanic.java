@@ -157,7 +157,7 @@ public class AddMechanic extends AppCompatActivity {
                             //pd.hide();
                             // Get a URL to the uploaded content
                             //Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                            imgUri = imagesRef.getDownloadUrl().toString();
+                            imgUri = taskSnapshot.getDownloadUrl().toString();
                             bt_addMechanic.setVisibility(View.VISIBLE);
                             //Message.show(AddMechanic.this,"Image uploaded!Go for Registration...");
                         }
@@ -169,6 +169,7 @@ public class AddMechanic extends AppCompatActivity {
                                     // Handle unsuccessful uploads
                                     // ...
                                     Message.show(AddMechanic.this, "Failed image uploading..\n" + exception.getMessage());
+                                    bt_addMechanic.setVisibility(View.VISIBLE);
                                 }
                             });
                     //pd.hide();
