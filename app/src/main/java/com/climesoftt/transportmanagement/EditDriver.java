@@ -163,7 +163,7 @@ public class EditDriver extends AppCompatActivity {
                 //final PDialog pd = new PDialog(this).message("Image is uploading. . .");
                 if (filePath != null) {
                     Message.show(this,"Please wait ...");
-                    StorageReference imagesRef = mStorageRef.child("images/" + filePath.getLastPathSegment());
+                    final StorageReference imagesRef = mStorageRef.child("images/" + filePath.getLastPathSegment());
                     UploadTask uploadTask = imagesRef.putFile(filePath);
                     uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -171,7 +171,7 @@ public class EditDriver extends AppCompatActivity {
                             //pd.hide();
                             // Get a URL to the uploaded content
                             //Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                            imgUri = taskSnapshot.getDownloadUrl().toString();
+                            imgUri = imagesRef.getDownloadUrl().toString();
                             bt_update.setVisibility(View.VISIBLE);
                             //Message.show(EditDriver.this,"Image updated!Go for updation...");
                         }

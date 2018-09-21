@@ -95,9 +95,9 @@ public class AddMaintenenceActivity extends AppCompatActivity {
 
 
     public void addMaintenance(View view) {
-        /*int getId = GenerateUniqueNumber.randomNum();
-        String id = Integer.toString(getId).trim();*/
-        final String id = GenerateUniqueNumber.uniqueId();
+        int getId = GenerateUniqueNumber.randomNum();
+        final String id = Integer.toString(getId).trim();
+        //final String id = GenerateUniqueNumber.maintenanceId();
         String sDate = startDate.getText().toString().trim();
         String eDate = endDate.getText().toString().trim();
         String description = et_desc.getText().toString().trim();

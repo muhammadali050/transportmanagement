@@ -65,6 +65,7 @@ public class RouteAdaptor extends RecyclerView.Adapter<RouteAdaptor.VHolder> {
                     String toolPlaza = "";
                     String petrol = "";
                     String extraCost = "";
+                    String description = "";
                     // get position of current Row
                     int pos = getAdapterPosition();
 
@@ -77,6 +78,7 @@ public class RouteAdaptor extends RecyclerView.Adapter<RouteAdaptor.VHolder> {
                         toolPlaza = clickedDataItem.getTooPlaza();
                         petrol = clickedDataItem.getPetrolCost();
                         extraCost = clickedDataItem.getExtras();
+                        description = clickedDataItem.getDescription();
                     }
                     Intent intent = new Intent(context , Route.class);
                     intent.putExtra("RID" , rId);
@@ -85,6 +87,7 @@ public class RouteAdaptor extends RecyclerView.Adapter<RouteAdaptor.VHolder> {
                     intent.putExtra("TOOLPLAZA" , toolPlaza);
                     intent.putExtra("PETROL", petrol);
                     intent.putExtra("EXTRACOST",extraCost);
+                    intent.putExtra("RDESCRIPTION", description);
 
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     context.startActivity(intent);

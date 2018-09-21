@@ -34,9 +34,8 @@ import java.util.Locale;
 
 public class AddRoute extends AppCompatActivity{
     private DatabaseReference dbRef;
-    private EditText toCity, fromCity, toolPlaza, petrolCost, extraCost;
-    private TextView tv_driver;
-    private Spinner spinnerDriver;
+    private EditText toCity, fromCity, toolPlaza, petrolCost, extraCost, description;
+
     private ArrayAdapter adapterSpinner;
     private ArrayList<String> arrayList = new ArrayList<>();
 
@@ -55,27 +54,12 @@ public class AddRoute extends AppCompatActivity{
 
         dbRef = FirebaseDatabase.getInstance().getReference("Routes");
 
-       // tv_driver = findViewById(R.id.textViewDriver);
         toCity = findViewById(R.id.rToCity);
         fromCity = findViewById(R.id.rFromCity);
         toolPlaza  = findViewById(R.id.rToolPlaza);
         petrolCost   = findViewById(R.id.rPetrol);
-        extraCost    = findViewById(R.id.mEmail);
-        //spinnerDriver = findViewById(R.id.rDriverSpinner);
-
-        if(USER_TYPE.equals("Personal"))
-        {
-            spinnerDriver.setVisibility(View.GONE);
-            tv_driver.setVisibility(View.GONE);
-        }
-        if(USER_TYPE.equals("Admin"))
-        {
-            spinnerDriver.setVisibility(View.VISIBLE);
-            tv_driver.setVisibility(View.VISIBLE);
-
-        }
-        //Method for fetching names and showing driver names in spinner
-        getAndSetDriversListInAdapter();
+        extraCost    = findViewById(R.id.rExtras);
+        description = findViewById(R.id.textViewRDescription);
 
         try{
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -83,20 +67,20 @@ public class AddRoute extends AppCompatActivity{
         catch (Exception e){
 
         }
-
     }
-
 
     public void addRoute(View view)
     {
-        final String rId = GenerateUniqueNumber.uniqueId();
+        int getId = GenerateUniqueNumber.randomNum();
+        final String rid = Integer.toString(getId).trim();
+        //final String rId = GenerateUniqueNumber.routeId();
         String to = toCity.getText().toString();
         String from = fromCity.getText().toString();
         String tool = toolPlaza.getText().toString();
         String petrol = petrolCost.getText().toString();
         String extras = extraCost.getText().toString();
-        //Get spinner Selected Item
-        String driver = spinnerDriver.getSelectedItem().toString();
+        String rDescription = description.getText().toString();
+
         String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         if(TextUtils.isEmpty(to) || TextUtils.isEmpty(from) || TextUtils.isEmpty(tool) || TextUtils.isEmpty(petrol) || TextUtils.isEmpty(extras))
         {
@@ -107,24 +91,22 @@ public class AddRoute extends AppCompatActivity{
         final PDialog pd = new PDialog(this).message("Route adding. . . ");
         try
         {
-           // String uniqueId = String.valueOf(new Date().getTime());
+            // String uniqueId = String.valueOf(new Date().getTime());
             Routes route = new Routes();
-            route.setId(rId);
+            route.setId(rid);
             route.setToCity(to);
             route.setFromCity(from);
             route.setTooPlaza(tool);
             route.setPetrolCost(petrol);
             route.setExtras(extras);
             route.setrDate(date);
-
-           // dbRef.child(rId).setValue(route);
+            route.setDescription(rDescription);
 
             if(!USER_TYPE.isEmpty())
             {
                 if(USER_TYPE.equals("Admin"))
                 {
-                    route.setDriver(driver);
-                    dbRef.child(rId).setValue(route);
+                    dbRef.child(rid).setValue(route);
                     Message.show(AddRoute.this,"Added successfully.");
                     this.finish();
                     Intent intent = new Intent(this, AllRoutes.class);
@@ -138,7 +120,7 @@ public class AddRoute extends AppCompatActivity{
                     DatabaseReference pRef = FirebaseDatabase.getInstance().getReference("Personal");
                     route.setAccountType(USER_TYPE);
                     route.setPersonName(USER_NAME);
-                    pRef.child(rId).setValue(route);
+                    pRef.child(rid).setValue(route);
                     Message.show(AddRoute.this,"Added successfully.");
                     this.finish();
                     Intent intent = new Intent(this, AllRoutes.class);
@@ -154,32 +136,6 @@ public class AddRoute extends AppCompatActivity{
             Message.show(AddRoute.this,"Something went wrong.\n"+e.getMessage());
         }
         pd.hide();
-
-
-    }
-
-    public void getAndSetDriversListInAdapter()
-    {
-       DatabaseReference driverRef = FirebaseDatabase.getInstance().getReference("drivers");
-        driverRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot driverSnapshot : dataSnapshot.getChildren())
-                {
-                    Person data = driverSnapshot.getValue(Person.class);
-                    arrayList.add(data.getName());
-                    //Log.d("KEY",arrayList.toString());
-                }
-                adapterSpinner = new ArrayAdapter(AddRoute.this,android.R.layout.simple_spinner_item, arrayList);
-                adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinnerDriver.setAdapter(adapterSpinner);
-                adapterSpinner.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {

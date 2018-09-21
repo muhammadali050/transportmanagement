@@ -38,7 +38,7 @@ public class ImageUpload {
 
         if(filePath!=null)
         {
-            StorageReference imagesRef = mStorageRef.child("images/"+filePath.getLastPathSegment());
+            final StorageReference imagesRef = mStorageRef.child("images/"+filePath.getLastPathSegment());
             Message.show(context,"Please wait...");
             UploadTask uploadTask = imagesRef.putFile(filePath);
             uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -46,7 +46,7 @@ public class ImageUpload {
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     // Get a URL to the uploaded content
                     //Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                    imgUrl = taskSnapshot.getDownloadUrl().toString();
+                    imgUrl = taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
                     //Message.show(context,"Image uploaded!Go for Registration...");
                 }
 

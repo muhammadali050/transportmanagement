@@ -66,7 +66,7 @@ public class AddDriver extends AppCompatActivity {
         dPhone = findViewById(R.id.etDPhone);
         dMail = findViewById(R.id.etDEmail);
         dPassword = findViewById(R.id.etDPass);
-        dAddress = findViewById(R.id.mEmail);
+        dAddress = findViewById(R.id.rExtras);
         imgViewDriver = findViewById(R.id.imgViewAdd_driver);
         bt_add = findViewById(R.id.btAddDriver);
 
@@ -131,10 +131,15 @@ public class AddDriver extends AppCompatActivity {
                                     Message.show(AddDriver.this,"Verification Email has been sent!" +
                                             "\nVerify himself before login!");
                                     pd.hide();
+
+                                    //for logout first user enter his / her credentials
+                                    FirebaseAuth.getInstance().signOut();
+
                                     AddDriver.this.finish();
-                                    Intent intent = new Intent(AddDriver.this, DriverDashboard.class);
+                                    Intent intent = new Intent(AddDriver.this, LoginActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(intent);
+
                                 }
                             });
 
@@ -153,6 +158,7 @@ public class AddDriver extends AppCompatActivity {
                         }
                     }
                 });
+
 
         /*
         //Message.show(this, imgUriDriver);
@@ -208,7 +214,7 @@ public class AddDriver extends AppCompatActivity {
                 }
                 if (filePath != null) {
                     Message.show(this,"Please wait...");
-                    StorageReference imagesRef = mStorageRef.child("images/" + filePath.getLastPathSegment());
+                    final StorageReference imagesRef = mStorageRef.child("images/" + filePath.getLastPathSegment());
                     UploadTask uploadTask = imagesRef.putFile(filePath);
                     uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -216,7 +222,10 @@ public class AddDriver extends AppCompatActivity {
                             //pd.hide();
                             // Get a URL to the uploaded content
                             //Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                            imgUriDriver = taskSnapshot.getDownloadUrl().toString();
+                          //  imgUriDriver = taskSnapshot.getDownloadUrl().toString();
+
+                            imgUriDriver = taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
+
                             bt_add.setVisibility(View.VISIBLE);
                             //Message.show(AddDriver.this,"Image uploaded!Go for Registration...");
                         }

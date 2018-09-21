@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import com.climesoftt.transportmanagement.model.Maintenance;
 import com.climesoftt.transportmanagement.model.Person;
+import com.climesoftt.transportmanagement.model.Routes;
 import com.climesoftt.transportmanagement.model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,6 +23,7 @@ public class GenerateUniqueNumber {
     private static String id = "";
     private static String mId = "";
     private static String maintenanceId = "";
+    private static String rId = "";
     public static String uniqueId() {
         // Read from the database
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Users");
@@ -113,7 +115,7 @@ public class GenerateUniqueNumber {
                     maintenanceId = data.getId();
                 }
 
-                if(TextUtils.isEmpty(mId) || mId == null || mId.equals(""))
+                if(TextUtils.isEmpty(maintenanceId) || maintenanceId == null || maintenanceId.equals(""))
                 {
                     maintenanceId = "1";
                 }
@@ -131,4 +133,39 @@ public class GenerateUniqueNumber {
         });
         return maintenanceId;
     }
+
+    ///////////////////
+    public static String routeId()
+    {
+        // Read from the database
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Routes");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                for(DataSnapshot userSnapshot : dataSnapshot.getChildren())
+                {
+                    Routes data = userSnapshot.getValue(Routes.class);
+                    rId = data.getId();
+                }
+
+                if(TextUtils.isEmpty(rId) || rId == null || rId.equals(""))
+                {
+                    rId = "1";
+                }
+                else
+                {
+                    int uid = Integer.parseInt(rId);
+                    uid = uid+1;
+                    rId = Integer.toString(uid);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+            }
+        });
+        return rId;
+    }
+    ////////////////
 }

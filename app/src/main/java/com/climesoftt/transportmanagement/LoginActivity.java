@@ -101,10 +101,10 @@ public class LoginActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 pd.hide();
                                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                moveLoginUserHisDashboard(email);
+                                //moveLoginUserHisDashboard(email);
                                 // Check if user's email is verified
-                              /*  if (user.isEmailVerified()) {
-                                    moveLoginUserHisDashboard();
+                                if (user.isEmailVerified()) {
+                                    moveLoginUserHisDashboard(email);
 
                             }else
                             {
@@ -117,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
                                                 "\nPlease Verify himself!");
                                     }
                                 });
-                            }*/
+                            }
                             //updateUI(user);
                         } else {
                                 pd.hide();

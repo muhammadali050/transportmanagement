@@ -16,13 +16,14 @@ import com.climesoftt.transportmanagement.utils.DeleteRecord;
 
 public class Route extends AppCompatActivity {
 
-    private TextView tvTo, tvFrom , tvToolPlaza, tvPetrol, tvExtras;
+    private TextView tvTo, tvFrom , tvToolPlaza, tvPetrol, tvExtras, tvDescription;
     private String RouteID = "";
     private String RTo = "";
     private String RFrom = "";
     private String RTool = "";
     private String RPetrol = "";
     private String RExtras = "";
+    private String RDescription = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,8 +34,8 @@ public class Route extends AppCompatActivity {
         tvFrom = findViewById(R.id.tv_from);
         tvToolPlaza = findViewById(R.id.rTool);
         tvPetrol = findViewById(R.id.rPetrol);
-        tvExtras = findViewById(R.id.mEmail);
-
+        tvExtras = findViewById(R.id.rExtras);
+        tvDescription = findViewById(R.id.tvRDescription);
         //Call Function Below defined
         getDataOfCurrentSelectedRow();
         try{
@@ -54,12 +55,14 @@ public class Route extends AppCompatActivity {
         RTool = intent.getStringExtra("TOOLPLAZA");
         RPetrol = intent.getStringExtra("PETROL");
         RExtras = intent.getStringExtra("EXTRACOST");
+        RDescription = intent.getStringExtra("RDESCRIPTION");
 
         tvFrom.setText(RFrom);
         tvTo.setText(RTo);
         tvToolPlaza.setText(RTool);
         tvPetrol.setText(RPetrol);
         tvExtras.setText(RExtras);
+        tvDescription.setText(RDescription);
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -82,6 +85,7 @@ public class Route extends AppCompatActivity {
         intent.putExtra("RTOOL",RTool);
         intent.putExtra("RPETROL",RPetrol);
         intent.putExtra("REXTRAS",RExtras);
+        intent.putExtra("RDESCRIPTION", RDescription);
         startActivity(intent);
 
     }

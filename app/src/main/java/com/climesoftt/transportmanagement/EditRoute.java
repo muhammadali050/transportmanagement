@@ -14,13 +14,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class EditRoute extends AppCompatActivity {
-    private EditText toCity, fromCity, toolPlaza, petrolCost, extraCost;
+    private EditText toCity, fromCity, toolPlaza, petrolCost, extraCost, description;
     private String RouteID = "";
     private String RTo = "";
     private String RFrom = "";
     private String RTool = "";
     private String RPetrol = "";
     private String RExtras = "";
+    private String RDescription = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +31,8 @@ public class EditRoute extends AppCompatActivity {
         fromCity = findViewById(R.id.rFromCity);
         toolPlaza  = findViewById(R.id.rToolPlaza);
         petrolCost   = findViewById(R.id.rPetrol);
-        extraCost    = findViewById(R.id.mEmail);
+        extraCost    = findViewById(R.id.rExtras);
+        description = findViewById(R.id.rEDescription);
 
         Intent intent = getIntent();
         if(intent!= null)
@@ -41,6 +43,7 @@ public class EditRoute extends AppCompatActivity {
             RTool = intent.getStringExtra("RTOOL");
             RPetrol = intent.getStringExtra("RPETROL");
             RExtras = intent.getStringExtra("REXTRAS");
+            RDescription = intent.getStringExtra("RDESCRIPTION");
         }
 
         toCity.setText(RTo);
@@ -48,6 +51,7 @@ public class EditRoute extends AppCompatActivity {
         toolPlaza.setText(RTool);
         petrolCost.setText(RPetrol);
         extraCost.setText(RExtras);
+        description.setText(RDescription);
     }
 
     public void updateRoute(View view)
@@ -57,7 +61,7 @@ public class EditRoute extends AppCompatActivity {
         String tool = toolPlaza.getText().toString();
         String petrol = petrolCost.getText().toString();
         String extras = extraCost.getText().toString();
-
+        String desc = description.getText().toString();
         if(TextUtils.isEmpty(to) || TextUtils.isEmpty(from) || TextUtils.isEmpty(tool) || TextUtils.isEmpty(petrol) || TextUtils.isEmpty(extras))
         {
             Message.show(this, "Please fill all fields!");
@@ -71,6 +75,7 @@ public class EditRoute extends AppCompatActivity {
         route.setTooPlaza(tool);
         route.setPetrolCost(petrol);
         route.setExtras(extras);
+        route.setDescription(desc);
 
         final PDialog pd = new PDialog(this).message("Route updating. . . ");
         try {

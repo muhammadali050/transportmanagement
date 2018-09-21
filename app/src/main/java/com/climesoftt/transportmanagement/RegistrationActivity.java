@@ -21,6 +21,7 @@ import com.climesoftt.transportmanagement.utils.GenerateUniqueNumber;
 import com.climesoftt.transportmanagement.model.User;
 import com.climesoftt.transportmanagement.utils.Message;
 import com.climesoftt.transportmanagement.utils.PDialog;
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -152,6 +153,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     Message.show(RegistrationActivity.this,"Verification Email has been sent!" +
                                             "\nPlease Register himself before login!");
+
                                 }
                             });
                             userName.setText("");
@@ -160,6 +162,14 @@ public class RegistrationActivity extends AppCompatActivity {
                             imgViewUser.setImageResource(R.drawable.add_image_icon);
                             userName.requestFocus();
                             pd.hide();
+
+                            //for logout first user enter his / her credentials
+                            FirebaseAuth.getInstance().signOut();
+
+                            RegistrationActivity.this.finish();
+                            Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
 
                         } else {
                             // If sign in fails, display a message to the user.
@@ -176,6 +186,8 @@ public class RegistrationActivity extends AppCompatActivity {
 
                     }
                 });
+
+
 
     }
 
@@ -229,28 +241,33 @@ public class RegistrationActivity extends AppCompatActivity {
                 }
                 if (filePath != null) {
                     Message.show(this,"Please wait...");
-                    StorageReference imagesRef = mStorageRef.child("images/" + filePath.getLastPathSegment());
-                    UploadTask uploadTask = imagesRef.putFile(filePath);
-                    uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    final StorageReference imagesRef = mStorageRef.child("images/" + filePath.getLastPathSegment());
+                    imagesRef.putFile(filePath).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                         @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            //pd.hide();
-                            // Get a URL to the uploaded content
-                            //Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                            imgUrl = taskSnapshot.getDownloadUrl().toString();
+                        public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                            if (!task.isSuccessful()){
+                                throw task.getException();
+                            }
+                            imgUrl = imagesRef.getDownloadUrl().toString();
                             bt_add.setVisibility(View.VISIBLE);
-                            //Message.show(AddDriver.this,"Image uploaded!Go for Registration...");
+                            return imagesRef.getDownloadUrl();
                         }
-                    })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception exception) {
-                                    // pd.hide();
-                                    // Handle unsuccessful uploads
-                                    // ...
-                                    Message.show(RegistrationActivity.this, "Failed image uploading..\n" + exception.getMessage());
-                                }
-                            });
+                    }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            if (task.isSuccessful()){
+                            imgUrl = imagesRef.getDownloadUrl().toString();
+                            }
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            // pd.hide();
+                            // Handle unsuccessful uploads
+                            // ...
+                            Message.show(RegistrationActivity.this, "Failed image uploading..\n" + exception.getMessage());
+                        }
+                    });
                 }
 
             } catch (IOException e) {

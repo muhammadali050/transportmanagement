@@ -15,6 +15,7 @@ public class Routes {
     private String driver = "";
     private String accountType = "";
     private String personName = "";
+    private String description = "";
     public Routes()
     {
     }
@@ -97,5 +98,13 @@ public class Routes {
     public String getDriver()
     {
         return driver;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
