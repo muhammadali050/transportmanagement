@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">Transport Management</string>
+    <string name="title_activity_all_drivers">All Driver</string>
+    <string name="title_activity_all_mechanics">All Mechanics</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_admin_dashboard">Dashboard</string>
+    <string name="title_activity_resgistration">Create Account</string>
+    <string name="title_activity_driver_profile">Driver Profile</string>
+    <string name="title_activity_mechanic_profile">Driver Profile</string>
+    <string name="title_activity_all_routes">All Routes</string>
+    <string name="title_activity_add_route">Add Routes</string>
+    <string name="title_activity_route">Route</string>
+    <string name="title_activity_add_Mechanic">Add Mechanic</string>
+    <string name="title_activity_add_driver">Add Driver</string>
+    <string name="title_activity_edit_driver">Edit Driver</string>
+    <string name="title_activity_edit_mechanic">Edit Mechanic</string>
+    <string name="title_activity_edit_route">Edit Route</string>
+    <string name="title_activity_driver_faq">FAQ</string>
+    <string name="title_activity_faq">All FAQ</string>
+    <string name="title_activity_driver_dashboard">Dashboard</string>
+    <string name="title_activity_add_question">Add Question</string>
+    <string name="title_activity_edit_question">Edit Question</string>
+    <string name="title_activity_add_maintenence">Add Maintenece</string>
+    <string name="title_activity_edit_maintenence">Edit Maintenece</string>
+    <string name="title_activity_all_maintenece">All Maintenence</string>
+    <string name="title_activity_view_maintenence">View Maintenence</string>
+
+
+    <string name="login"><u>Login</u></string>
+    <string name="btnRegisterDrive"><u>Driver Register</u></string>
+    <string name="btnRegisterPersonal"><u>Personal Register</u></string>
+
+    <string-array name="DriverName">
+        <item>None</item>
+
+    </string-array>
+
+
+    <string-array name="userType">
+        <item>Driver</item>
+        <item>Personal</item>
+
+    </string-array>
+
+</resources>

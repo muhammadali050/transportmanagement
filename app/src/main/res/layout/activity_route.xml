@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:id="@+id/profile_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/header_cover_image"
+            android:background="#32a0ef"
+            android:elevation="4dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="16dp">
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/ll_route_head">
+
+                <TextView
+                    android:id="@+id/tv_from"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="false"
+                    android:layout_marginTop="16dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:text="From"
+                    android:layout_weight="1"
+                    android:textColor="#fff"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_to"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="false"
+                    android:layout_marginTop="16dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:text="to"
+                    android:textColor="#fff"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/tv_destination"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="false"
+                    android:layout_marginTop="16dp"
+                    android:paddingStart="16dp"
+                    android:layout_weight="1"
+                    android:paddingEnd="16dp"
+                    android:text="Destination"
+                    android:gravity="end"
+                    android:textColor="#fff"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/rUpdateProfile"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_below="@+id/ll_route_head"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_toLeftOf="@+id/rProfileDelete"
+                android:onClick="onClickEditRoute"
+                app:srcCompat="@drawable/icon_edit_user" />
+
+            <ImageView
+                android:id="@+id/rProfileDelete"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:onClick="routeDelete"
+                android:layout_below="@+id/ll_route_head"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="8dp"
+                app:srcCompat="@drawable/icon_delete_user" />
+
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profile_layout"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="#fff"
+                    android:drawablePadding="8dp"
+                    android:layout_weight="1"
+                    android:elevation="2dp"
+                    android:padding="20dp"
+                    android:text="Tool Plaza"
+                    android:textColor="#000" />
+
+                <TextView
+                    android:id="@+id/rTool"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_marginBottom="3dp"
+                    android:maxLength="6"
+                    android:layout_marginTop="3dp"
+                    android:layout_weight="0.5"
+                    android:background="#fff"
+                    android:drawablePadding="8dp"
+                    android:elevation="2dp"
+                    android:padding="20dp"
+                    android:text="0000"
+                    android:textColor="@color/textcolor" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="#fff"
+                    android:drawablePadding="8dp"
+                    android:layout_weight="1"
+                    android:elevation="2dp"
+                    android:padding="20dp"
+                    android:text="Petrol"
+                    android:textColor="#000" />
+
+                <TextView
+                    android:id="@+id/rPetrol"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginTop="3dp"
+                    android:maxLength="6"
+                    android:layout_weight="0.5"
+                    android:background="#fff"
+                    android:drawablePadding="8dp"
+                    android:elevation="2dp"
+                    android:padding="20dp"
+                    android:text="0000"
+                    android:textColor="@color/textcolor" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="#fff"
+                    android:drawablePadding="8dp"
+                    android:layout_weight="1"
+                    android:elevation="2dp"
+                    android:padding="20dp"
+                    android:text="Extras"
+                    android:textColor="#000" />
+
+                <TextView
+                    android:id="@+id/rExtras"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginTop="3dp"
+                    android:maxLength="6"
+                    android:layout_weight="0.5"
+                    android:background="#fff"
+                    android:drawablePadding="8dp"
+                    android:elevation="2dp"
+                    android:padding="20dp"
+                    android:text="0000"
+                    android:textColor="@color/textcolor" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvRDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="#fff"
+                    android:drawablePadding="8dp"
+                    android:elevation="2dp"
+                    android:padding="20dp"
+                    android:text="Descrition"
+                    android:textColor="#000" />
+                <TextView
+                    android:id="@+id/tvShowDriver"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="#fff"
+                    android:drawablePadding="8dp"
+                    android:elevation="2dp"
+                    android:padding="20dp"
+                    android:text="Driver Email"
+                    android:textColor="#000" />
+
+                <Button
+                    android:id="@+id/tvTotalRoutes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimary"
+                    android:drawablePadding="8dp"
+                    android:elevation="2dp"
+                    android:onClick="getDriverTotalRoutes"
+                    android:padding="20dp"
+                    android:text="Total Routes"
+                    android:textColor="#000" />
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>
