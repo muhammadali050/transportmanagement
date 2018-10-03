@@ -36,7 +36,7 @@ import java.io.IOException;
 
 public class EditDriver extends AppCompatActivity {
     private TextView tv_dName, tv_dPhone, tv_dAddress;
-    private String driverId, dName, dPhone, dAddress, dImage;
+    private String driverId, dName, dPhone, dAddress, dImage, dEmail;
     private static final int chooseImageCode = 1;
     private Uri filePath;
     private StorageReference mStorageRef;
@@ -61,6 +61,7 @@ public class EditDriver extends AppCompatActivity {
             dPhone = bundle.getString("DR_PHONE_KEY");
             dAddress = bundle.getString("DR_ADDRESS_KEY");
             dImage = bundle.getString("DR_IMAGE_KEY");
+            dEmail = bundle.getString("DR_EMAIL_KEY");
         }
         tv_dName.setText(dName);
         tv_dPhone.setText(dPhone);
@@ -116,6 +117,8 @@ public class EditDriver extends AppCompatActivity {
         driver.setPhone(uPhone);
         driver.setAddress(uAddress);
         driver.setImage(imgUri);
+        driver.setEmail(dEmail);
+        driver.setAccountType("Driver");
         final PDialog pd = new PDialog(this).message("Updating record. . .");
         try
         {

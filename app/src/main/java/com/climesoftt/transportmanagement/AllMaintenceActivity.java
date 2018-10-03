@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import com.climesoftt.transportmanagement.adapter.MaintenenceAdapter;
 import com.climesoftt.transportmanagement.model.Maintenance;
 import com.climesoftt.transportmanagement.model.Person;
+import com.climesoftt.transportmanagement.utils.AccountManager;
 import com.climesoftt.transportmanagement.utils.PDialog;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,11 +29,18 @@ public class AllMaintenceActivity extends AppCompatActivity {
     private MaintenenceAdapter maintenenceAdapter;
     private RecyclerView  rv;
     private DatabaseReference mref;
+    private String USER_EMAIL = "";
+    private String USER_TYPE = "";
+    private AccountManager accountManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_maintenece);
+
+        accountManager = new AccountManager(this);
+        USER_TYPE = accountManager.getUserAccountType();
+        USER_EMAIL = accountManager.getUserEmail();
 
         rv = (RecyclerView)findViewById(R.id.rcvMaintenece);
         maintenenceAdapter= new MaintenenceAdapter(this,arrayList);
@@ -40,7 +48,6 @@ public class AllMaintenceActivity extends AppCompatActivity {
         rv.setLayoutManager(new LinearLayoutManager(this));
         fetchDataFromFirebase();
     }
-
 
     private void fetchDataFromFirebase()
     {
@@ -52,7 +59,28 @@ public class AllMaintenceActivity extends AppCompatActivity {
                 for(DataSnapshot mSnapshot : dataSnapshot.getChildren())
                 {
                     Maintenance mData = mSnapshot.getValue(Maintenance.class);
-                    arrayList.add(mData);
+                    if(USER_TYPE.equals("Admin"))
+                    {
+                        if(mData.getUserType().equals("Driver") || mData.getUserType().equals("Admin"))
+                        {
+                            arrayList.add(mData);
+                        }
+                    }
+                    if(mData.getUserType().equals("Driver") && USER_TYPE.equals("Driver"))
+                    {
+                        if(USER_EMAIL.equals(mData.getEmail()))
+                        {
+                            arrayList.add(mData);
+                        }
+                    }
+
+                    if(USER_TYPE.equals("Personal"))
+                    {
+                        if(mData.getUserType().equals("Personal") && USER_EMAIL.equals(mData.getEmail()))
+                        {
+                            arrayList.add(mData);
+                        }
+                    }
                 }
                 maintenenceAdapter.notifyDataSetChanged();
                 pd.hide();

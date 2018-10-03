@@ -183,8 +183,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        System.exit(0);
+        startActivity(new Intent(this, MainActivity.class));
     }
 
     public void moveLoginUserHisDashboard(final String userEmail)

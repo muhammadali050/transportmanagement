@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.climesoftt.transportmanagement.utils.AccountManager;
 import com.climesoftt.transportmanagement.utils.AlertDialogClass;
+import com.climesoftt.transportmanagement.utils.DeleteUserAccount;
 import com.climesoftt.transportmanagement.utils.Logout;
 import com.climesoftt.transportmanagement.utils.WelcomeImage;
 
@@ -52,6 +53,7 @@ public class DriverDashboard extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_dashboard, menu);
+        //inflater.inflate(R.menu.menu_delete_user, menu);
         return true;
     }
 
@@ -94,4 +96,10 @@ public class DriverDashboard extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
+
+    /*
+    public void deleteUserAccount(MenuItem item) {
+        DeleteUserAccount obj = new DeleteUserAccount();
+        obj.deleteUser(this);
+    }*/
 }

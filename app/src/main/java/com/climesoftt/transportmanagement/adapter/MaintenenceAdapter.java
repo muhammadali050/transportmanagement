@@ -71,6 +71,8 @@ public class MaintenenceAdapter extends RecyclerView.Adapter<MaintenenceAdapter.
                     String mDescription = "";
                     String mStartDate = "";
                     String mEndDate = "";
+                    String mEmail = "";
+                    String mUserType = "";
 
                     // get position of current Row
                     int pos = getAdapterPosition();
@@ -82,6 +84,8 @@ public class MaintenenceAdapter extends RecyclerView.Adapter<MaintenenceAdapter.
                         mDescription = clickedDataItem.getDescription();
                         mStartDate = clickedDataItem.getStartDate();
                         mEndDate = clickedDataItem.getEndDate();
+                        mEmail = clickedDataItem.getEmail();
+                        mUserType = clickedDataItem.getUserType();
                     }
 
                     Intent intent = new Intent(context, ViewMaintenenceActivity.class);
@@ -89,6 +93,9 @@ public class MaintenenceAdapter extends RecyclerView.Adapter<MaintenenceAdapter.
                     intent.putExtra("DESCRIPTION", mDescription);
                     intent.putExtra("STARTDATE", mStartDate);
                     intent.putExtra("ENDDATE", mEndDate);
+                    intent.putExtra("USER_EMAIL", mEmail);
+                    intent.putExtra("USER_TYPE", mUserType);
+
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     context.startActivity(intent);
                 }
@@ -99,7 +106,8 @@ public class MaintenenceAdapter extends RecyclerView.Adapter<MaintenenceAdapter.
                 String description = "";
                 String startDate = "";
                 String endDate = "";
-
+                String mEmail = "";
+                String mUserType = "";
                 @Override
                 public boolean onLongClick(View v) {
                     final int pos = getAdapterPosition();
@@ -131,6 +139,8 @@ public class MaintenenceAdapter extends RecyclerView.Adapter<MaintenenceAdapter.
                                         description = clickedDataItem.getDescription();
                                         startDate = clickedDataItem.getStartDate();
                                         endDate = clickedDataItem.getEndDate();
+                                        mEmail = clickedDataItem.getEmail();
+                                        mUserType = clickedDataItem.getUserType();
                                     }
 
                                     Intent intent = new Intent(context, EditMaintenenceActivity.class);
@@ -138,6 +148,9 @@ public class MaintenenceAdapter extends RecyclerView.Adapter<MaintenenceAdapter.
                                     intent.putExtra("DESCRIPTION", description);
                                     intent.putExtra("STARTDATE", startDate);
                                     intent.putExtra("ENDDATE", endDate);
+                                    intent.putExtra("USER_EMAIL", mEmail);
+                                    intent.putExtra("USER_TYPE", mUserType);
+
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     context.startActivity(intent);
 

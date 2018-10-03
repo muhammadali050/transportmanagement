@@ -7,34 +7,47 @@
     android:background="@color/colorActivityBackground">
 
     <TextView
-        android:id="@+id/admin_title"
-        android:layout_width="fill_parent"
+        android:id="@+id/tvRDriver"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center_horizontal"
-        android:text="Add Route"
-        android:textColor="#FFF"
-        android:textSize="26sp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:text="Driver                  "
+        android:textColor="#000"
+        android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Spinner
+        android:id="@+id/rDriverSpinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="35dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="16dp"
+        android:textColor="#000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/tvRDriver"
+        app:layout_constraintStart_toEndOf="@+id/tvRDriver"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <RelativeLayout
+        android:id="@+id/relativeLayout3"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:orientation="vertical"
         android:background="#FFF"
+        android:orientation="vertical"
         android:scrollbarAlwaysDrawVerticalTrack="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/admin_title"
+        app:layout_constraintTop_toBottomOf="@+id/tvRDriver"
         app:layout_constraintVertical_bias="0.0">
 
 
@@ -43,10 +56,10 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:background="#fff"
             android:elevation="0dp"
-            android:padding="20dp">
+            android:padding="10dp">
 
             <android.support.constraint.Guideline
                 android:id="@+id/guideline"
@@ -78,8 +91,8 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:hint="City"
-                android:maxLength="15"
                 android:inputType="textCapWords"
+                android:maxLength="15"
                 android:paddingBottom="10dp"
                 android:paddingTop="5dp"
                 android:singleLine="true"
@@ -111,8 +124,8 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:hint="City"
-                android:maxLength="15"
                 android:inputType="textCapWords"
+                android:maxLength="15"
                 android:paddingBottom="10dp"
                 android:paddingTop="5dp"
                 android:singleLine="true"
@@ -179,10 +192,10 @@
                 android:layout_marginStart="8dp"
                 android:hint="Petrol Cost"
                 android:inputType="number"
-                android:textColor="#000"
                 android:maxLength="6"
                 android:paddingBottom="5dp"
                 android:singleLine="true"
+                android:textColor="#000"
                 android:textSize="18sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textViewPetrol"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -213,10 +226,10 @@
                 android:layout_marginStart="8dp"
                 android:hint="Extra Cost"
                 android:inputType="number"
-                android:paddingBottom="5dp"
                 android:maxLength="6"
-                android:textColor="#000"
+                android:paddingBottom="5dp"
                 android:singleLine="true"
+                android:textColor="#000"
                 android:textSize="18sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textViewExtras"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -231,6 +244,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:background="#fff"
+                android:elevation="2dp"
                 android:ems="10"
                 android:gravity="top|left"
                 android:hint="Description"
@@ -238,7 +252,6 @@
                 android:maxLength="200"
                 android:padding="8dp"
                 android:textSize="18sp"
-                android:elevation="2dp"
                 app:layout_constraintBottom_toTopOf="@+id/btAddRoute"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -265,7 +278,6 @@
 
 
     </RelativeLayout>
-
 
 
 </android.support.constraint.ConstraintLayout>

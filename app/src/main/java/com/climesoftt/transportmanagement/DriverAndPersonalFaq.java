@@ -56,8 +56,8 @@ public class DriverAndPersonalFaq extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot driverSnapshot : dataSnapshot.getChildren())
                 {
-                    Faq pData = driverSnapshot.getValue(Faq.class);
-                    arrayList.add(pData);
+                    Faq faqData = driverSnapshot.getValue(Faq.class);
+                    arrayList.add(faqData);
                 }
                 faqAdapter.notifyDataSetChanged();
                 pd.hide();

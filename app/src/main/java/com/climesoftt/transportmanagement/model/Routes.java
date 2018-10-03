@@ -16,8 +16,18 @@ public class Routes {
     private String accountType = "";
     private String personName = "";
     private String description = "";
+    private String email = "";
+
     public Routes()
     {
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getAccountType() {

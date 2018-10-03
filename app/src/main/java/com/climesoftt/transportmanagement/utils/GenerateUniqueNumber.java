@@ -2,6 +2,7 @@ package com.climesoftt.transportmanagement.utils;
 
 import android.text.TextUtils;
 
+import com.climesoftt.transportmanagement.model.Faq;
 import com.climesoftt.transportmanagement.model.Maintenance;
 import com.climesoftt.transportmanagement.model.Person;
 import com.climesoftt.transportmanagement.model.Routes;
@@ -24,6 +25,7 @@ public class GenerateUniqueNumber {
     private static String mId = "";
     private static String maintenanceId = "";
     private static String rId = "";
+    private static String faqId = "";
     public static String uniqueId() {
         // Read from the database
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Users");
@@ -56,6 +58,40 @@ public class GenerateUniqueNumber {
         return id;
     }
 
+    /////////////////////////////////////
+    public static String questionId() {
+        // Read from the database
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Faq");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                for(DataSnapshot faqSnapshot : dataSnapshot.getChildren())
+                {
+                    Faq data = faqSnapshot.getValue(Faq.class);
+                    faqId = data.getId();
+                }
+
+                if(TextUtils.isEmpty(faqId) || faqId == null || faqId.equals(""))
+                {
+                    faqId = "1";
+                }
+                else
+                {
+                    int uid = Integer.parseInt(faqId);
+                    uid = uid+1;
+                    faqId = Integer.toString(uid);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+            }
+        });
+        return faqId;
+    }
+    ////////////////////////////////
+
     public static int randomNum() {
         Random r = new Random( System.currentTimeMillis() );
         int firstNum = 1000 + r.nextInt(20000);
@@ -75,9 +111,9 @@ public class GenerateUniqueNumber {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
-                for(DataSnapshot userSnapshot : dataSnapshot.getChildren())
+                for(DataSnapshot personSnapshot : dataSnapshot.getChildren())
                 {
-                    Person data = userSnapshot.getValue(Person.class);
+                    Person data = personSnapshot.getValue(Person.class);
                     mId = data.getId();
                 }
 

@@ -30,6 +30,7 @@ public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.VHolder> {
     public static String DRIVER_ADDRESS = "";
     public static String DRIVER_PHONE = "";
     public static String DRIVER_IMAGE = "";
+    public static String DRIVER_EMAIL = "";
     public DriverAdapter(Context context, ArrayList<Person> dList ){
         this.context = context;
         this.driversList = dList;
@@ -91,6 +92,7 @@ public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.VHolder> {
                     String pAddress = "";
                     String pPhone = "";
                     String pImage = "";
+                    String pEmail = "";
                     // get position of current Row
                     int pos = getAdapterPosition();
 
@@ -102,6 +104,7 @@ public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.VHolder> {
                         pAddress = clickedDataItem.getAddress();
                         pPhone = clickedDataItem.getPhone();
                         pImage = clickedDataItem.getImage();
+                        pEmail = clickedDataItem.getEmail();
                     }
                     //Send Data to MechanicProfile.java activity
                     DRIVER_ID = pId;
@@ -109,6 +112,7 @@ public class DriverAdapter extends RecyclerView.Adapter<DriverAdapter.VHolder> {
                     DRIVER_ADDRESS = pAddress;
                     DRIVER_PHONE = pPhone;
                     DRIVER_IMAGE = pImage;
+                    DRIVER_EMAIL = pEmail;
                     Intent intent = new Intent(context , DriverProfile.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     context.startActivity(intent);

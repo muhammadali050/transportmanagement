@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.climesoftt.transportmanagement.model.Routes;
+import com.climesoftt.transportmanagement.utils.AccountManager;
 import com.climesoftt.transportmanagement.utils.Message;
 import com.climesoftt.transportmanagement.utils.PDialog;
 import com.google.firebase.database.DatabaseReference;
@@ -22,10 +23,20 @@ public class EditRoute extends AppCompatActivity {
     private String RPetrol = "";
     private String RExtras = "";
     private String RDescription = "";
+    private String RDriverEmail = "";
+
+    private String USER_TYPE = "";
+    private String USER_EMAIL = "";
+    private AccountManager accountManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_route);
+
+        accountManager = new AccountManager(this);
+        USER_TYPE = accountManager.getUserAccountType();
+        USER_EMAIL = accountManager.getUserEmail();
 
         toCity = findViewById(R.id.rToCity);
         fromCity = findViewById(R.id.rFromCity);
@@ -44,6 +55,7 @@ public class EditRoute extends AppCompatActivity {
             RPetrol = intent.getStringExtra("RPETROL");
             RExtras = intent.getStringExtra("REXTRAS");
             RDescription = intent.getStringExtra("RDESCRIPTION");
+            RDriverEmail = intent.getStringExtra("R_DRIVER_EMAIL");
         }
 
         toCity.setText(RTo);
@@ -79,8 +91,30 @@ public class EditRoute extends AppCompatActivity {
 
         final PDialog pd = new PDialog(this).message("Route updating. . . ");
         try {
-            DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("Routes").child(RouteID);
-            dbRef.setValue(route);
+            //DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("Routes").child(RouteID);
+           // dbRef.setValue(route);
+
+            if(!USER_TYPE.isEmpty())
+            {
+                if(USER_TYPE.equals("Admin"))
+                {
+                    DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("Routes").child(RouteID);
+                    route.setEmail(RDriverEmail);
+                    dbRef.setValue(route);
+                }
+            }
+
+            if(!USER_TYPE.isEmpty())
+            {
+                if(USER_TYPE.equals("Personal"))
+                {
+                    DatabaseReference pRef = FirebaseDatabase.getInstance().getReference("Personal").child(RouteID);
+                    route.setAccountType(USER_TYPE);
+                    route.setEmail(USER_EMAIL);
+                    pRef.setValue(route);
+                }
+            }
+
             Message.show(this,"Record updated successfully.");
             this.finish();
             Intent int_newActivity = new Intent(this, AllRoutes.class);

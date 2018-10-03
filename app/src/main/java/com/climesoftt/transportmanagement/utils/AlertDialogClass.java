@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 
 import com.climesoftt.transportmanagement.AdminDashboardActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * Created by AtoZ on 3/30/2018.
@@ -20,6 +21,7 @@ public class AlertDialogClass {
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface arg0, int arg1) {
+                        FirebaseAuth.getInstance().signOut();
                         Logout.logoutUser(context);
                     }
                 }).create().show();

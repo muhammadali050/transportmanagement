@@ -1,4 +1,5 @@
 package com.climesoftt.transportmanagement;
+import com.climesoftt.transportmanagement.utils.AccountManager;
 import  com.climesoftt.transportmanagement.utils.NotificationManager;
 
 import android.app.DatePickerDialog;
@@ -24,6 +25,9 @@ public class AddMaintenenceActivity extends AppCompatActivity {
     private EditText et_desc;
     private Button startDate;
     private Button endDate;
+    private String USER_EMAIL = "";
+    private String USER_TYPE = "";
+    private AccountManager accountManager;
     private DatePickerDialog datePickerDialogStart;
     private DatePickerDialog datePickerDialogEnd;
 
@@ -32,9 +36,17 @@ public class AddMaintenenceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_maintenence);
 
+        accountManager = new AccountManager(this);
+        USER_EMAIL = accountManager.getUserEmail();
+        USER_TYPE = accountManager.getUserAccountType();
+
+        //Get maintenance id zero first time when add data into database must call here
+        GenerateUniqueNumber.maintenanceId();
+
         startDate = (Button) findViewById(R.id.btnStartDate);
         endDate = (Button) findViewById(R.id.btnEndDate);
         et_desc = findViewById(R.id.etDescription);
+        et_desc.setFocusable(false);
         setStartDateDialog();
         setEndDateDialog();
     }
@@ -95,16 +107,16 @@ public class AddMaintenenceActivity extends AppCompatActivity {
 
 
     public void addMaintenance(View view) {
-        int getId = GenerateUniqueNumber.randomNum();
-        final String id = Integer.toString(getId).trim();
-        //final String id = GenerateUniqueNumber.maintenanceId();
+
+        final String id = GenerateUniqueNumber.maintenanceId();
         String sDate = startDate.getText().toString().trim();
         String eDate = endDate.getText().toString().trim();
         String description = et_desc.getText().toString().trim();
         //Validation
-        if(TextUtils.isEmpty(sDate) || TextUtils.isEmpty(eDate) || TextUtils.isEmpty(description))
+        if(TextUtils.isEmpty(sDate) || TextUtils.isEmpty(eDate) || TextUtils.isEmpty(description) || sDate.equals("Start Date")
+                || eDate.equals("End date"))
         {
-            Message.show(AddMaintenenceActivity.this , "Please fill all the fields!");
+            Message.show(AddMaintenenceActivity.this , "Please fill all the fields!\nMust select Start and End date!");
             return;
         }
 
@@ -113,6 +125,8 @@ public class AddMaintenenceActivity extends AppCompatActivity {
         maintenance.setStartDate(sDate);
         maintenance.setEndDate(eDate);
         maintenance.setDescription(description);
+        maintenance.setEmail(USER_EMAIL);
+        maintenance.setUserType(USER_TYPE);
         final PDialog pd = new PDialog(this).message("Adding . . .");
         try
         {

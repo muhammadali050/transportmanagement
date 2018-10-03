@@ -16,25 +16,25 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class AddQuestionActivity extends AppCompatActivity {
 
+    private  DatabaseReference dbRef;
     private EditText etQuestn, etAns;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_question);
-        
+
+        //get  question id zero or null when first time call
+        GenerateUniqueNumber.questionId();
+
         etQuestn = findViewById(R.id.etQuestion);
         etAns = findViewById(R.id.etAnswer);
     }
 
     public void addQuestion(View view)
     {
-        addQuestion();
-    }
-
-    public void addQuestion()
-    {
-        int qId = GenerateUniqueNumber.randomNum();
-        String id = Integer.toString(qId);
+        /*int qId = GenerateUniqueNumber.randomNum();
+        String id = Integer.toString(qId);*/
+        final String faqId = GenerateUniqueNumber.questionId();
         String question = etQuestn.getText().toString().trim();
         String answer = etAns.getText().toString().trim();
         //Validation
@@ -45,7 +45,7 @@ public class AddQuestionActivity extends AppCompatActivity {
         }
 
         final Faq faq = new Faq();
-        faq.setId(id);
+        faq.setId(faqId);
         faq.setQuestion(question);
         faq.setAnswer(answer);
 
@@ -53,7 +53,7 @@ public class AddQuestionActivity extends AppCompatActivity {
         try
         {
             //String uniqueId = String.valueOf(new Date().getTime());
-            DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Faq").child(id);
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Faq").child(faqId);
             ref.setValue(faq);
             Message.show(this,"Submitted successfully!");
             this.finish();

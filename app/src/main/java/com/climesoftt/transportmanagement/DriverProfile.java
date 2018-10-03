@@ -33,13 +33,15 @@ import com.squareup.picasso.Picasso;
  */
 
 public class DriverProfile extends AppCompatActivity{
-    private TextView tvId, tvName, tvAddress, tvPhone;
+    private TextView tvId, tvName, tvAddress, tvPhone, tvEmail;
     private ImageView imgProfile;
     private String dPId = "";
     private String pName = "";
     private String pAddress = "";
     private String pPhone = "";
     private String pImage = "";
+    private String pEmail = "";
+
     private FirebaseStorage mStorageRef;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class DriverProfile extends AppCompatActivity{
 
         tvId = findViewById(R.id.pId);
         tvName = findViewById(R.id.user_profile_name);
+        tvEmail = findViewById(R.id.pEmail);
         tvAddress = findViewById(R.id.user_profile_short_bio);
         tvPhone = findViewById(R.id.pPhone);
         imgProfile = findViewById(R.id.header_cover_image);
@@ -60,11 +63,13 @@ public class DriverProfile extends AppCompatActivity{
         pAddress = DriverAdapter.DRIVER_ADDRESS;
         pPhone = DriverAdapter.DRIVER_PHONE;
         pImage = DriverAdapter.DRIVER_IMAGE;
+        pEmail = DriverAdapter.DRIVER_EMAIL;
 
         tvId.setText(dPId);
         tvName.setText(pName);
         tvAddress.setText(pAddress);
         tvPhone.setText(pPhone);
+        tvEmail.setText(pEmail);
         if(pImage != null && !TextUtils.isEmpty(pImage))
         {
             Picasso.with(this).load(pImage).placeholder(R.drawable.user_default).fit().centerCrop().into(imgProfile);
@@ -89,6 +94,7 @@ public class DriverProfile extends AppCompatActivity{
         intent.putExtra("DR_ADDRESS_KEY",pAddress);
         intent.putExtra("DR_PHONE_KEY",pPhone);
         intent.putExtra("DR_IMAGE_KEY",pImage);
+        intent.putExtra("DR_EMAIL_KEY",pEmail);
         startActivity(intent);
     }
 
@@ -112,7 +118,6 @@ public class DriverProfile extends AppCompatActivity{
         startActivity(intent);
 
     }
-
 
     public void onClickDriverRoutes(View view) {
         //Start activity to show Driver Routes...

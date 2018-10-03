@@ -4,11 +4,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.climesoftt.transportmanagement.model.Routes;
+import com.climesoftt.transportmanagement.utils.AccountManager;
 import com.climesoftt.transportmanagement.utils.DeleteRecord;
+import com.climesoftt.transportmanagement.utils.Message;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * Created by Ali on 3/19/2018.
@@ -16,7 +27,8 @@ import com.climesoftt.transportmanagement.utils.DeleteRecord;
 
 public class Route extends AppCompatActivity {
 
-    private TextView tvTo, tvFrom , tvToolPlaza, tvPetrol, tvExtras, tvDescription;
+    private TextView tvTo, tvFrom , tvToolPlaza, tvPetrol, tvExtras, tvDescription, tvDriverMail;
+    private ImageView routeUpdate, routeDelete;
     private String RouteID = "";
     private String RTo = "";
     private String RFrom = "";
@@ -24,11 +36,29 @@ public class Route extends AppCompatActivity {
     private String RPetrol = "";
     private String RExtras = "";
     private String RDescription = "";
+    private String RDriverEmail = "";
+    private String TotalRoutes = "";
+    private String USER_TYPE = "";
+    private AccountManager accountManager;
+
+    private DatabaseReference dbref;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route);
+
+        accountManager = new AccountManager(this);
+        USER_TYPE = accountManager.getUserAccountType();
+
+        routeUpdate = findViewById(R.id.rUpdateProfile);
+        routeDelete = findViewById(R.id.rProfileDelete);
+
+        if(USER_TYPE.equals("Driver"))
+        {
+            routeUpdate.setVisibility(View.GONE);
+            routeDelete.setVisibility(View.GONE);
+        }
 
         tvTo = findViewById(R.id.tv_destination);
         tvFrom = findViewById(R.id.tv_from);
@@ -36,6 +66,8 @@ public class Route extends AppCompatActivity {
         tvPetrol = findViewById(R.id.rPetrol);
         tvExtras = findViewById(R.id.rExtras);
         tvDescription = findViewById(R.id.tvRDescription);
+        tvDriverMail = findViewById(R.id.tvShowDriver);
+
         //Call Function Below defined
         getDataOfCurrentSelectedRow();
         try{
@@ -56,6 +88,7 @@ public class Route extends AppCompatActivity {
         RPetrol = intent.getStringExtra("PETROL");
         RExtras = intent.getStringExtra("EXTRACOST");
         RDescription = intent.getStringExtra("RDESCRIPTION");
+        RDriverEmail = intent.getStringExtra("RDRIVER_EMAIL");
 
         tvFrom.setText(RFrom);
         tvTo.setText(RTo);
@@ -63,6 +96,12 @@ public class Route extends AppCompatActivity {
         tvPetrol.setText(RPetrol);
         tvExtras.setText(RExtras);
         tvDescription.setText(RDescription);
+        tvDriverMail.setText(RDriverEmail);
+
+        if(TextUtils.isEmpty(tvDriverMail.getText().toString()))
+        {
+            tvDriverMail.setText("NULL");
+        }
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -86,6 +125,7 @@ public class Route extends AppCompatActivity {
         intent.putExtra("RPETROL",RPetrol);
         intent.putExtra("REXTRAS",RExtras);
         intent.putExtra("RDESCRIPTION", RDescription);
+        intent.putExtra("R_DRIVER_EMAIL", RDriverEmail);
         startActivity(intent);
 
     }
@@ -96,5 +136,29 @@ public class Route extends AppCompatActivity {
         this.finish();
         Intent intent = new Intent(this, AllRoutes.class);
         this.startActivity(intent);
+    }
+
+    public void getDriverTotalRoutes(View view) {
+        dbref = FirebaseDatabase.getInstance().getReference("Routes");
+            dbref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    int routeCounter = 0;
+                    for(DataSnapshot routesSnapshot : dataSnapshot.getChildren()) {
+                        Routes data = routesSnapshot.getValue(Routes.class);
+                        if(RDriverEmail.equals(data.getEmail()))
+                        {
+                            routeCounter++;
+                        }
+                    }
+                    if(routeCounter!=0)
+                    {
+                        Toast.makeText(Route.this, "\nTotal No. of Routes : "+Integer.toString(routeCounter)+"\n",Toast.LENGTH_SHORT).show();
+                    }
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            });
     }
 }

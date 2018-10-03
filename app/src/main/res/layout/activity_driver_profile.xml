@@ -11,7 +11,7 @@
         <ImageView
             android:id="@+id/header_cover_image"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="150dp"
             android:scaleType="centerCrop"
             android:src="@drawable/user_default" />
 
@@ -122,6 +122,21 @@
                 android:elevation="2dp"
                 android:padding="20dp"
                 android:text="0123-123456789"
+                android:textColor="#000" />
+
+            <TextView
+                android:id="@+id/pEmail"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"
+                android:background="#fff"
+                android:drawableLeft="@drawable/ic_user_identity"
+                android:drawablePadding="8dp"
+                android:elevation="2dp"
+                android:padding="20dp"
+                android:text=""
                 android:textColor="#000" />
 
 

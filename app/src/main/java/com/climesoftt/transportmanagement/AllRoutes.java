@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.climesoftt.transportmanagement.adapter.RouteAdaptor;
 import com.climesoftt.transportmanagement.model.Routes;
@@ -34,7 +35,6 @@ public class AllRoutes extends AppCompatActivity {
     private RecyclerView rvRoutes;
     private RouteAdaptor adapter;
     private DatabaseReference dbref;
-    private DatabaseReference adminRef;
     private String USER_TYPE = "";
     private String USER_NAME = "";
     private String USER_EMAIL = "";
@@ -49,10 +49,11 @@ public class AllRoutes extends AppCompatActivity {
         rvRoutes.setAdapter(adapter) ;
         rvRoutes.setLayoutManager(new LinearLayoutManager(this));
 
-        //call function for fetch data from firebase
+
         accountManager = new AccountManager(this);
         USER_NAME = accountManager.getUserName();
         USER_TYPE = accountManager.getUserAccountType();
+        USER_EMAIL = accountManager.getUserEmail();
         //Message.show(this,USER_TYPE);
         //call function for fetch data from firebase
         if(USER_TYPE.equals("Driver"))
@@ -80,7 +81,7 @@ public class AllRoutes extends AppCompatActivity {
     }
 
     //Fetch data
-    private void fetchDataFromFirebase(String reference)
+    private void fetchDataFromFirebase(final String reference)
     {
         final PDialog pd = new PDialog(AllRoutes.this).message("Loading. . .");
         dbref = FirebaseDatabase.getInstance().getReference(reference);
@@ -90,32 +91,27 @@ public class AllRoutes extends AppCompatActivity {
                 arrayList.clear();
                 for(DataSnapshot routesSnapshot : dataSnapshot.getChildren()) {
                     Routes data = routesSnapshot.getValue(Routes.class);
+
                     if(USER_TYPE.equals("Admin"))
                     {
                         arrayList.add(data);
                     }
-                    else if(USER_TYPE.equals("Driver"))
+
+                    if(USER_TYPE.equals("Driver"))
                     {
-                        if(USER_NAME.equals(data.getDriver()))
+                        if(USER_EMAIL.equals(data.getEmail()))
                         {
                             arrayList.add(data);
-                        }else {
-                            pd.hide();
-                            return;
                         }
                     }
-                    else if(USER_TYPE.equals("Personal"))
+
+                    if(USER_TYPE.equals("Personal"))
                     {
-                        if(USER_NAME.equals(data.getPersonName()))
+
+                        if(USER_EMAIL.equals(data.getEmail()))
                         {
                             arrayList.add(data);
-                        }else {
-                            pd.hide();
-                            return;
                         }
-                    } else {
-                        pd.hide();
-                        return;
                     }
                 }
                 adapter.notifyDataSetChanged();
@@ -132,14 +128,23 @@ public class AllRoutes extends AppCompatActivity {
 
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_add_route, menu);
+        inflater.inflate(R.menu.menu_total_routes, menu);
+        MenuItem routeIcon = menu.findItem(R.id.total_routes);
         MenuItem item = menu.findItem(R.id.add_route);
-        if(USER_TYPE.equals("Personal") || USER_TYPE.equals("Admin"))
+        routeIcon.setVisible(true);
+        item.setVisible(true);
+       /*
+       if(USER_TYPE.equals("Personal") || USER_TYPE.equals("Admin") || USER_TYPE.equals("Driver"))
         {
+            routeIcon.setVisible(true);
             item.setVisible(true);
+
         }else
         {
             item.setVisible(false);
+            routeIcon.setVisible(false);
         }
+        */
         return true;
     }
 
@@ -166,5 +171,47 @@ public class AllRoutes extends AppCompatActivity {
         super.onBackPressed();
         this.finish();
         MoveUserToDashboard.moveUser(this,USER_TYPE);
+    }
+
+    public void getTotalNumberOfRoutes(MenuItem item) {
+        DatabaseReference dbref = FirebaseDatabase.getInstance().getReference("Routes");
+        dbref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int routeCounter = 0;
+                for(DataSnapshot routesSnapshot : dataSnapshot.getChildren()) {
+                    Routes data = routesSnapshot.getValue(Routes.class);
+                    if(USER_TYPE.equals("Admin"))
+                    {
+                        routeCounter++;
+                    }
+
+                    if(USER_TYPE.equals("Driver"))
+                    {
+                        if(USER_EMAIL.equals(data.getEmail()))
+                        {
+                            routeCounter = routeCounter+1;
+                        }
+                    }
+
+                    if(USER_TYPE.equals("Personal"))
+                    {
+
+                        if(USER_EMAIL.equals(data.getEmail()))
+                        {
+                            routeCounter = routeCounter+1;
+
+                        }
+                    }
+                }
+                if(routeCounter!=0)
+                {
+                    Message.show(AllRoutes.this, "\nTotal No. of Routes : "+Integer.toString(routeCounter)+"\n");
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
     }
 }

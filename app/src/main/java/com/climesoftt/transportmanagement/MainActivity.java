@@ -3,11 +3,13 @@ package com.climesoftt.transportmanagement;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.climesoftt.transportmanagement.utils.Logout;
 import com.climesoftt.transportmanagement.utils.PDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -17,6 +19,7 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_main);
         //getActionBar().setDisplayHomeAsUpEnabled(true);
         try{
@@ -96,4 +99,8 @@ public class MainActivity extends AppCompatActivity{
         startActivity(intent);
     }
 
+    @Override
+    public void onBackPressed() {
+
+    }
 }

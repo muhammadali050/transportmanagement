@@ -23,66 +23,90 @@
         </activity>
         <activity
             android:name=".AllMechanicsActivity"
+
             android:label="@string/title_activity_all_mechanics" />
         <activity
             android:name=".AllDriversActivity"
+
             android:label="@string/title_activity_all_drivers" />
         <activity
             android:name=".LoginActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_login" />
         <activity
             android:name=".AdminDashboardActivity"
+
             android:label="@string/title_activity_admin_dashboard" />
         <activity
             android:name=".RegistrationActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_resgistration" />
         <activity
             android:name=".DriverProfile"
+
             android:label="@string/title_activity_driver_profile" />
         <activity
             android:name=".AllRoutes"
+
             android:label="@string/title_activity_all_routes" />
         <activity
             android:name=".AddRoute"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_add_route" />
         <activity
             android:name=".Route"
+
             android:label="@string/title_activity_route" />
         <activity
             android:name=".AddMechanic"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_add_Mechanic" />
         <activity
             android:name=".AddDriver"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_add_driver" />
         <activity
             android:name=".EditDriver"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_edit_driver" />
         <activity
             android:name=".EditMechanic"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_edit_mechanic" />
         <activity
             android:name=".MechanicProfile"
+
             android:label="@string/title_activity_edit_mechanic" />
         <activity android:name=".EditRoute"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_edit_route"/>
         <activity android:name=".DriverAndPersonalFaq"
+
             android:label="@string/title_activity_driver_faq"/>
         <activity android:name=".DriverDashboard"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_driver_dashboard"/>
         <activity android:name=".AddQuestionActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_add_question"/>
         <activity android:name=".EditQuestionActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_edit_question"/>
         <activity android:name=".AddMaintenenceActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_add_maintenence"/>
         <activity android:name=".EditMaintenenceActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_edit_maintenence" />
         <activity
             android:name=".AllMaintenceActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_all_maintenece" />
         <activity android:name=".ViewMaintenenceActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_view_maintenence"/>
         <activity android:name=".Personal"
+            android:screenOrientation="portrait"
             android:label="Personal"/>
 
         <receiver

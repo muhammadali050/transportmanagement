@@ -12,7 +12,7 @@ public class ViewMaintenenceActivity extends AppCompatActivity {
 
     private TextView tvStartDate, tvEndDate, tvDescription;
 
-    private String mId, startDate, endDate, mDescription;
+    private String mId, startDate, endDate, mDescription, mEmail, mUserType;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +27,8 @@ public class ViewMaintenenceActivity extends AppCompatActivity {
         mDescription = intent.getStringExtra("DESCRIPTION");
         startDate = intent.getStringExtra("STARTDATE");
         endDate = intent.getStringExtra("ENDDATE");
+        mEmail = intent.getStringExtra("USER_EMAIL");
+        mUserType = intent.getStringExtra("USER_TYPE");
 
         tvStartDate.setText(startDate);
         tvEndDate.setText(endDate);
@@ -41,6 +43,8 @@ public class ViewMaintenenceActivity extends AppCompatActivity {
         intent.putExtra("DESCRIPTION", mDescription);
         intent.putExtra("STARTDATE", startDate);
         intent.putExtra("ENDDATE", endDate);
+        intent.putExtra("USER_EMAIL", mEmail);
+        intent.putExtra("USER_TYPE", mUserType);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }

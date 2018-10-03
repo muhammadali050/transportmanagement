@@ -38,9 +38,12 @@ public class AddRoute extends AppCompatActivity{
 
     private ArrayAdapter adapterSpinner;
     private ArrayList<String> arrayList = new ArrayList<>();
+    private TextView tv_driver;
+    private Spinner spinnerDriver;
 
     private String USER_TYPE = "";
     private String USER_NAME = "";
+    private String USER_EMAIL = "";
     private AccountManager accountManager;
 
     @Override
@@ -51,6 +54,10 @@ public class AddRoute extends AppCompatActivity{
         accountManager = new AccountManager(this);
         USER_NAME = accountManager.getUserName();
         USER_TYPE = accountManager.getUserAccountType();
+        USER_EMAIL = accountManager.getUserEmail();
+
+        //Get route id zero first time when add data into database must call here
+        GenerateUniqueNumber.routeId();
 
         dbRef = FirebaseDatabase.getInstance().getReference("Routes");
 
@@ -60,6 +67,23 @@ public class AddRoute extends AppCompatActivity{
         petrolCost   = findViewById(R.id.rPetrol);
         extraCost    = findViewById(R.id.rExtras);
         description = findViewById(R.id.textViewRDescription);
+        tv_driver = findViewById(R.id.tvRDriver);
+        spinnerDriver = findViewById(R.id.rDriverSpinner);
+
+        if(USER_TYPE.equals("Personal") || USER_TYPE.equals("Driver"))
+        {
+            spinnerDriver.setVisibility(View.GONE);
+            tv_driver.setVisibility(View.GONE);
+        }
+        if(USER_TYPE.equals("Admin"))
+        {
+            spinnerDriver.setVisibility(View.VISIBLE);
+            tv_driver.setVisibility(View.VISIBLE);
+
+        }
+
+        //Method for fetching names and showing driver names in spinner
+        getAndSetDriversListInAdapter();
 
         try{
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -69,11 +93,37 @@ public class AddRoute extends AppCompatActivity{
         }
     }
 
+    public void getAndSetDriversListInAdapter()
+    {
+        DatabaseReference driverRef = FirebaseDatabase.getInstance().getReference("drivers");
+        driverRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot driverSnapshot : dataSnapshot.getChildren())
+                {
+                    Person data = driverSnapshot.getValue(Person.class);
+                    //arrayList.add(data.getName()+"\n"+data.getEmail());
+                    arrayList.add(data.getEmail());
+                    //Log.d("KEY",arrayList.toString());
+                }
+                adapterSpinner = new ArrayAdapter(AddRoute.this,android.R.layout.simple_spinner_item, arrayList);
+                adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerDriver.setAdapter(adapterSpinner);
+                adapterSpinner.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    }
+
     public void addRoute(View view)
     {
-        int getId = GenerateUniqueNumber.randomNum();
-        final String rid = Integer.toString(getId).trim();
-        //final String rId = GenerateUniqueNumber.routeId();
+        /*int getId = GenerateUniqueNumber.randomNum();
+        final String rid = Integer.toString(getId).trim();*/
+
+        final String rid = GenerateUniqueNumber.routeId();
         String to = toCity.getText().toString();
         String from = fromCity.getText().toString();
         String tool = toolPlaza.getText().toString();
@@ -81,8 +131,11 @@ public class AddRoute extends AppCompatActivity{
         String extras = extraCost.getText().toString();
         String rDescription = description.getText().toString();
 
+        //Get spinner Selected Item driver email
+        String driverEmail = spinnerDriver.getSelectedItem().toString();
+
         String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-        if(TextUtils.isEmpty(to) || TextUtils.isEmpty(from) || TextUtils.isEmpty(tool) || TextUtils.isEmpty(petrol) || TextUtils.isEmpty(extras))
+        if(TextUtils.isEmpty(driverEmail) || TextUtils.isEmpty(to) || TextUtils.isEmpty(from) || TextUtils.isEmpty(tool) || TextUtils.isEmpty(petrol) || TextUtils.isEmpty(extras))
         {
             Message.show(AddRoute.this, "Please fill all fields!");
             return;
@@ -106,6 +159,7 @@ public class AddRoute extends AppCompatActivity{
             {
                 if(USER_TYPE.equals("Admin"))
                 {
+                    route.setEmail(driverEmail);
                     dbRef.child(rid).setValue(route);
                     Message.show(AddRoute.this,"Added successfully.");
                     this.finish();
@@ -113,6 +167,20 @@ public class AddRoute extends AppCompatActivity{
                     startActivity(intent);
                 }
             }
+
+            if(!USER_TYPE.isEmpty())
+            {
+                if(USER_TYPE.equals("Driver"))
+                {
+                    route.setEmail(USER_EMAIL);
+                    dbRef.child(rid).setValue(route);
+                    Message.show(AddRoute.this,"Added successfully.");
+                    this.finish();
+                    Intent intent = new Intent(this, AllRoutes.class);
+                    startActivity(intent);
+                }
+            }
+
             if(!USER_TYPE.isEmpty())
             {
                 if(USER_TYPE.equals("Personal"))
@@ -120,6 +188,7 @@ public class AddRoute extends AppCompatActivity{
                     DatabaseReference pRef = FirebaseDatabase.getInstance().getReference("Personal");
                     route.setAccountType(USER_TYPE);
                     route.setPersonName(USER_NAME);
+                    route.setEmail(USER_EMAIL);
                     pRef.child(rid).setValue(route);
                     Message.show(AddRoute.this,"Added successfully.");
                     this.finish();

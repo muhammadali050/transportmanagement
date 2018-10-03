@@ -24,7 +24,7 @@ public class EditMaintenenceActivity extends AppCompatActivity {
     private EditText et_description;
     private Button btStartDate;
     private Button btEndDate;
-    private String mId, startDate, endDate, mDescription;
+    private String mId, startDate, endDate, mDescription, mEmail, mUserType;
 
     private DatePickerDialog datePickerDialogStart;
     private DatePickerDialog datePickerDialogEnd;
@@ -37,12 +37,16 @@ public class EditMaintenenceActivity extends AppCompatActivity {
         btStartDate = (Button) findViewById(R.id.btnStartDate);
         btEndDate = (Button) findViewById(R.id.btnEndDate);
         et_description = findViewById(R.id.etDescription);
+        et_description.setFocusable(false);
 
         Intent intent = getIntent();
         mId = intent.getStringExtra("MID");
         mDescription = intent.getStringExtra("DESCRIPTION");
         startDate = intent.getStringExtra("STARTDATE");
         endDate = intent.getStringExtra("ENDDATE");
+
+        mEmail = intent.getStringExtra("USER_EMAIL");
+        mUserType = intent.getStringExtra("USER_TYPE");
 
         btStartDate.setText(startDate);
         btEndDate.setText(endDate);
@@ -72,7 +76,8 @@ public class EditMaintenenceActivity extends AppCompatActivity {
         maintenance.setStartDate(startDate);
         maintenance.setEndDate(endDate);
         maintenance.setDescription(description);
-
+        maintenance.setEmail(mEmail);
+        maintenance.setUserType(mUserType);
         final PDialog pd = new PDialog(this).message("Updating. . .");
         try
         {
